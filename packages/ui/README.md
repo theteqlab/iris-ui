@@ -9,15 +9,58 @@ Accessible React components in the _Verre irisé_ style, from
 npm install @irisui/ui @irisui/tokens
 ```
 
-`react` and `react-dom` (18 or 19) are peer dependencies.
+`react`, `react-dom` (18 or 19) and `tailwindcss` (v4) are peer dependencies.
 
-Import the tokens once in your global CSS (see
+Import the tokens and the component styles once in your global CSS (see
 [`@irisui/tokens`](https://www.npmjs.com/package/@irisui/tokens)):
 
 ```css
 @import "tailwindcss";
 @import "@irisui/tokens/tailwind.css";
+@import "@irisui/ui/styles.css";
 ```
+
+## Components
+
+| Component    | Notes                                                                                                                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Button`     | `look` (`holo` · `glass` · `solid` · `outline` · `ghost`), `tone` (`1`–`5`, `ink`, `danger`), `size` (`sm` 36 px · `md` 44 px · `lg` 56 px), `loading`, `startIcon` / `endIcon`, `asChild` |
+| `IconButton` | Same looks; round; `aria-label` required                                                                                                                                                   |
+| `Badge`      | Looks `holo` · `glass` · `solid` · `outline`, `tone`, `dot`                                                                                                                                |
+| `Field`      | With `FieldLabel`, `FieldDescription`, `FieldError`: links label, help and error to the control                                                                                            |
+| `Input`      | `size`, `invalid`, `startIcon`, `endSlot`                                                                                                                                                  |
+| `Textarea`   | `autoResize`, `showCount` (with `maxLength`)                                                                                                                                               |
+| `Checkbox`   | Label as children; `checked="indeterminate"`                                                                                                                                               |
+| `RadioGroup` | With `RadioGroupItem`; `orientation`                                                                                                                                                       |
+| `Switch`     | Label as children (or `aria-label`, required); `size`                                                                                                                                      |
+| `Select`     | With `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel`, `SelectSeparator`                                                                        |
+
+```tsx
+import { Button, Field, FieldError, FieldLabel, Input } from "@irisui/ui";
+
+<Button look="solid" tone={3} size="lg">
+  Pay
+</Button>;
+
+<Field>
+  <FieldLabel>Email</FieldLabel>
+  <Input type="email" />
+  <FieldError>{error}</FieldError>
+</Field>;
+```
+
+Every component forwards its ref, merges `className` and exposes `data-state`,
+`data-disabled`, `data-look`, `data-tone` and `data-size` for styling. With no
+`tone`, the `holo` look is the plain holographic film and the other looks use
+`ink`.
+
+### Texts
+
+Texts rendered by the components ("Loading", the character counter, the select
+placeholder) are in English by default. Wrap your app in
+`<LocaleProvider messages={fr}>` for French, or pass your own `Messages`; each
+text can also be overridden by a prop (`loadingLabel`, `counterLabel`,
+`placeholder`).
 
 ## Theme
 

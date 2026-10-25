@@ -1,0 +1,376 @@
+/* =====================================================================
+   @irisui/ui — component styles.
+   Usage (after Tailwind and the tokens):
+     @import "tailwindcss";
+     @import "@irisui/tokens/tailwind.css";
+     @import "@irisui/ui/styles.css";
+   Recipes read only semantic and component tokens from @irisui/tokens.
+   Hooks: data-look, data-tone, data-size, data-state, data-disabled.
+   ===================================================================== */
+
+/* Lets Tailwind see the utility classes used by the compiled components. */
+@source "../dist";
+
+@layer components {
+  /* ---------- Tones: one set of variables per tone ---------- */
+  .iris-look {
+    --t-outline-text: color-mix(
+      in srgb,
+      color-mix(in srgb, var(--t-base) 45%, var(--white)) calc(var(--is-dark) * 100%),
+      var(--t-deep)
+    );
+    --t-tint: color-mix(
+      in srgb,
+      color-mix(in srgb, var(--t-base) 22%, var(--look-outline-bg)) calc(var(--is-dark) * 100%),
+      var(--t-tint-light)
+    );
+    --t-glass-bg: color-mix(in srgb, var(--t-base) var(--look-glass-tint), var(--look-glass-wash));
+    --t-glass-bg-hover: color-mix(
+      in srgb,
+      var(--t-base) calc(var(--look-glass-tint) + 10%),
+      var(--look-glass-wash)
+    );
+    --t-glass-text: var(--look-glass-text);
+    --t-glass-edge: color-mix(in srgb, var(--t-base) 75%, transparent);
+    --t-fg: var(--ink);
+  }
+  .iris-look[data-tone="1"] {
+    --t-base: var(--tone-1-base);
+    --t-deep: var(--tone-1-deep);
+    --t-tint-light: var(--tone-1-tint-light);
+  }
+  .iris-look[data-tone="2"] {
+    --t-base: var(--tone-2-base);
+    --t-deep: var(--tone-2-deep);
+    --t-tint-light: var(--tone-2-tint-light);
+  }
+  .iris-look[data-tone="3"] {
+    --t-base: var(--tone-3-base);
+    --t-deep: var(--tone-3-deep);
+    --t-tint-light: var(--tone-3-tint-light);
+  }
+  .iris-look[data-tone="4"] {
+    --t-base: var(--tone-4-base);
+    --t-deep: var(--tone-4-deep);
+    --t-tint-light: var(--tone-4-tint-light);
+  }
+  .iris-look[data-tone="5"] {
+    --t-base: var(--tone-5-base);
+    --t-deep: var(--tone-5-deep);
+    --t-tint-light: var(--tone-5-tint-light);
+  }
+  /* Ink: dark ink in light mode, light ink in dark mode (like --solid-ink). */
+  .iris-look[data-tone="ink"] {
+    --t-base: var(--solid-ink);
+    --t-deep: var(--text);
+    --t-tint-light: var(--track);
+    --t-fg: var(--text-on-ink);
+    --t-outline-text: var(--text);
+    --t-tint: var(--track);
+    --t-glass-bg: var(--glass-strong);
+    --t-glass-bg-hover: var(--glass-strong);
+    --t-glass-text: var(--text);
+    --t-glass-edge: var(--rim-b);
+  }
+  .iris-look[data-tone="danger"] {
+    --t-base: var(--danger);
+    --t-deep: var(--danger-text);
+    --t-tint-light: var(--danger-soft);
+    --t-fg: var(--text-on-danger);
+    --t-outline-text: var(--danger-text);
+    --t-tint: var(--danger-soft);
+    /* The soft danger tint sits on glass, like an Alert. */
+    --t-glass-bg: linear-gradient(var(--danger-soft), var(--danger-soft)), var(--glass);
+    --t-glass-bg-hover:
+      linear-gradient(
+        color-mix(in srgb, var(--danger) 12%, var(--danger-soft)),
+        color-mix(in srgb, var(--danger) 12%, var(--danger-soft))
+      ),
+      var(--glass);
+    --t-glass-text: var(--danger-text);
+  }
+
+  /* ---------- Looks ---------- */
+  .iris-look {
+    --shadow-mix: 1;
+    position: relative;
+    isolation: isolate;
+    transition:
+      transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out),
+      background-color var(--duration-fast) var(--ease-out),
+      filter var(--duration-fast) var(--ease-out);
+  }
+
+  /* holo, no tone: the plain holographic film. */
+  .iris-look[data-look="holo"] {
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    animation: holo-shift var(--holo-speed) linear infinite;
+    color: var(--text-on-holo);
+    border: 1px solid var(--look-holo-border);
+    box-shadow:
+      inset 0 1px 0 var(--white),
+      var(--surface-holo-shadow);
+  }
+  /* holo with a pastel tone: film tinted by the tone. */
+  .iris-look[data-look="holo"][data-tone]:not([data-tone="ink"], [data-tone="danger"]) {
+    background:
+      var(--sheen),
+      linear-gradient(
+        color-mix(in srgb, var(--t-base) 45%, transparent),
+        color-mix(in srgb, var(--t-base) 45%, transparent)
+      ),
+      var(--holo);
+    background-size:
+      100% 100%,
+      100% 100%,
+      200% 100%;
+    animation-name: iris-holo-3;
+    color: var(--t-fg);
+    box-shadow:
+      inset 0 1px 0 var(--white),
+      0 0 0 1px color-mix(in srgb, var(--t-deep) 30%, transparent),
+      0 8px 22px color-mix(in srgb, var(--t-base) calc(55% * var(--shadow-mix)), transparent);
+  }
+  /* holo with ink or danger: solid fill, holographic rim. */
+  .iris-look[data-look="holo"]:is([data-tone="ink"], [data-tone="danger"]) {
+    background:
+      linear-gradient(var(--t-base), var(--t-base)) padding-box,
+      var(--holo) border-box;
+    background-size:
+      100% 100%,
+      200% 100%;
+    border: 2px solid transparent;
+    color: var(--t-fg);
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) calc(30% * var(--shadow-mix)), transparent);
+  }
+
+  .iris-look[data-look="glass"] {
+    background: var(--t-glass-bg);
+    backdrop-filter: blur(var(--blur-small)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--blur-small)) saturate(180%);
+    color: var(--t-glass-text);
+    border: 1px solid var(--look-glass-border);
+    box-shadow:
+      inset 1.5px 1.5px 0 var(--look-glass-highlight),
+      inset -1.5px -1.5px 0 var(--t-glass-edge),
+      0 6px 16px color-mix(in srgb, var(--t-glass-edge) calc(35% * var(--shadow-mix)), transparent);
+  }
+
+  .iris-look[data-look="solid"] {
+    background:
+      linear-gradient(var(--t-base), var(--t-base)) padding-box,
+      var(--holo-deep) border-box;
+    background-size:
+      100% 100%,
+      200% 100%;
+    animation: holo-shift var(--holo-speed) linear infinite;
+    border: 2.5px solid transparent;
+    color: var(--t-fg);
+    box-shadow: 0 8px 20px
+      color-mix(in srgb, var(--t-base) calc(45% * var(--shadow-mix)), transparent);
+  }
+
+  .iris-look[data-look="outline"] {
+    background:
+      linear-gradient(var(--look-outline-bg), var(--look-outline-bg)) padding-box,
+      var(--holo-deep) border-box;
+    background-size:
+      100% 100%,
+      200% 100%;
+    animation: holo-shift var(--holo-speed) linear infinite;
+    border: 2px solid transparent;
+    color: var(--t-outline-text);
+    font-weight: var(--weight-bold);
+  }
+
+  /* Badges: same looks, more compact rims. */
+  .iris-badge:is([data-look="solid"], [data-look="outline"]) {
+    border-width: 1.5px;
+  }
+
+  .iris-look[data-look="ghost"] {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid transparent;
+  }
+
+  /* ---------- Interactive states (buttons) ---------- */
+  .iris-interactive:where(:not([data-disabled], [aria-busy="true"])) {
+    cursor: pointer;
+  }
+  @media (hover: hover) {
+    .iris-interactive:where(:not([data-disabled], [aria-busy="true"])):hover {
+      --shadow-mix: 1.25;
+    }
+    .iris-interactive[data-look="holo"]:where(:not([data-disabled], [aria-busy="true"])):hover {
+      filter: brightness(1.04);
+      animation-duration: calc(var(--holo-speed) / 2);
+    }
+    .iris-interactive[data-look="glass"]:where(:not([data-disabled], [aria-busy="true"])):hover {
+      background: var(--t-glass-bg-hover);
+    }
+    .iris-interactive[data-look="solid"]:where(:not([data-disabled], [aria-busy="true"])):hover {
+      --t-base-hover: color-mix(in srgb, var(--t-base) 92%, var(--ink));
+      background:
+        linear-gradient(var(--t-base-hover), var(--t-base-hover)) padding-box,
+        var(--holo-deep) border-box;
+      background-size:
+        100% 100%,
+        200% 100%;
+    }
+    .iris-interactive[data-look="outline"]:where(:not([data-disabled], [aria-busy="true"])):hover {
+      background:
+        linear-gradient(var(--t-tint), var(--t-tint)) padding-box,
+        var(--holo-deep) border-box;
+      background-size:
+        100% 100%,
+        200% 100%;
+    }
+    .iris-interactive[data-look="ghost"]:where(:not([data-disabled], [aria-busy="true"])):hover {
+      background: var(--glass);
+    }
+  }
+  .iris-interactive:where(:not([data-disabled], [aria-busy="true"])):active {
+    --shadow-mix: 0.5;
+    transform: translateY(var(--pressed-shift));
+  }
+  .iris-interactive:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .iris-interactive[data-disabled] {
+    opacity: var(--disabled-opacity);
+    animation-play-state: paused;
+    cursor: not-allowed;
+  }
+
+  /* ---------- Loading ---------- */
+  .iris-spinner {
+    width: 1.125em;
+    height: 1.125em;
+    border-radius: var(--radius-pill);
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    animation: iris-spin 0.8s linear infinite;
+  }
+
+  /* ---------- Form controls ---------- */
+  .iris-field {
+    background: var(--field);
+    color: var(--text);
+    border: 1px solid var(--field-border);
+    border-radius: var(--radius-field);
+    box-shadow: var(--field-shadow);
+    transition:
+      box-shadow var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+  .iris-field::placeholder {
+    color: var(--text-muted);
+  }
+  /* Focus: the border gives way to the iridescent rim, plus the focus ring. */
+  .iris-field:focus-within:not([data-invalid]),
+  .iris-field:focus-visible:not([data-invalid]) {
+    border-color: transparent;
+    box-shadow: var(--rim-edge), var(--field-shadow);
+  }
+  .iris-field:has(:focus-visible),
+  .iris-field:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .iris-field[data-invalid] {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 1px var(--danger);
+  }
+  .iris-field[data-invalid]:has(:focus-visible),
+  .iris-field[data-invalid]:focus-visible {
+    outline-color: var(--danger);
+  }
+  .iris-field[data-disabled] {
+    opacity: var(--disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* Checkbox and radio box: empty = field, checked = solid ink. */
+  .iris-check {
+    background: var(--field);
+    border: 1px solid var(--control-border);
+    color: var(--selected-text);
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+  .iris-check:is([data-state="checked"], [data-state="indeterminate"]) {
+    background: var(--selected-bg);
+    border-color: var(--selected-bg);
+  }
+  .iris-check[data-invalid] {
+    border-color: var(--danger);
+  }
+
+  /* Switch: track, then the holographic film when on. */
+  .iris-switch {
+    background: var(--track);
+    border: 1px solid var(--track-border);
+  }
+  .iris-switch[data-state="checked"] {
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    animation: holo-shift var(--holo-speed) linear infinite;
+    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .iris-switch-thumb {
+    background: var(--white);
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--ink) 25%, transparent);
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  /* Floating list (Select): opaque glass with the iridescent rim. */
+  .iris-popover {
+    background: var(--glass-strong);
+    color: var(--text);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--rim-edge), var(--glass-shadow);
+  }
+  .iris-option[data-highlighted] {
+    background: var(--menu-hover);
+  }
+  .iris-option[data-disabled] {
+    opacity: var(--disabled-opacity);
+  }
+}
+
+@keyframes iris-holo-3 {
+  from {
+    background-position:
+      0 0,
+      0 0,
+      0% 0;
+  }
+  to {
+    background-position:
+      0 0,
+      0 0,
+      200% 0;
+  }
+}
+
+@keyframes iris-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iris-spinner {
+    animation: none;
+  }
+}
