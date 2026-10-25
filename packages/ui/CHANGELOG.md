@@ -1,5 +1,12 @@
 # @irisui/ui
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [596e7a1]
+  - @irisui/tokens@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
