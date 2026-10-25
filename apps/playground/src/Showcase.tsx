@@ -1,4 +1,10 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
   Badge,
   Button,
   Card,
@@ -40,6 +46,7 @@ import {
   PopoverClose,
   PopoverContent,
   PopoverTrigger,
+  Progress,
   RadioGroup,
   RadioGroupItem,
   Select,
@@ -56,14 +63,16 @@ import {
   TabsList,
   TabsTrigger,
   Textarea,
+  Toaster,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  toast,
   type Look,
   type Tone,
 } from "@irisui/ui";
 import { cn } from "@irisui/utils";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 const LOOKS: Look[] = ["holo", "glass", "solid", "outline", "ghost"];
 const TONES: (Tone | undefined)[] = [undefined, 1, 2, 3, 4, 5, "ink", "danger"];
@@ -496,6 +505,94 @@ function Surfaces() {
   );
 }
 
+function Feedback() {
+  const [value, setValue] = useState(68);
+  useEffect(() => {
+    const id = setInterval(() => setValue((v) => (v >= 100 ? 0 : v + 4)), 600);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <Section id="feedback" title="Alert · Toast · Avatar · Progress">
+      <div className="grid gap-4 md:grid-cols-2">
+        <Alert tone="info">
+          <AlertTitle>Nouvelle version</AlertTitle>
+          <AlertDescription>La version 2 est disponible.</AlertDescription>
+        </Alert>
+        <Alert tone="success">
+          <AlertTitle>Enregistré</AlertTitle>
+          <AlertDescription>Vos modifications sont en ligne.</AlertDescription>
+        </Alert>
+        <Alert tone="warning">
+          <AlertTitle>Espace presque plein</AlertTitle>
+          <AlertDescription>Il reste 2 Go sur 50 Go.</AlertDescription>
+        </Alert>
+        <Alert tone="danger">
+          <AlertTitle>Paiement refusé</AlertTitle>
+          <AlertDescription>Vérifiez les informations de votre carte.</AlertDescription>
+        </Alert>
+      </div>
+      <Row label="Toast">
+        <Button
+          look="glass"
+          tone={3}
+          onClick={() =>
+            toast.success("Enregistré", { description: "Vos modifications sont en ligne." })
+          }
+        >
+          Succès
+        </Button>
+        <Button look="glass" tone={2} onClick={() => toast.info("Nouvelle version disponible")}>
+          Info
+        </Button>
+        <Button look="glass" tone={4} onClick={() => toast.warning("Espace presque plein")}>
+          Avertissement
+        </Button>
+        <Button
+          look="glass"
+          tone="danger"
+          onClick={() =>
+            toast.error("Paiement refusé", {
+              description: "Vérifiez votre carte.",
+              action: { label: "Réessayer", onClick: () => toast.info("Nouvelle tentative…") },
+            })
+          }
+        >
+          Erreur avec action
+        </Button>
+      </Row>
+      <Row label="Avatar">
+        <Avatar size="sm">
+          <AvatarFallback>CR</AvatarFallback>
+        </Avatar>
+        <Avatar tone={1}>
+          <AvatarFallback>HM</AvatarFallback>
+        </Avatar>
+        <Avatar tone={3} size="lg">
+          <AvatarFallback>LB</AvatarFallback>
+        </Avatar>
+        <AvatarGroup aria-label="Équipe">
+          {(["ink", 1, 2, 3, 5] as const).map((tone, i) => (
+            <Avatar key={tone} tone={tone}>
+              <AvatarFallback>{["CR", "HM", "LB", "AD", "+5"][i]}</AvatarFallback>
+            </Avatar>
+          ))}
+        </AvatarGroup>
+      </Row>
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between text-sm font-medium">
+            <span id="import-label">Import en cours</span>
+            <span className="font-mono">{value} %</span>
+          </div>
+          <Progress aria-labelledby="import-label" value={value} />
+        </div>
+        <Progress aria-label="Quota" value={82} tone="danger" />
+        <Progress aria-label="Chargement" />
+      </div>
+    </Section>
+  );
+}
+
 export function Showcase() {
   return (
     <>
@@ -504,6 +601,8 @@ export function Showcase() {
       <Forms />
       <Choices />
       <Surfaces />
+      <Feedback />
+      <Toaster />
     </>
   );
 }

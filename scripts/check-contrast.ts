@@ -332,7 +332,7 @@ const pairs: Pair[] = [
     surface: "glass-ink",
     min: TEXT,
   },
-  ...(["success", "warning", "danger"] as const).map((s) => ({
+  ...(["success", "warning", "danger", "info"] as const).map((s) => ({
     label: `--${s}-text / --${s}-soft`,
     fg: `--${s}-text`,
     on: layer(`--${s}-soft`, glass),
@@ -487,6 +487,26 @@ const lookPairs: Pair[] = TONE_IDS.flatMap((id): Pair[] => {
   ];
 });
 pairs.push(...lookPairs);
+
+// Alert and Toast: body text on the soft status tint, over glass or the opaque surface.
+for (const s of ["info", "success", "warning", "danger"] as const) {
+  pairs.push(
+    {
+      label: `--text / --${s}-soft (Alert)`,
+      fg: "--text",
+      on: layer(`--${s}-soft`, glass),
+      surface: `${s}-soft`,
+      min: TEXT,
+    },
+    {
+      label: `--${s}-text / --${s}-soft (Toast)`,
+      fg: `--${s}-text`,
+      on: (vars) => [over(color(vars, `--${s}-soft`), color(vars, "--popover"))],
+      surface: `${s}-soft`,
+      min: TEXT,
+    },
+  );
+}
 
 // Surfaces: muted text of the ink Card, and the active option of menus and lists.
 pairs.push(

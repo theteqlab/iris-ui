@@ -15,4 +15,8 @@ export * from "./dropdown-menu";
 export * from "./popover";
 export * from "./tooltip";
 export * from "./tabs";
+export * from "./alert";
+export * from "./toast";
+export * from "./avatar";
+export * from "./progress";
 export type { Look, Size, Tone } from "./lib/look";

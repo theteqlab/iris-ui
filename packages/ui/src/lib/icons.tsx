@@ -83,3 +83,26 @@ export function ChevronRightIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+const statusIcon = (path: string) =>
+  function StatusIcon(props: SVGProps<SVGSVGElement>) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+        {...props}
+      >
+        <path d={path} />
+      </svg>
+    );
+  };
+
+export const InfoIcon = statusIcon("M12 11v6M12 7h.01");
+export const SuccessIcon = statusIcon("M6.5 12.5l3.5 3.5 7.5-8");
+export const WarningIcon = statusIcon("M12 6v7M12 17h.01");
+export const DangerIcon = statusIcon("M8 8l8 8M16 8l-8 8");

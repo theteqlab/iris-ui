@@ -10,6 +10,10 @@ export interface Messages {
   selectPlaceholder: string;
   /** Dialog close button. */
   close: string;
+  /** Name of the toast region. */
+  notifications: string;
+  /** Close button of a toast. */
+  closeNotification: string;
 }
 
 export const en: Messages = {
@@ -17,6 +21,8 @@ export const en: Messages = {
   characterCount: (count, max) => `${count} / ${max} characters`,
   selectPlaceholder: "Select…",
   close: "Close",
+  notifications: "Notifications",
+  closeNotification: "Close notification",
 };
 
 export const fr: Messages = {
@@ -24,6 +30,8 @@ export const fr: Messages = {
   characterCount: (count, max) => `${count} / ${max} caractères`,
   selectPlaceholder: "Choisir…",
   close: "Fermer",
+  notifications: "Notifications",
+  closeNotification: "Fermer la notification",
 };
 
 const MessagesContext = createContext<Messages>(en);

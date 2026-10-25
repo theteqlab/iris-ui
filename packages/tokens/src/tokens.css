@@ -346,6 +346,7 @@
   --success: #0F7A63;  --success-soft: rgb(214 246 236 / 0.72);  --success-text: #0B5E4C;
   --warning: #F4DE95;  --warning-soft: rgb(255 243 210 / 0.78);  --warning-text: #6E5512;
   --danger:  #B3245E;  --danger-soft:  rgb(252 224 236 / 0.78);  --danger-text:  #A81F57;
+  --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 12%, rgb(255 255 255 / 0.78)); --info-text: var(--link);
 
   --chart-1: var(--chart-light-1); --chart-2: var(--chart-light-2); --chart-3: var(--chart-light-3);
 
@@ -365,6 +366,7 @@
   --look-outline-bg: var(--white);
   --text-on-danger: var(--white);
   --control-border: rgb(21 19 42 / 0.3);
+  --avatar-ring: rgb(255 255 255 / 0.9);
   --track-border: rgb(255 255 255 / 0.7);
   --menu-hover: linear-gradient(90deg, color-mix(in srgb, var(--holo-1) 50%, transparent), color-mix(in srgb, var(--holo-2) 50%, transparent), color-mix(in srgb, var(--holo-3) 50%, transparent));
 
@@ -412,6 +414,7 @@
   --success: #4FD1AE;  --success-soft: rgb(79 209 174 / 0.14);   --success-text: #7FE3C6;
   --warning: #F4DE95;  --warning-soft: rgb(244 222 149 / 0.14);  --warning-text: #F4DE95;
   --danger:  #FF7AA8;  --danger-soft:  rgb(255 122 168 / 0.14);  --danger-text:  #FF90B5;
+  --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 14%, transparent); --info-text: var(--link);
 
   --chart-1: var(--chart-dark-1); --chart-2: var(--chart-dark-2); --chart-3: var(--chart-dark-3);
 
@@ -431,6 +434,7 @@
   --look-outline-bg: #1A1733;
   --text-on-danger: var(--night);
   --control-border: rgb(255 255 255 / 0.3);
+  --avatar-ring: rgb(255 255 255 / 0.3);
   --track-border: rgb(255 255 255 / 0.12);
   --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
 
@@ -461,13 +465,14 @@
     --success: #4FD1AE; --success-soft: rgb(79 209 174 / 0.14); --success-text: #7FE3C6;
     --warning-soft: rgb(244 222 149 / 0.14); --warning-text: #F4DE95;
     --danger: #FF7AA8; --danger-soft: rgb(255 122 168 / 0.14); --danger-text: #FF90B5;
+    --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 14%, transparent); --info-text: var(--link);
     --chart-1: var(--chart-dark-1); --chart-2: var(--chart-dark-2); --chart-3: var(--chart-dark-3);
     --selected-bg: #F1EEF8; --selected-text: var(--ink);
     --track: rgb(255 255 255 / 0.08); --overlay: rgb(0 0 0 / 0.35);
     --surface-holo-shadow: 0 0 0 1px rgb(255 255 255 / 0.2), 0 8px 22px rgb(0 0 0 / 0.45);
     --is-dark: 1; --look-glass-tint: 26%; --look-glass-wash: rgb(255 255 255 / 0.04); --look-glass-text: var(--white);
     --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --look-outline-bg: #1A1733;
-    --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
+    --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --avatar-ring: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
     --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
     --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
     --tone-2-text: color-mix(in srgb, var(--tone-2-base) 45%, var(--white)); --tone-2-soft: color-mix(in srgb, var(--tone-2-base) 22%, var(--look-outline-bg));

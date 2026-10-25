@@ -110,3 +110,22 @@ test("Tabs: arrow keys move between tabs and skip disabled ones", async ({ page 
   await hold(page, "ArrowRight");
   await expect(list.getByRole("tab", { name: "Profil" })).toBeFocused();
 });
+
+test("Toast: shown in a live region, runs its action, stays while hovered", async ({ page }) => {
+  await page.getByRole("button", { name: "Erreur avec action" }).click();
+  const region = page.getByRole("region", { name: /Notifications/ });
+  const toast = region.getByRole("listitem").filter({ hasText: "Paiement refusé" });
+  await expect(toast).toBeVisible();
+  await expect(region).toHaveAttribute("aria-live", "polite");
+
+  // Sonner closes a toast after 4 s unless it is hovered. Hover once it has
+  // finished sliding in, so the pointer stays over it.
+  await expect(toast).toHaveAttribute("data-mounted", "true");
+  await page.waitForTimeout(500);
+  await toast.hover();
+  await page.waitForTimeout(5000);
+  await expect(toast).toBeVisible();
+
+  await toast.getByRole("button", { name: "Réessayer" }).click();
+  await expect(region.getByText("Nouvelle tentative…")).toBeVisible();
+});

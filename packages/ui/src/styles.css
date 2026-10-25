@@ -361,6 +361,88 @@
     animation: holo-shift var(--holo-speed) linear infinite;
   }
 
+  /* ---------- Feedback (Alert, Toast) ---------- */
+  .iris-status[data-tone="info"] {
+    --s-soft: var(--info-soft);
+    --s-text: var(--info-text);
+  }
+  .iris-status[data-tone="success"] {
+    --s-soft: var(--success-soft);
+    --s-text: var(--success-text);
+  }
+  .iris-status[data-tone="warning"] {
+    --s-soft: var(--warning-soft);
+    --s-text: var(--warning-text);
+  }
+  .iris-status[data-tone="danger"] {
+    --s-soft: var(--danger-soft);
+    --s-text: var(--danger-text);
+  }
+  /* Toasts: Sonner sets data-type (error is the danger tone). */
+  .iris-toast[data-type="info"] {
+    --s-soft: var(--info-soft);
+    --s-text: var(--info-text);
+  }
+  .iris-toast[data-type="success"] {
+    --s-soft: var(--success-soft);
+    --s-text: var(--success-text);
+  }
+  .iris-toast[data-type="warning"] {
+    --s-soft: var(--warning-soft);
+    --s-text: var(--warning-text);
+  }
+  .iris-toast[data-type="error"] {
+    --s-soft: var(--danger-soft);
+    --s-text: var(--danger-text);
+  }
+  /* Alert: the soft status tint over glass. No backdrop-filter: alerts often sit
+     in cards or panels that already blur, and blurs are never nested. */
+  .iris-alert {
+    background: linear-gradient(var(--s-soft), var(--s-soft)), var(--glass);
+    color: var(--text);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--rim-edge);
+  }
+  /* Toast: the same tint over the opaque surface. */
+  .iris-toast {
+    background:
+      linear-gradient(var(--s-soft, transparent), var(--s-soft, transparent)), var(--popover);
+    color: var(--text);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--rim-edge), var(--glass-shadow);
+  }
+  .iris-status-icon {
+    color: var(--s-text, var(--text));
+    border: 2px solid currentColor;
+  }
+
+  /* ---------- Avatar, Progress ---------- */
+  .iris-avatar {
+    background: var(--t-base);
+    color: var(--t-fg);
+    box-shadow: 0 0 0 2px var(--avatar-ring);
+  }
+  .iris-progress {
+    background: var(--track);
+    border: 1px solid var(--track-border);
+  }
+  .iris-progress-fill {
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    animation: holo-shift var(--holo-speed) linear infinite;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  .iris-progress[data-tone] .iris-progress-fill {
+    background: var(--t-base);
+    animation: none;
+  }
+  /* Indeterminate: the film alone, sliding faster. */
+  .iris-progress[data-state="indeterminate"] .iris-progress-fill {
+    animation-duration: calc(var(--holo-speed) / 4);
+  }
+
   /* ---------- Form controls ---------- */
   .iris-field {
     background: var(--field);
