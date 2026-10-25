@@ -6,7 +6,7 @@ const shared: Options = {
   dts: { compilerOptions: { ignoreDeprecations: "6.0" } },
   sourcemap: true,
   target: "es2022",
-  external: ["react", "react-dom", "@verre/utils", "@verre/tokens"],
+  external: ["react", "react-dom", "@iris-ui/utils", "@iris-ui/tokens"],
 };
 
 export default defineConfig([

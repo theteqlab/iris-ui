@@ -1,7 +1,7 @@
 {
-  "name": "@verre/tokens",
+  "name": "@iris-ui/tokens",
   "version": "0.0.0",
-  "description": "CSS design tokens for the Verre irisé UI library.",
+  "description": "CSS design tokens for the iris-ui library.",
   "license": "MIT",
   "type": "module",
   "sideEffects": ["*.css"],

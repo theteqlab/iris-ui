@@ -1,7 +1,7 @@
 {
-  "name": "@verre/utils",
+  "name": "@iris-ui/utils",
   "version": "0.0.0",
-  "description": "Shared utilities and hooks for the Verre irisé UI library.",
+  "description": "Shared utilities and hooks for the iris-ui library.",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,

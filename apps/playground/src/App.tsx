@@ -1,5 +1,5 @@
-import { MODES, PALETTES, useTheme, type Mode, type Palette } from "@verre/ui";
-import { cn } from "@verre/utils";
+import { MODES, PALETTES, useTheme, type Mode, type Palette } from "@iris-ui/ui";
+import { cn } from "@iris-ui/utils";
 
 const PALETTE_LABELS: Record<Palette, string> = {
   nacre: "Nacre",

@@ -3,7 +3,7 @@ import { extendTailwindMerge } from "tailwind-merge";
 
 /**
  * tailwind-merge only knows Tailwind's default scale. The custom theme keys
- * declared in `@verre/tokens/tailwind.css` are registered here so that, for
+ * declared in `@iris-ui/tokens/tailwind.css` are registered here so that, for
  * instance, `text-h3` is seen as a font size and not as a text color.
  */
 const twMerge = extendTailwindMerge({

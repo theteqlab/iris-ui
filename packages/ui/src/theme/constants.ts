@@ -7,7 +7,7 @@ export type ResolvedMode = Exclude<Mode, "system">;
 
 export const DEFAULT_PALETTE: Palette = "nacre";
 export const DEFAULT_MODE: Mode = "system";
-export const DEFAULT_STORAGE_KEY = "@verre/theme";
+export const DEFAULT_STORAGE_KEY = "@iris-ui/theme";
 
 export const isPalette = (value: unknown): value is Palette =>
   (PALETTES as readonly unknown[]).includes(value);
