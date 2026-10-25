@@ -1,5 +1,12 @@
 # @irisui/ui
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [931175d]
+  - @irisui/utils@0.1.2
+
 ## 0.1.2
 
 ### Patch Changes
