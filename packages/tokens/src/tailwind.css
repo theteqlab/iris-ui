@@ -1,7 +1,7 @@
 /* =====================================================================
    Tailwind CSS v4 bridge.
    Usage :  @import "tailwindcss";
-            @import "@iris-ui/tokens/tailwind.css";
+            @import "@irisui/tokens/tailwind.css";
    Exposes ONLY the semantic tokens (level 2) as utilities. Tailwind's
    default palette is removed so that no hard-coded color can slip in.
    `reference` : the theme variables are not re-emitted (tokens.css owns

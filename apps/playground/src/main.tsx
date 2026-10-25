@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@iris-ui/ui";
+import { ThemeProvider } from "@irisui/ui";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";

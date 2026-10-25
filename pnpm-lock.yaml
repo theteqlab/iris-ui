@@ -23,13 +23,13 @@ importers:
 
   apps/playground:
     dependencies:
-      '@iris-ui/tokens':
+      '@irisui/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
-      '@iris-ui/ui':
+      '@irisui/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@iris-ui/utils':
+      '@irisui/utils':
         specifier: workspace:*
         version: link:../../packages/utils
       react:
@@ -66,10 +66,10 @@ importers:
 
   packages/ui:
     dependencies:
-      '@iris-ui/tokens':
+      '@irisui/tokens':
         specifier: workspace:*
         version: link:../tokens
-      '@iris-ui/utils':
+      '@irisui/utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:

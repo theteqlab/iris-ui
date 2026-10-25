@@ -1,6 +1,6 @@
 {
-  "name": "@iris-ui/tokens",
-  "version": "0.0.0",
+  "name": "@irisui/tokens",
+  "version": "0.1.0",
   "description": "CSS design tokens for the iris-ui library.",
   "license": "MIT",
   "type": "module",
@@ -19,5 +19,17 @@
     "tailwindcss": {
       "optional": true
     }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theteqlab/iris-ui.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://github.com/theteqlab/iris-ui#readme",
+  "bugs": {
+    "url": "https://github.com/theteqlab/iris-ui/issues"
   }
 }
