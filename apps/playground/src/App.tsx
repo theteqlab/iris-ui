@@ -96,9 +96,7 @@ export function App() {
       </header>
 
       <main className="flex flex-col gap-8">
-        <h1 className="m-0 text-h2 leading-tight font-medium tracking-display">
-          Fondations
-        </h1>
+        <h1 className="m-0 text-h2 leading-tight font-medium tracking-display">Fondations</h1>
 
         <article
           className={cn(

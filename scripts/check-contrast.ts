@@ -13,9 +13,7 @@
 import { appendFileSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-const TOKENS_PATH = fileURLToPath(
-  new URL("../packages/tokens/src/tokens.css", import.meta.url),
-);
+const TOKENS_PATH = fileURLToPath(new URL("../packages/tokens/src/tokens.css", import.meta.url));
 
 const PALETTES = ["nacre", "aurore", "couchant", "glacier"] as const;
 const MODES = ["light", "dark"] as const;
@@ -170,7 +168,10 @@ function parseColor(value: string): Rgba {
   }
   const fn = /^rgba?\(([^)]+)\)$/i.exec(v);
   if (fn) {
-    const parts = fn[1]!.split(/[\s,/]+/).filter(Boolean).map(parseFloat);
+    const parts = fn[1]!
+      .split(/[\s,/]+/)
+      .filter(Boolean)
+      .map(parseFloat);
     const [r = 0, g = 0, b = 0, a = 1] = parts;
     return { r, g, b, a };
   }
@@ -284,8 +285,20 @@ const pairs: Pair[] = [
     surface: `holo-${n}`,
     min: TEXT,
   })),
-  { label: "--selected-text / --selected-bg", fg: "--selected-text", on: solid("--selected-bg"), surface: "selected-bg", min: TEXT },
-  { label: "--text-on-ink / --glass-ink", fg: "--text-on-ink", on: glassInk, surface: "glass-ink", min: TEXT },
+  {
+    label: "--selected-text / --selected-bg",
+    fg: "--selected-text",
+    on: solid("--selected-bg"),
+    surface: "selected-bg",
+    min: TEXT,
+  },
+  {
+    label: "--text-on-ink / --glass-ink",
+    fg: "--text-on-ink",
+    on: glassInk,
+    surface: "glass-ink",
+    min: TEXT,
+  },
   ...(["success", "warning", "danger"] as const).map((s) => ({
     label: `--${s}-text / --${s}-soft`,
     fg: `--${s}-text`,
@@ -294,12 +307,30 @@ const pairs: Pair[] = [
     min: TEXT,
   })),
   ...[1, 2, 3, 4, 5].flatMap((n) => [
-    { label: `--tone-${n}-deep / --tone-${n}-tint-light`, fg: `--tone-${n}-deep`, on: solid(`--tone-${n}-tint-light`), surface: "tint", min: TEXT },
-    { label: `--ink / --tone-${n}-base`, fg: "--ink", on: solid(`--tone-${n}-base`), surface: "tone", min: TEXT },
+    {
+      label: `--tone-${n}-deep / --tone-${n}-tint-light`,
+      fg: `--tone-${n}-deep`,
+      on: solid(`--tone-${n}-tint-light`),
+      surface: "tint",
+      min: TEXT,
+    },
+    {
+      label: `--ink / --tone-${n}-base`,
+      fg: "--ink",
+      on: solid(`--tone-${n}-base`),
+      surface: "tone",
+      min: TEXT,
+    },
   ]),
   { label: "--focus-ring / page", fg: "--focus-ring", on: page, surface: "page", min: NON_TEXT },
   { label: "--focus-ring / glass", fg: "--focus-ring", on: glass, surface: "glass", min: NON_TEXT },
-  { label: "--danger / field (invalid border)", fg: "--danger", on: fieldOnGlass, surface: "field", min: NON_TEXT },
+  {
+    label: "--danger / field (invalid border)",
+    fg: "--danger",
+    on: fieldOnGlass,
+    surface: "field",
+    min: NON_TEXT,
+  },
   ...[1, 2, 3].map((n) => ({
     label: `--chart-${n} / glass`,
     fg: `--chart-${n}`,
@@ -331,7 +362,10 @@ for (const combo of combos) {
     const fg = color(vars, pair.fg);
     const ratio = Math.min(...pair.on(vars).map((bg) => contrast(fg, bg)));
     const pass = ratio >= pair.min;
-    if (!pass) pair.advisory ? warnings++ : failures++;
+    if (!pass) {
+      if (pair.advisory) warnings++;
+      else failures++;
+    }
     const row = results.get(pair.label) ?? [];
     row.push({ ratio, pass });
     results.set(pair.label, row);
@@ -344,7 +378,8 @@ for (const palette of PALETTES) {
   const dark = computeVars(rules, { palette, mode: "dark", prefersDark: false });
   const system = computeVars(rules, { palette, mode: "system", prefersDark: true });
   for (const [name, value] of dark) {
-    if (system.get(name) !== value) drift.push(`${palette} ${name}: dark=${value} system=${system.get(name)}`);
+    if (system.get(name) !== value)
+      drift.push(`${palette} ${name}: dark=${value} system=${system.get(name)}`);
   }
 }
 failures += drift.length;
@@ -370,7 +405,9 @@ for (const pair of pairs) {
   );
 }
 lines.push("");
-lines.push(`system ≡ dark : ${drift.length === 0 ? "✓ identical" : `✗ ${drift.length} difference(s)`}`);
+lines.push(
+  `system ≡ dark : ${drift.length === 0 ? "✓ identical" : `✗ ${drift.length} difference(s)`}`,
+);
 for (const d of drift) lines.push(`  ${d}`);
 lines.push("");
 
@@ -383,7 +420,8 @@ lines.push(
   failures === 0
     ? `GATE PASSED — ${pairs.length} pairs × ${combos.length} combinations` +
         (warnings ? ` (${warnings} advisory warning(s))` : "")
-    : `GATE FAILED — ${failures} failure(s)` + (warnings ? `, ${warnings} advisory warning(s)` : ""),
+    : `GATE FAILED — ${failures} failure(s)` +
+        (warnings ? `, ${warnings} advisory warning(s)` : ""),
 );
 console.log(lines.join("\n"));
 
@@ -396,8 +434,12 @@ if (summaryPath) {
   md.push(`| --- | --- | ${combos.map(() => "---").join(" | ")} |`);
   for (const pair of pairs) {
     const row = results.get(pair.label)!;
-    const cells = row.map((r) => `${r.pass ? "" : pair.advisory ? "⚠️ " : "❌ "}${r.ratio.toFixed(2)}`);
-    md.push(`| \`${pair.label}\`${pair.advisory ? " (advisory)" : ""} | ${pair.min} | ${cells.join(" | ")} |`);
+    const cells = row.map(
+      (r) => `${r.pass ? "" : pair.advisory ? "⚠️ " : "❌ "}${r.ratio.toFixed(2)}`,
+    );
+    md.push(
+      `| \`${pair.label}\`${pair.advisory ? " (advisory)" : ""} | ${pair.min} | ${cells.join(" | ")} |`,
+    );
   }
   md.push("", `system ≡ dark: ${drift.length === 0 ? "identical" : drift.join("<br>")}`, "");
   appendFileSync(summaryPath, md.join("\n"));

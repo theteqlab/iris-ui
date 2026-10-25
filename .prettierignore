@@ -1,0 +1,3 @@
+pnpm-lock.yaml
+# Hand-aligned token tables.
+packages/tokens/src/*.css

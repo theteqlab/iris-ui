@@ -6,11 +6,11 @@ iridescent glass surfaces, 4 palettes (`nacre`, `aurore`, `couchant`,
 
 ## Packages
 
-| Package | Description |
-| --- | --- |
-| [`@irisui/ui`](./packages/ui) | React components and theme helpers |
+| Package                               | Description                                  |
+| ------------------------------------- | -------------------------------------------- |
+| [`@irisui/ui`](./packages/ui)         | React components and theme helpers           |
 | [`@irisui/tokens`](./packages/tokens) | CSS design tokens and Tailwind CSS v4 bridge |
-| [`@irisui/utils`](./packages/utils) | Shared utilities and hooks |
+| [`@irisui/utils`](./packages/utils)   | Shared utilities and hooks                   |
 
 ```sh
 npm install @irisui/ui @irisui/tokens
@@ -22,11 +22,19 @@ Requires Node.js 24.11+ and pnpm (version pinned in `package.json`).
 
 ```sh
 pnpm install
-pnpm dev        # playground (apps/playground)
+pnpm dev            # playground (apps/playground)
 pnpm build
 pnpm typecheck
-pnpm contrast   # checks token color contrast
+pnpm lint           # ESLint
+pnpm format         # Prettier (format:check in CI)
+pnpm test           # unit tests: Vitest + Testing Library + axe
+pnpm test:e2e       # playground in the 8 palette × mode combinations: Playwright + axe
+pnpm contrast       # checks token color contrast
 ```
+
+Before the first `pnpm test:e2e`, install the browser with
+`pnpm exec playwright install chromium`; it runs on the built packages, so run
+`pnpm build` first.
 
 ### Releasing
 
