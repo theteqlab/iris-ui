@@ -36,7 +36,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
           {...props}
         >
           {children}
-          {arrow && <PopoverPrimitive.Arrow width={16} height={8} className="fill-glass-strong" />}
+          {arrow && <PopoverPrimitive.Arrow width={16} height={8} className="fill-popover" />}
         </PopoverPrimitive.Content>
       </PopoverPrimitive.Portal>
     );

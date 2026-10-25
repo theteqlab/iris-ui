@@ -501,24 +501,31 @@ pairs.push(
     label: "--text / --menu-hover (active option)",
     fg: "--text",
     on: (vars) => {
-      const strong = glassStrong(vars);
+      const panel = color(vars, "--popover");
       // Light: a gradient of holo 1–3 at 50 %; dark: the accent at 16 %.
       const value = vars.get("--menu-hover") ?? "";
       const layers = value.startsWith("linear-gradient")
         ? [1, 2, 3].map((n) => mix(color(vars, `--holo-${n}`), 0.5, TRANSPARENT))
         : [parseColor(value)];
-      return strong.flatMap((bg) => layers.map((layer) => over(layer, bg)));
+      return layers.map((layer) => over(layer, panel));
     },
     surface: "menu-hover",
     min: TEXT,
   },
   {
-    label: "--danger-text / --glass-strong (danger menu item)",
+    label: "--danger-text / --popover (danger menu item)",
     fg: "--danger-text",
-    on: glassStrong,
-    surface: "glass-strong",
+    on: solid("--popover"),
+    surface: "popover",
     min: TEXT,
   },
+  ...["--text", "--text-muted"].map((fg) => ({
+    label: `${fg} / --popover (lists and menus)`,
+    fg,
+    on: solid("--popover"),
+    surface: "popover",
+    min: TEXT,
+  })),
   {
     label: "--text / --track (inactive pill tab)",
     fg: "--text",

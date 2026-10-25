@@ -436,9 +436,9 @@
     transition: transform var(--duration-base) var(--ease-out);
   }
 
-  /* Floating list (Select): opaque glass with the iridescent rim. */
+  /* Floating panels (Select, DropdownMenu, Popover): opaque, with the iridescent rim. */
   .iris-popover {
-    background: var(--glass-strong);
+    background: var(--popover);
     color: var(--text);
     border: 1px solid var(--glass-border);
     box-shadow: var(--rim-edge), var(--glass-shadow);

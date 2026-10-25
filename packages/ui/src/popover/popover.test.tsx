@@ -39,7 +39,7 @@ describe("Popover", () => {
   it("shows an optional arrow", async () => {
     const { baseElement } = render(<Help arrow />);
     await userEvent.click(screen.getByRole("button", { name: "Help" }));
-    expect(baseElement.querySelector("svg.fill-glass-strong")).toBeInTheDocument();
+    expect(baseElement.querySelector("svg.fill-popover")).toBeInTheDocument();
   });
 
   it("has no axe violations when open", async () => {

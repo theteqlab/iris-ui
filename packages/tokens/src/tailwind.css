@@ -31,6 +31,7 @@
   /* surfaces */
   --color-glass: var(--glass);
   --color-glass-strong: var(--glass-strong);
+  --color-popover: var(--popover);
   --color-glass-border: var(--glass-border);
   --color-glass-ink: var(--glass-ink);
   --color-solid-ink: var(--solid-ink);
