@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contrast:
+    name: Contrast gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/check-contrast.ts
+
+  build:
+    name: Typecheck & build (React ${{ matrix.react }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        react: [19, 18]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - name: Pin React 18
+        if: matrix.react == 18
+        run: |
+          npm pkg set pnpm.overrides.react=18.3.1 pnpm.overrides.react-dom=18.3.1 \
+            pnpm.overrides.@types/react=18.3.31 pnpm.overrides.@types/react-dom=18.3.7
+      - run: pnpm install ${{ matrix.react == 19 && '--frozen-lockfile' || '--no-frozen-lockfile' }}
+      - run: pnpm typecheck
+      - run: pnpm build
