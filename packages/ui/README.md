@@ -22,24 +22,28 @@ Import the tokens and the component styles once in your global CSS (see
 
 ## Components
 
-| Component      | Notes                                                                                                                                                                                      |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Button`       | `look` (`holo` · `glass` · `solid` · `outline` · `ghost`), `tone` (`1`–`5`, `ink`, `danger`), `size` (`sm` 36 px · `md` 44 px · `lg` 56 px), `loading`, `startIcon` / `endIcon`, `asChild` |
-| `IconButton`   | Same looks; round; `aria-label` required                                                                                                                                                   |
-| `Badge`        | Looks `holo` · `glass` · `solid` · `outline`, `tone`, `dot`                                                                                                                                |
-| `Field`        | With `FieldLabel`, `FieldDescription`, `FieldError`: links label, help and error to the control                                                                                            |
-| `Input`        | `size`, `invalid`, `startIcon`, `endSlot`                                                                                                                                                  |
-| `Textarea`     | `autoResize`, `showCount` (with `maxLength`)                                                                                                                                               |
-| `Checkbox`     | Label as children; `checked="indeterminate"`                                                                                                                                               |
-| `RadioGroup`   | With `RadioGroupItem`; `orientation`                                                                                                                                                       |
-| `Switch`       | Label as children (or `aria-label`, required); `size`                                                                                                                                      |
-| `Select`       | With `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel`, `SelectSeparator`                                                                        |
-| `Card`         | `variant` (`glass` · `strong` · `ink`), with `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`                                                                     |
-| `Dialog`       | With `DialogTrigger`, `DialogContent` (`size`, close button), `DialogHeader`, `DialogTitle`, `DialogDescription`, `DialogBody`, `DialogFooter`, `DialogClose`                              |
-| `DropdownMenu` | Items, checkbox and radio items, labels, separators, shortcuts, submenus, `variant="danger"`                                                                                               |
-| `Popover`      | `side`, `align`, optional `arrow`                                                                                                                                                          |
-| `Tooltip`      | 300 ms delay, opens on keyboard focus                                                                                                                                                      |
-| `Tabs`         | `look` (`pill` · `underline`), with `TabsList`, `TabsTrigger`, `TabsContent`                                                                                                               |
+| Component           | Notes                                                                                                                                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Button`            | `look` (`holo` · `glass` · `solid` · `outline` · `ghost`), `tone` (`1`–`5`, `ink`, `danger`), `size` (`sm` 36 px · `md` 44 px · `lg` 56 px), `loading`, `startIcon` / `endIcon`, `asChild` |
+| `IconButton`        | Same looks; round; `aria-label` required                                                                                                                                                   |
+| `Badge`             | Looks `holo` · `glass` · `solid` · `outline`, `tone`, `dot`                                                                                                                                |
+| `Field`             | With `FieldLabel`, `FieldDescription`, `FieldError`: links label, help and error to the control                                                                                            |
+| `Input`             | `size`, `invalid`, `startIcon`, `endSlot`                                                                                                                                                  |
+| `Textarea`          | `autoResize`, `showCount` (with `maxLength`)                                                                                                                                               |
+| `Checkbox`          | Label as children; `checked="indeterminate"`                                                                                                                                               |
+| `RadioGroup`        | With `RadioGroupItem`; `orientation`                                                                                                                                                       |
+| `Switch`            | Label as children (or `aria-label`, required); `size`                                                                                                                                      |
+| `Select`            | With `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel`, `SelectSeparator`                                                                        |
+| `Card`              | `variant` (`glass` · `strong` · `ink`), with `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`                                                                     |
+| `Dialog`            | With `DialogTrigger`, `DialogContent` (`size`, close button), `DialogHeader`, `DialogTitle`, `DialogDescription`, `DialogBody`, `DialogFooter`, `DialogClose`                              |
+| `DropdownMenu`      | Items, checkbox and radio items, labels, separators, shortcuts, submenus, `variant="danger"`                                                                                               |
+| `Popover`           | `side`, `align`, optional `arrow`                                                                                                                                                          |
+| `Tooltip`           | 300 ms delay, opens on keyboard focus                                                                                                                                                      |
+| `Tabs`              | `look` (`pill` · `underline`), with `TabsList`, `TabsTrigger`, `TabsContent`                                                                                                               |
+| `Alert`             | `tone` (`info` · `success` · `warning` · `danger`), circled icon, `AlertTitle`, `AlertDescription`; `role="alert"` for warnings and errors, `status` otherwise                             |
+| `Toaster` / `toast` | Sonner: `toast()`, `toast.success()`, `.info()`, `.warning()`, `.error()`, with description and action; bottom right, 360 px, announced, paused on hover                                   |
+| `Avatar`            | `size` (32 · 44 · 56 px), `tone`, with `AvatarImage`, `AvatarFallback`; `AvatarGroup` overlaps by 12 px                                                                                    |
+| `Progress`          | `value` / `max`, `null` for indeterminate, optional `tone` (default: the holographic film)                                                                                                 |
 
 ```tsx
 import { Button, Field, FieldError, FieldLabel, Input } from "@irisui/ui";
@@ -63,7 +67,7 @@ Every component forwards its ref, merges `className` and exposes `data-state`,
 ### Texts
 
 Texts rendered by the components ("Loading", the character counter, the select
-placeholder, the dialog's "Close") are in English by default. Wrap your app in
+placeholder, the dialog's "Close", the toast region and close labels) are in English by default. Wrap your app in
 `<LocaleProvider messages={fr}>` for French, or pass your own `Messages`; each
 text can also be overridden by a prop (`loadingLabel`, `counterLabel`,
 `placeholder`, `closeLabel`).
