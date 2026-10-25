@@ -1,6 +1,6 @@
 {
-  "name": "@iris-ui/ui",
-  "version": "0.0.0",
+  "name": "@irisui/ui",
+  "version": "0.1.0",
   "description": "Accessible React components in the Verre irisé style.",
   "license": "MIT",
   "type": "module",
@@ -39,8 +39,8 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@iris-ui/tokens": "workspace:*",
-    "@iris-ui/utils": "workspace:*"
+    "@irisui/tokens": "workspace:*",
+    "@irisui/utils": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
@@ -51,5 +51,17 @@
     "@types/react-dom": "19.3.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theteqlab/iris-ui.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://github.com/theteqlab/iris-ui#readme",
+  "bugs": {
+    "url": "https://github.com/theteqlab/iris-ui/issues"
   }
 }

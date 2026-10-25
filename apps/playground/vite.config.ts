@@ -1,6 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import { getThemeScript } from "@iris-ui/ui/theme-script";
+import { getThemeScript } from "@irisui/ui/theme-script";
 import { defineConfig, type Plugin } from "vite";
 
 /** Injects the anti-flash theme script at the top of `<head>`. */

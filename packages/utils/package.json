@@ -1,6 +1,6 @@
 {
-  "name": "@iris-ui/utils",
-  "version": "0.0.0",
+  "name": "@irisui/utils",
+  "version": "0.1.0",
   "description": "Shared utilities and hooks for the iris-ui library.",
   "license": "MIT",
   "type": "module",
@@ -36,5 +36,17 @@
   "devDependencies": {
     "@types/react": "19.3.0",
     "react": "19.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theteqlab/iris-ui.git",
+    "directory": "packages/utils"
+  },
+  "homepage": "https://github.com/theteqlab/iris-ui#readme",
+  "bugs": {
+    "url": "https://github.com/theteqlab/iris-ui/issues"
   }
 }
