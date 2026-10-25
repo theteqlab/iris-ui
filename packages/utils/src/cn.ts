@@ -6,7 +6,7 @@ import { extendTailwindMerge } from "tailwind-merge";
  * declared in `@irisui/tokens/tailwind.css` are registered here so that, for
  * instance, `text-h3` is seen as a font size and not as a text color.
  */
-const twMerge = extendTailwindMerge({
+export const twMergeConfig = {
   extend: {
     theme: {
       text: ["xs", "sm", "md", "lg", "h1", "h2", "h3"],
@@ -18,7 +18,9 @@ const twMerge = extendTailwindMerge({
       animate: ["holo"],
     },
   },
-});
+};
+
+const twMerge = extendTailwindMerge(twMergeConfig);
 
 /** Merges class names, resolving conflicting Tailwind utilities (last one wins). */
 export function cn(...inputs: ClassValue[]): string {

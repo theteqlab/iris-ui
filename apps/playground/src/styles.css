@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@irisui/tokens/tailwind.css";
+@import "@irisui/ui/styles.css";
 
 @layer base {
   html {

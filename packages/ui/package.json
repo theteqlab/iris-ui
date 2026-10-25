@@ -4,9 +4,12 @@
   "description": "Accessible React components in the Verre irisé style.",
   "license": "MIT",
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
-    "dist"
+    "dist",
+    "src/styles.css"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -31,7 +34,8 @@
         "types": "./dist/theme-script.d.cts",
         "default": "./dist/theme-script.cjs"
       }
-    }
+    },
+    "./styles.css": "./src/styles.css"
   },
   "scripts": {
     "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsup",
@@ -40,11 +44,19 @@
   },
   "dependencies": {
     "@irisui/tokens": "workspace:*",
-    "@irisui/utils": "workspace:*"
+    "@irisui/utils": "workspace:*",
+    "@radix-ui/react-checkbox": "1.3.12",
+    "@radix-ui/react-label": "2.1.16",
+    "@radix-ui/react-radio-group": "1.4.8",
+    "@radix-ui/react-select": "2.3.8",
+    "@radix-ui/react-slot": "1.4.0",
+    "@radix-ui/react-switch": "1.3.8",
+    "tailwind-variants": "3.3.1"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
-    "react-dom": "^18.2.0 || ^19.0.0"
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "tailwindcss": "^4.1.0"
   },
   "devDependencies": {
     "@types/react": "19.3.0",

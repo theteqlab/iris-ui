@@ -1,6 +1,7 @@
 /**
  * Contrast gate: checks every text / background pair of tokens.css in the
- * 8 palette × mode combinations against the WCAG 2.2 AA thresholds.
+ * 8 palette × mode combinations against the WCAG 2.2 AA thresholds, including
+ * the text of every Button / Badge look in every tone.
  *
  *   node scripts/check-contrast.ts            # exit 1 on any failure
  *
@@ -257,7 +258,8 @@ const fieldOnGlass = layer("--field", glass);
 
 interface Pair {
   label: string;
-  fg: string;
+  /** A token, or a colour computed from the tokens (component recipes). */
+  fg: string | ((vars: Map<string, string>) => Rgba);
   on: Surface;
   surface: string;
   min: number;
@@ -342,6 +344,111 @@ const pairs: Pair[] = [
 ];
 
 // ---------------------------------------------------------------------------
+// Button and badge looks (recipes of packages/ui/src/styles.css)
+
+const TRANSPARENT: Rgba = { r: 0, g: 0, b: 0, a: 0 };
+const WHITE: Rgba = { r: 255, g: 255, b: 255, a: 1 };
+
+/** CSS `color-mix(in srgb, a p, b)`, with premultiplied alpha like browsers. */
+function mix(a: Rgba, p: number, b: Rgba): Rgba {
+  const q = 1 - p;
+  const alpha = a.a * p + b.a * q;
+  if (alpha === 0) return TRANSPARENT;
+  const ch = (x: number, y: number) => (x * a.a * p + y * b.a * q) / alpha;
+  return { r: ch(a.r, b.r), g: ch(a.g, b.g), b: ch(a.b, b.b), a: alpha };
+}
+
+type ToneId = 1 | 2 | 3 | 4 | 5 | "ink" | "danger";
+const TONE_IDS: ToneId[] = [1, 2, 3, 4, 5, "ink", "danger"];
+
+interface ToneColors {
+  base: Rgba;
+  fg: Rgba;
+  glassBg: Rgba;
+  glassText: Rgba;
+  outlineText: Rgba;
+}
+
+function toneColors(vars: Map<string, string>, id: ToneId): ToneColors {
+  const c = (name: string) => color(vars, name);
+  if (id === "ink") {
+    const base = c("--solid-ink");
+    return {
+      base,
+      fg: c("--text-on-ink"),
+      glassBg: c("--glass-strong"),
+      glassText: c("--text"),
+      outlineText: c("--text"),
+    };
+  }
+  if (id === "danger") {
+    const base = c("--danger");
+    // Glass: the soft danger tint over the glass layer.
+    const glassBg = over(c("--danger-soft"), c("--glass"));
+    return {
+      base,
+      fg: c("--text-on-danger"),
+      glassBg,
+      glassText: c("--danger-text"),
+      outlineText: c("--danger-text"),
+    };
+  }
+  const base = c(`--tone-${id}-base`);
+  const dark = parseFloat(vars.get("--is-dark") ?? "0") === 1;
+  const tint = parseFloat(vars.get("--look-glass-tint") ?? "0") / 100;
+  return {
+    base,
+    fg: c("--ink"),
+    glassBg: mix(base, tint, c("--look-glass-wash")),
+    glassText: c("--look-glass-text"),
+    outlineText: dark ? mix(base, 0.45, WHITE) : c(`--tone-${id}-deep`),
+  };
+}
+
+const lookPairs: Pair[] = TONE_IDS.flatMap((id): Pair[] => {
+  const t = (vars: Map<string, string>) => toneColors(vars, id);
+  const filled = id === "ink" || id === "danger";
+  return [
+    {
+      label: `look holo · tone ${id}`,
+      fg: (vars) => t(vars).fg,
+      // Pastel tones tint the film at 45 % (the white sheen only lightens it);
+      // ink and danger are a solid fill with a holographic rim.
+      on: filled
+        ? (vars) => [t(vars).base]
+        : (vars) =>
+            [1, 2, 3, 4, 5].map((n) =>
+              over(mix(t(vars).base, 0.45, TRANSPARENT), color(vars, `--holo-${n}`)),
+            ),
+      surface: "holo",
+      min: TEXT,
+    },
+    {
+      label: `look glass · tone ${id}`,
+      fg: (vars) => t(vars).glassText,
+      on: (vars) => page(vars).map((b) => over(t(vars).glassBg, saturate(b, 1.8))),
+      surface: "glass",
+      min: TEXT,
+    },
+    {
+      label: `look solid · tone ${id}`,
+      fg: (vars) => t(vars).fg,
+      on: (vars) => [t(vars).base],
+      surface: "solid",
+      min: TEXT,
+    },
+    {
+      label: `look outline · tone ${id}`,
+      fg: (vars) => t(vars).outlineText,
+      on: solid("--look-outline-bg"),
+      surface: "outline",
+      min: TEXT,
+    },
+  ];
+});
+pairs.push(...lookPairs);
+
+// ---------------------------------------------------------------------------
 // Run
 
 const rules = parseCss(readFileSync(TOKENS_PATH, "utf8"));
@@ -359,7 +466,7 @@ let warnings = 0;
 for (const combo of combos) {
   const vars = computeVars(rules, { ...combo, prefersDark: false });
   for (const pair of pairs) {
-    const fg = color(vars, pair.fg);
+    const fg = typeof pair.fg === "string" ? color(vars, pair.fg) : pair.fg(vars);
     const ratio = Math.min(...pair.on(vars).map((bg) => contrast(fg, bg)));
     const pass = ratio >= pair.min;
     if (!pass) {

@@ -292,6 +292,9 @@
   --blur: 28px;
   --blur-small: 14px;
 
+  /* film holographique : reste clair dans les deux modes */
+  --look-holo-border: rgb(255 255 255 / 0.95);
+
   /* états */
   --disabled-opacity: 0.45;
   --pressed-shift: 1px;
@@ -347,6 +350,19 @@
   --track: rgb(21 19 42 / 0.1);
   --overlay: rgb(21 19 42 / 0.3);
   --surface-holo-shadow: 0 0 0 1px rgb(110 90 170 / 0.22), 0 8px 22px rgb(120 100 190 / 0.3);
+
+  /* Niveau 3 — composants (looks, contrôles) */
+  --is-dark: 0;
+  --look-glass-tint: 40%;
+  --look-glass-wash: rgb(255 255 255 / 0.3);
+  --look-glass-text: var(--ink);
+  --look-glass-border: rgb(255 255 255 / 0.8);
+  --look-glass-highlight: rgb(255 255 255 / 0.85);
+  --look-outline-bg: var(--white);
+  --text-on-danger: var(--white);
+  --control-border: rgb(21 19 42 / 0.3);
+  --track-border: rgb(255 255 255 / 0.7);
+  --menu-hover: linear-gradient(90deg, color-mix(in srgb, var(--holo-1) 50%, transparent), color-mix(in srgb, var(--holo-2) 50%, transparent), color-mix(in srgb, var(--holo-3) 50%, transparent));
 }
 
 /* ---------- Niveau 2 — Sémantique, mode sombre ---------- */
@@ -392,6 +408,19 @@
   --track: rgb(255 255 255 / 0.08);
   --overlay: rgb(0 0 0 / 0.35);
   --surface-holo-shadow: 0 0 0 1px rgb(255 255 255 / 0.2), 0 8px 22px rgb(0 0 0 / 0.45);
+
+  /* Niveau 3 — composants (looks, contrôles) */
+  --is-dark: 1;
+  --look-glass-tint: 26%;
+  --look-glass-wash: rgb(255 255 255 / 0.04);
+  --look-glass-text: var(--white);
+  --look-glass-border: rgb(255 255 255 / 0.25);
+  --look-glass-highlight: rgb(255 255 255 / 0.35);
+  --look-outline-bg: #1A1733;
+  --text-on-danger: var(--night);
+  --control-border: rgb(255 255 255 / 0.3);
+  --track-border: rgb(255 255 255 / 0.12);
+  --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 /* data-mode="system" : suit le réglage du système */
@@ -417,6 +446,10 @@
     --selected-bg: #F1EEF8; --selected-text: var(--ink);
     --track: rgb(255 255 255 / 0.08); --overlay: rgb(0 0 0 / 0.35);
     --surface-holo-shadow: 0 0 0 1px rgb(255 255 255 / 0.2), 0 8px 22px rgb(0 0 0 / 0.45);
+    --is-dark: 1; --look-glass-tint: 26%; --look-glass-wash: rgb(255 255 255 / 0.04); --look-glass-text: var(--white);
+    --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --look-outline-bg: #1A1733;
+    --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
+    --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
   }
 }
 

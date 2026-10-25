@@ -9,6 +9,12 @@ afterEach(() => {
   document.documentElement.removeAttribute("data-mode");
 });
 
+// Radix Select needs pointer capture and scrolling, which jsdom lacks.
+Element.prototype.hasPointerCapture ??= () => false;
+Element.prototype.setPointerCapture ??= () => {};
+Element.prototype.releasePointerCapture ??= () => {};
+Element.prototype.scrollIntoView ??= () => {};
+
 // jsdom has no matchMedia; tests override `matches` with `mockMatchMedia`.
 type Listener = (event: MediaQueryListEvent) => void;
 const listeners = new Map<string, Set<Listener>>();
