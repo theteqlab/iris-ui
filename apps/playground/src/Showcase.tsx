@@ -1,13 +1,45 @@
 import {
   Badge,
   Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
   Checkbox,
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
   IconButton,
   Input,
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverTrigger,
   RadioGroup,
   RadioGroupItem,
   Select,
@@ -19,7 +51,14 @@ import {
   SelectTrigger,
   SelectValue,
   Switch,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
   Textarea,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
   type Look,
   type Tone,
 } from "@irisui/ui";
@@ -40,15 +79,27 @@ const ArrowIcon = () => icon("M5 12h14M13 6l6 6-6 6");
 const SearchIcon = () => icon("M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4");
 const GearIcon = () => icon("M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M2 12h3M19 12h3");
 
-function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+function Section({
+  id,
+  title,
+  plain = false,
+  children,
+}: {
+  id: string;
+  title: string;
+  /** No glass: for content that brings its own (backdrop-filter is never nested). */
+  plain?: boolean;
+  children: ReactNode;
+}) {
   return (
     <section
       aria-labelledby={`${id}-title`}
       data-testid={`section-${id}`}
       className={cn(
-        "flex flex-col gap-6 rounded-card p-7",
-        "border border-glass-border bg-glass shadow-glass",
-        "backdrop-blur-glass backdrop-saturate-(--glass-saturate)",
+        "flex flex-col gap-6 rounded-card",
+        plain
+          ? "py-2"
+          : "border border-glass-border bg-glass p-7 shadow-glass backdrop-blur-glass backdrop-saturate-(--glass-saturate)",
       )}
     >
       <h2 id={`${id}-title`} className="m-0 text-h3 font-medium">
@@ -281,6 +332,170 @@ function Choices() {
   );
 }
 
+const MoreIcon = () => icon("M5 12h.01M12 12h.01M19 12h.01");
+const InfoIcon = () => icon("M12 16v-4M12 8h.01M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z");
+
+function Surfaces() {
+  const [grid, setGrid] = useState(true);
+  const [view, setView] = useState("list");
+  return (
+    <Section id="surface" title="Card · Dialog · DropdownMenu · Popover · Tooltip · Tabs" plain>
+      <div className="grid gap-6 md:grid-cols-3">
+        <Card>
+          <CardHeader>
+            <CardTitle>Verre</CardTitle>
+            <CardDescription>variant="glass"</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="m-0">Surface floutée au liseré irisé.</p>
+          </CardContent>
+          <CardFooter>
+            <Button look="outline" tone={2} size="sm">
+              Détails
+            </Button>
+          </CardFooter>
+        </Card>
+        <Card variant="strong">
+          <CardHeader>
+            <CardTitle>Holographique</CardTitle>
+            <CardDescription>variant="strong"</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="m-0">Le film holographique, pour la mise en avant.</p>
+          </CardContent>
+        </Card>
+        <Card variant="ink">
+          <CardHeader>
+            <CardTitle>Encre</CardTitle>
+            <CardDescription>variant="ink"</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="m-0">Verre encre, texte clair.</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div>
+        <Row label="Dialog · DropdownMenu · Popover · Tooltip">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button look="solid" tone="danger">
+                Supprimer le projet
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Supprimer le projet ?</DialogTitle>
+              </DialogHeader>
+              <DialogBody>
+                <DialogDescription>
+                  Les fichiers et l'historique seront effacés. Cette action est définitive.
+                </DialogDescription>
+                <Field>
+                  <FieldLabel>Nom du projet</FieldLabel>
+                  <Input placeholder="iris-ui" />
+                </Field>
+              </DialogBody>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button look="outline">Annuler</Button>
+                </DialogClose>
+                <Button look="solid" tone="danger">
+                  Supprimer
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button look="glass" endIcon={<MoreIcon />}>
+                Actions
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Projet</DropdownMenuLabel>
+              <DropdownMenuItem>
+                Modifier <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                Dupliquer <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem disabled>Archiver</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuCheckboxItem checked={grid} onCheckedChange={setGrid}>
+                Afficher la grille
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuRadioGroup value={view} onValueChange={setView}>
+                <DropdownMenuRadioItem value="list">Liste</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="cards">Cartes</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>Partager</DropdownMenuSubTrigger>
+                <DropdownMenuSubContent>
+                  <DropdownMenuItem>Copier le lien</DropdownMenuItem>
+                  <DropdownMenuItem>Par e-mail</DropdownMenuItem>
+                </DropdownMenuSubContent>
+              </DropdownMenuSub>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="danger">Supprimer</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button look="outline" tone={3}>
+                Livraison
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent arrow aria-label="Livraison">
+              <strong>Livraison offerte</strong>
+              <p className="m-0 text-sm text-text-muted">Dès 50 € d'achat, en 2 jours ouvrés.</p>
+              <PopoverClose asChild>
+                <Button size="sm">Compris</Button>
+              </PopoverClose>
+            </PopoverContent>
+          </Popover>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <IconButton look="glass" aria-label="Informations">
+                <InfoIcon />
+              </IconButton>
+            </TooltipTrigger>
+            <TooltipContent>Raccourci : ⌘I</TooltipContent>
+          </Tooltip>
+        </Row>
+      </div>
+
+      <Card>
+        <Tabs defaultValue="profile">
+          <TabsList aria-label="Réglages (pill)">
+            <TabsTrigger value="profile">Profil</TabsTrigger>
+            <TabsTrigger value="billing">Facturation</TabsTrigger>
+            <TabsTrigger value="api" disabled>
+              API
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="profile">Nom, photo et langue.</TabsContent>
+          <TabsContent value="billing">Formule et factures.</TabsContent>
+          <TabsContent value="api">Clés d'accès.</TabsContent>
+        </Tabs>
+        <Tabs defaultValue="week" look="underline">
+          <TabsList aria-label="Période (underline)">
+            <TabsTrigger value="day">Jour</TabsTrigger>
+            <TabsTrigger value="week">Semaine</TabsTrigger>
+            <TabsTrigger value="month">Mois</TabsTrigger>
+          </TabsList>
+          <TabsContent value="day">Ventes du jour.</TabsContent>
+          <TabsContent value="week">Ventes de la semaine.</TabsContent>
+          <TabsContent value="month">Ventes du mois.</TabsContent>
+        </Tabs>
+      </Card>
+    </Section>
+  );
+}
+
 export function Showcase() {
   return (
     <>
@@ -288,6 +503,7 @@ export function Showcase() {
       <Badges />
       <Forms />
       <Choices />
+      <Surfaces />
     </>
   );
 }

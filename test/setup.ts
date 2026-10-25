@@ -14,6 +14,12 @@ Element.prototype.hasPointerCapture ??= () => false;
 Element.prototype.setPointerCapture ??= () => {};
 Element.prototype.releasePointerCapture ??= () => {};
 Element.prototype.scrollIntoView ??= () => {};
+// Radix measures floating arrows with ResizeObserver.
+globalThis.ResizeObserver ??= class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
 
 // jsdom has no matchMedia; tests override `matches` with `mockMatchMedia`.
 type Listener = (event: MediaQueryListEvent) => void;

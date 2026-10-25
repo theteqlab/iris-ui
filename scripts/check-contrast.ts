@@ -176,7 +176,38 @@ function parseColor(value: string): Rgba {
     const [r = 0, g = 0, b = 0, a = 1] = parts;
     return { r, g, b, a };
   }
+  if (v === "transparent") return { r: 0, g: 0, b: 0, a: 0 };
+  const colorMix = /^color-mix\(\s*in srgb\s*,(.*)\)$/i.exec(v);
+  if (colorMix) {
+    // color-mix(in srgb, A p%, B [q%]): the second share defaults to 100 % − p.
+    const [first, second] = splitTopLevel(colorMix[1]!).map((part) => {
+      const pct = /\s([\d.]+)%\s*$/.exec(part);
+      return {
+        color: parseColor(pct ? part.slice(0, pct.index) : part),
+        pct: pct ? parseFloat(pct[1]!) / 100 : undefined,
+      };
+    }) as [{ color: Rgba; pct?: number }, { color: Rgba; pct?: number }];
+    const p = first.pct ?? (second.pct !== undefined ? 1 - second.pct : 0.5);
+    return mix(first.color, p, second.color);
+  }
   throw new Error(`Unsupported colour: ${value}`);
+}
+
+/** Splits on the commas that are not inside parentheses. */
+function splitTopLevel(list: string): string[] {
+  const parts: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] === "(") depth++;
+    else if (list[i] === ")") depth--;
+    else if (list[i] === "," && depth === 0) {
+      parts.push(list.slice(start, i).trim());
+      start = i + 1;
+    }
+  }
+  parts.push(list.slice(start).trim());
+  return parts;
 }
 
 /** Space-separated RGB triplet (blob tokens) with an alpha. */
@@ -347,7 +378,6 @@ const pairs: Pair[] = [
 // Button and badge looks (recipes of packages/ui/src/styles.css)
 
 const TRANSPARENT: Rgba = { r: 0, g: 0, b: 0, a: 0 };
-const WHITE: Rgba = { r: 255, g: 255, b: 255, a: 1 };
 
 /** CSS `color-mix(in srgb, a p, b)`, with premultiplied alpha like browsers. */
 function mix(a: Rgba, p: number, b: Rgba): Rgba {
@@ -367,6 +397,7 @@ interface ToneColors {
   glassBg: Rgba;
   glassText: Rgba;
   outlineText: Rgba;
+  soft: Rgba;
 }
 
 function toneColors(vars: Map<string, string>, id: ToneId): ToneColors {
@@ -379,6 +410,7 @@ function toneColors(vars: Map<string, string>, id: ToneId): ToneColors {
       glassBg: c("--glass-strong"),
       glassText: c("--text"),
       outlineText: c("--text"),
+      soft: c("--track"),
     };
   }
   if (id === "danger") {
@@ -391,17 +423,18 @@ function toneColors(vars: Map<string, string>, id: ToneId): ToneColors {
       glassBg,
       glassText: c("--danger-text"),
       outlineText: c("--danger-text"),
+      soft: c("--danger-soft"),
     };
   }
-  const base = c(`--tone-${id}-base`);
-  const dark = parseFloat(vars.get("--is-dark") ?? "0") === 1;
+  const base = c(`--tone-${id}`);
   const tint = parseFloat(vars.get("--look-glass-tint") ?? "0") / 100;
   return {
     base,
     fg: c("--ink"),
     glassBg: mix(base, tint, c("--look-glass-wash")),
     glassText: c("--look-glass-text"),
-    outlineText: dark ? mix(base, 0.45, WHITE) : c(`--tone-${id}-deep`),
+    outlineText: c(`--tone-${id}-text`),
+    soft: c(`--tone-${id}-soft`),
   };
 }
 
@@ -444,9 +477,63 @@ const lookPairs: Pair[] = TONE_IDS.flatMap((id): Pair[] => {
       surface: "outline",
       min: TEXT,
     },
+    {
+      label: `look outline:hover · tone ${id}`,
+      fg: (vars) => t(vars).outlineText,
+      on: (vars) => [over(t(vars).soft, color(vars, "--look-outline-bg"))],
+      surface: "outline-hover",
+      min: TEXT,
+    },
   ];
 });
 pairs.push(...lookPairs);
+
+// Surfaces: muted text of the ink Card, and the active option of menus and lists.
+pairs.push(
+  {
+    label: "--text-on-ink 78% / --glass-ink (Card ink, muted)",
+    fg: (vars) => mix(color(vars, "--text-on-ink"), 0.78, TRANSPARENT),
+    on: glassInk,
+    surface: "glass-ink",
+    min: TEXT,
+  },
+  {
+    label: "--text / --menu-hover (active option)",
+    fg: "--text",
+    on: (vars) => {
+      const panel = color(vars, "--popover");
+      // Light: a gradient of holo 1–3 at 50 %; dark: the accent at 16 %.
+      const value = vars.get("--menu-hover") ?? "";
+      const layers = value.startsWith("linear-gradient")
+        ? [1, 2, 3].map((n) => mix(color(vars, `--holo-${n}`), 0.5, TRANSPARENT))
+        : [parseColor(value)];
+      return layers.map((layer) => over(layer, panel));
+    },
+    surface: "menu-hover",
+    min: TEXT,
+  },
+  {
+    label: "--danger-text / --popover (danger menu item)",
+    fg: "--danger-text",
+    on: solid("--popover"),
+    surface: "popover",
+    min: TEXT,
+  },
+  ...["--text", "--text-muted"].map((fg) => ({
+    label: `${fg} / --popover (lists and menus)`,
+    fg,
+    on: solid("--popover"),
+    surface: "popover",
+    min: TEXT,
+  })),
+  {
+    label: "--text / --track (inactive pill tab)",
+    fg: "--text",
+    on: layer("--track", glass),
+    surface: "track",
+    min: TEXT,
+  },
+);
 
 // ---------------------------------------------------------------------------
 // Run

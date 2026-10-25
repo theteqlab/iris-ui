@@ -292,6 +292,9 @@
   --blur: 28px;
   --blur-small: 14px;
 
+  /* niveau 3 — composants */
+  --dialog-width: 460px;
+
   /* film holographique : reste clair dans les deux modes */
   --look-holo-border: rgb(255 255 255 / 0.95);
 
@@ -325,6 +328,7 @@
 
   --glass: rgb(255 255 255 / 0.5);
   --glass-strong: rgb(255 255 255 / 0.9);
+  --popover: color-mix(in srgb, var(--white) 90%, var(--paper));
   --glass-border: rgb(255 255 255 / 0.7);
   --glass-saturate: 180%;
   --glass-shadow: inset 0 2px 6px rgb(255 255 255 / 0.6), 0 18px 44px rgb(80 60 150 / 0.16);
@@ -363,6 +367,13 @@
   --control-border: rgb(21 19 42 / 0.3);
   --track-border: rgb(255 255 255 / 0.7);
   --menu-hover: linear-gradient(90deg, color-mix(in srgb, var(--holo-1) 50%, transparent), color-mix(in srgb, var(--holo-2) 50%, transparent), color-mix(in srgb, var(--holo-3) 50%, transparent));
+
+  /* tons (tone="1" à "5") : base, liseré, texte sur fond neutre, fond pâle */
+  --tone-1: var(--tone-1-base); --tone-1-edge: var(--tone-1-deep); --tone-1-text: var(--tone-1-deep); --tone-1-soft: var(--tone-1-tint-light);
+  --tone-2: var(--tone-2-base); --tone-2-edge: var(--tone-2-deep); --tone-2-text: var(--tone-2-deep); --tone-2-soft: var(--tone-2-tint-light);
+  --tone-3: var(--tone-3-base); --tone-3-edge: var(--tone-3-deep); --tone-3-text: var(--tone-3-deep); --tone-3-soft: var(--tone-3-tint-light);
+  --tone-4: var(--tone-4-base); --tone-4-edge: var(--tone-4-deep); --tone-4-text: var(--tone-4-deep); --tone-4-soft: var(--tone-4-tint-light);
+  --tone-5: var(--tone-5-base); --tone-5-edge: var(--tone-5-deep); --tone-5-text: var(--tone-5-deep); --tone-5-soft: var(--tone-5-tint-light);
 }
 
 /* ---------- Niveau 2 — Sémantique, mode sombre ---------- */
@@ -383,6 +394,7 @@
 
   --glass: rgb(30 26 58 / 0.45);
   --glass-strong: rgb(30 26 58 / 0.94);
+  --popover: color-mix(in srgb, #1E1A3A 94%, var(--night));
   --glass-border: rgb(255 255 255 / 0.14);
   --glass-saturate: 170%;
   --glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), 0 18px 44px rgb(0 0 0 / 0.4);
@@ -421,6 +433,13 @@
   --control-border: rgb(255 255 255 / 0.3);
   --track-border: rgb(255 255 255 / 0.12);
   --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
+
+  /* tons : texte et fond pâle éclaircis sur fond sombre */
+  --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
+  --tone-2-text: color-mix(in srgb, var(--tone-2-base) 45%, var(--white)); --tone-2-soft: color-mix(in srgb, var(--tone-2-base) 22%, var(--look-outline-bg));
+  --tone-3-text: color-mix(in srgb, var(--tone-3-base) 45%, var(--white)); --tone-3-soft: color-mix(in srgb, var(--tone-3-base) 22%, var(--look-outline-bg));
+  --tone-4-text: color-mix(in srgb, var(--tone-4-base) 45%, var(--white)); --tone-4-soft: color-mix(in srgb, var(--tone-4-base) 22%, var(--look-outline-bg));
+  --tone-5-text: color-mix(in srgb, var(--tone-5-base) 45%, var(--white)); --tone-5-soft: color-mix(in srgb, var(--tone-5-base) 22%, var(--look-outline-bg));
 }
 
 /* data-mode="system" : suit le réglage du système */
@@ -434,7 +453,7 @@
     --rim-b: rgb(var(--edge-dark-b) / 0.5);
     --bg: var(--night); --text: #F1EEF8; --text-muted: #BCB5CE; --text-on-holo: var(--ink); --text-on-ink: var(--ink);
     --line: rgb(255 255 255 / 0.14);
-    --glass: rgb(30 26 58 / 0.45); --glass-strong: rgb(30 26 58 / 0.94); --glass-border: rgb(255 255 255 / 0.14);
+    --glass: rgb(30 26 58 / 0.45); --glass-strong: rgb(30 26 58 / 0.94); --popover: color-mix(in srgb, #1E1A3A 94%, var(--night)); --glass-border: rgb(255 255 255 / 0.14);
     --glass-saturate: 170%; --glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), 0 18px 44px rgb(0 0 0 / 0.4);
     --glass-ink: rgb(241 238 248 / 0.84); --solid-ink: #F1EEF8;
     --field: rgb(255 255 255 / 0.06); --field-border: rgb(255 255 255 / 0.2); --field-shadow: inset 0 1px 3px rgb(0 0 0 / 0.3);
@@ -450,6 +469,11 @@
     --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --look-outline-bg: #1A1733;
     --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
     --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
+    --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
+    --tone-2-text: color-mix(in srgb, var(--tone-2-base) 45%, var(--white)); --tone-2-soft: color-mix(in srgb, var(--tone-2-base) 22%, var(--look-outline-bg));
+    --tone-3-text: color-mix(in srgb, var(--tone-3-base) 45%, var(--white)); --tone-3-soft: color-mix(in srgb, var(--tone-3-base) 22%, var(--look-outline-bg));
+    --tone-4-text: color-mix(in srgb, var(--tone-4-base) 45%, var(--white)); --tone-4-soft: color-mix(in srgb, var(--tone-4-base) 22%, var(--look-outline-bg));
+    --tone-5-text: color-mix(in srgb, var(--tone-5-base) 45%, var(--white)); --tone-5-soft: color-mix(in srgb, var(--tone-5-base) 22%, var(--look-outline-bg));
   }
 }
 

@@ -14,16 +14,6 @@
 @layer components {
   /* ---------- Tones: one set of variables per tone ---------- */
   .iris-look {
-    --t-outline-text: color-mix(
-      in srgb,
-      color-mix(in srgb, var(--t-base) 45%, var(--white)) calc(var(--is-dark) * 100%),
-      var(--t-deep)
-    );
-    --t-tint: color-mix(
-      in srgb,
-      color-mix(in srgb, var(--t-base) 22%, var(--look-outline-bg)) calc(var(--is-dark) * 100%),
-      var(--t-tint-light)
-    );
     --t-glass-bg: color-mix(in srgb, var(--t-base) var(--look-glass-tint), var(--look-glass-wash));
     --t-glass-bg-hover: color-mix(
       in srgb,
@@ -35,35 +25,39 @@
     --t-fg: var(--ink);
   }
   .iris-look[data-tone="1"] {
-    --t-base: var(--tone-1-base);
-    --t-deep: var(--tone-1-deep);
-    --t-tint-light: var(--tone-1-tint-light);
+    --t-base: var(--tone-1);
+    --t-deep: var(--tone-1-edge);
+    --t-outline-text: var(--tone-1-text);
+    --t-tint: var(--tone-1-soft);
   }
   .iris-look[data-tone="2"] {
-    --t-base: var(--tone-2-base);
-    --t-deep: var(--tone-2-deep);
-    --t-tint-light: var(--tone-2-tint-light);
+    --t-base: var(--tone-2);
+    --t-deep: var(--tone-2-edge);
+    --t-outline-text: var(--tone-2-text);
+    --t-tint: var(--tone-2-soft);
   }
   .iris-look[data-tone="3"] {
-    --t-base: var(--tone-3-base);
-    --t-deep: var(--tone-3-deep);
-    --t-tint-light: var(--tone-3-tint-light);
+    --t-base: var(--tone-3);
+    --t-deep: var(--tone-3-edge);
+    --t-outline-text: var(--tone-3-text);
+    --t-tint: var(--tone-3-soft);
   }
   .iris-look[data-tone="4"] {
-    --t-base: var(--tone-4-base);
-    --t-deep: var(--tone-4-deep);
-    --t-tint-light: var(--tone-4-tint-light);
+    --t-base: var(--tone-4);
+    --t-deep: var(--tone-4-edge);
+    --t-outline-text: var(--tone-4-text);
+    --t-tint: var(--tone-4-soft);
   }
   .iris-look[data-tone="5"] {
-    --t-base: var(--tone-5-base);
-    --t-deep: var(--tone-5-deep);
-    --t-tint-light: var(--tone-5-tint-light);
+    --t-base: var(--tone-5);
+    --t-deep: var(--tone-5-edge);
+    --t-outline-text: var(--tone-5-text);
+    --t-tint: var(--tone-5-soft);
   }
   /* Ink: dark ink in light mode, light ink in dark mode (like --solid-ink). */
   .iris-look[data-tone="ink"] {
     --t-base: var(--solid-ink);
     --t-deep: var(--text);
-    --t-tint-light: var(--track);
     --t-fg: var(--text-on-ink);
     --t-outline-text: var(--text);
     --t-tint: var(--track);
@@ -75,7 +69,6 @@
   .iris-look[data-tone="danger"] {
     --t-base: var(--danger);
     --t-deep: var(--danger-text);
-    --t-tint-light: var(--danger-soft);
     --t-fg: var(--text-on-danger);
     --t-outline-text: var(--danger-text);
     --t-tint: var(--danger-soft);
@@ -258,6 +251,116 @@
     animation: iris-spin 0.8s linear infinite;
   }
 
+  /* ---------- Surfaces ---------- */
+  .iris-card[data-variant="glass"] {
+    background: var(--glass);
+    backdrop-filter: blur(var(--blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--blur)) saturate(var(--glass-saturate));
+    color: var(--text);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--rim-edge), var(--glass-shadow);
+  }
+  /* The holographic film stays light in both modes: ink text on it. */
+  .iris-card[data-variant="strong"] {
+    --text: var(--text-on-holo);
+    --text-muted: var(--text-on-holo);
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    animation: holo-shift calc(var(--holo-speed) * 1.5) linear infinite;
+    color: var(--text);
+    border: 1px solid var(--look-holo-border);
+    box-shadow:
+      inset 0 1px 0 var(--white),
+      var(--surface-holo-shadow);
+  }
+  .iris-card[data-variant="ink"] {
+    --text: var(--text-on-ink);
+    --text-muted: color-mix(in srgb, var(--text-on-ink) 78%, transparent);
+    background: var(--glass-ink);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    color: var(--text);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--rim-edge);
+  }
+
+  /* Dialog: veil, opaque glass panel, holographic header. */
+  .iris-overlay {
+    background: var(--overlay);
+  }
+  .iris-dialog {
+    background: var(--glass-strong);
+    color: var(--text);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--rim-edge), var(--glass-shadow);
+  }
+  .iris-dialog-header {
+    --text: var(--text-on-holo);
+    --text-muted: var(--text-on-holo);
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    color: var(--text);
+    border-bottom: 1px solid var(--line);
+  }
+  /* The close button sits on the holographic header when there is one. */
+  .iris-dialog:has(> .iris-dialog-header) > .iris-dialog-close {
+    color: var(--text-on-holo);
+  }
+  .iris-overlay[data-state="open"] {
+    animation: iris-fade-in var(--duration-base) var(--ease-out);
+  }
+  .iris-overlay[data-state="closed"] {
+    animation: iris-fade-out var(--duration-fast) var(--ease-out);
+  }
+  .iris-dialog[data-state="open"],
+  .iris-floating[data-state="open"] {
+    animation: iris-pop-in var(--duration-base) var(--ease-out);
+  }
+  .iris-dialog[data-state="closed"],
+  .iris-floating[data-state="closed"] {
+    animation: iris-pop-out var(--duration-fast) var(--ease-out);
+  }
+
+  /* Tooltip: ink glass bubble. */
+  .iris-tooltip {
+    background: var(--glass-ink);
+    color: var(--text-on-ink);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--rim-edge);
+  }
+
+  /* Tabs: active tab in solid ink (pill) or underlined by the holographic film. */
+  .iris-tab {
+    background: transparent;
+    color: var(--text);
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .iris-tab[data-state="inactive"]:not([data-disabled]):hover {
+      background: var(--glass);
+    }
+  }
+  .iris-tab[data-look="pill"][data-state="active"] {
+    background: var(--selected-bg);
+    color: var(--selected-text);
+  }
+  .iris-tab[data-look="underline"][data-state="active"]::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 -1px;
+    height: 3px;
+    border-radius: var(--radius-pill);
+    background: var(--holo-deep);
+    background-size: 200% 100%;
+    animation: holo-shift var(--holo-speed) linear infinite;
+  }
+
   /* ---------- Form controls ---------- */
   .iris-field {
     background: var(--field);
@@ -333,9 +436,9 @@
     transition: transform var(--duration-base) var(--ease-out);
   }
 
-  /* Floating list (Select): opaque glass with the iridescent rim. */
+  /* Floating panels (Select, DropdownMenu, Popover): opaque, with the iridescent rim. */
   .iris-popover {
-    background: var(--glass-strong);
+    background: var(--popover);
     color: var(--text);
     border: 1px solid var(--glass-border);
     box-shadow: var(--rim-edge), var(--glass-shadow);
@@ -360,6 +463,29 @@
       0 0,
       0 0,
       200% 0;
+  }
+}
+
+@keyframes iris-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes iris-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes iris-pop-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+@keyframes iris-pop-out {
+  to {
+    opacity: 0;
+    scale: 0.96;
   }
 }
 

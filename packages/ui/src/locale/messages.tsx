@@ -8,18 +8,22 @@ export interface Messages {
   characterCount: (count: number, max: number) => string;
   /** Select trigger when no value is chosen. */
   selectPlaceholder: string;
+  /** Dialog close button. */
+  close: string;
 }
 
 export const en: Messages = {
   loading: "Loading",
   characterCount: (count, max) => `${count} / ${max} characters`,
   selectPlaceholder: "Select…",
+  close: "Close",
 };
 
 export const fr: Messages = {
   loading: "Chargement",
   characterCount: (count, max) => `${count} / ${max} caractères`,
   selectPlaceholder: "Choisir…",
+  close: "Fermer",
 };
 
 const MessagesContext = createContext<Messages>(en);
