@@ -11,9 +11,11 @@
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "contrast": "node scripts/check-contrast.ts",
-    "rename-scope": "node scripts/rename-scope.ts"
+    "rename-scope": "node scripts/rename-scope.ts",
+    "changeset": "changeset"
   },
   "devDependencies": {
+    "@changesets/cli": "3.0.3",
     "@types/node": "24.19.2",
     "tsup": "8.5.1",
     "turbo": "2.11.7",
