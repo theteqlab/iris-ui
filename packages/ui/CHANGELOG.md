@@ -1,5 +1,20 @@
 # @irisui/ui
 
+## 0.4.0
+
+### Minor Changes
+
+- 962e46c: Feedback components: Alert (info, success, warning, danger), Toaster and `toast()` (Sonner), Avatar and AvatarGroup, Progress (determinate, indeterminate, tones).
+
+  `@irisui/tokens` adds the `info` status (`--info`, `--info-soft`, `--info-text`, also as Tailwind colours) and `--avatar-ring`.
+
+  `Messages` gains `notifications` and `closeNotification` (the toast region and close button): custom `Messages` objects must add them.
+
+### Patch Changes
+
+- Updated dependencies [962e46c]
+  - @irisui/tokens@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes
