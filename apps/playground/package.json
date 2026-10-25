@@ -10,9 +10,9 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@verre/tokens": "workspace:*",
-    "@verre/ui": "workspace:*",
-    "@verre/utils": "workspace:*",
+    "@iris-ui/tokens": "workspace:*",
+    "@iris-ui/ui": "workspace:*",
+    "@iris-ui/utils": "workspace:*",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
