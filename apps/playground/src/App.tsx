@@ -1,5 +1,6 @@
 import { MODES, PALETTES, useTheme, type Mode, type Palette } from "@irisui/ui";
 import { cn } from "@irisui/utils";
+import { Showcase } from "./Showcase";
 
 const PALETTE_LABELS: Record<Palette, string> = {
   nacre: "Nacre",
@@ -95,8 +96,9 @@ export function App() {
         </div>
       </header>
 
-      <main className="flex flex-col gap-8">
-        <h1 className="m-0 text-h2 leading-tight font-medium tracking-display">Fondations</h1>
+      <main className="flex flex-col gap-12">
+        <h1 className="m-0 text-h2 leading-tight font-medium tracking-display">Composants</h1>
+        <Showcase />
 
         <article
           className={cn(
@@ -105,29 +107,7 @@ export function App() {
             "backdrop-blur-glass backdrop-saturate-(--glass-saturate)",
           )}
         >
-          <div className="flex items-center justify-between gap-4">
-            <h2 className="m-0 text-h3 font-medium">Carte en verre</h2>
-            <span
-              className={cn(
-                "inline-flex h-6 items-center rounded-pill px-3 text-xs font-bold text-text-on-holo",
-                "shadow-holo animate-holo",
-                "[background-image:var(--sheen),var(--holo)] bg-size-[100%_100%,200%_100%]",
-              )}
-            >
-              v0.1
-            </span>
-          </div>
-          <p className="m-0 text-text-muted">
-            Surface translucide, flou d'arrière-plan et liseré irisé : rose en haut à gauche, bleu
-            en bas à droite. Le fond est dessiné une seule fois par les taches de couleur.
-          </p>
-          <p className="m-0">
-            Un{" "}
-            <a href="#lien" className="text-link underline underline-offset-4">
-              lien dans le texte
-            </a>{" "}
-            reste lisible et souligné.
-          </p>
+          <h2 className="m-0 text-h3 font-medium">Thème</h2>
           <dl className="m-0 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 font-mono text-sm">
             <dt className="text-text-muted">data-palette</dt>
             <dd className="m-0">{palette}</dd>
