@@ -61,3 +61,52 @@ test("Button: loading keeps its width and blocks clicks", async ({ page }) => {
   expect(during?.width).toBe(before?.width);
   await expect(button).not.toHaveAttribute("aria-busy", { timeout: 3000 });
 });
+
+test("Dialog: traps the focus, closes with Escape and gives it back", async ({ page }) => {
+  const trigger = page.getByRole("button", { name: "Supprimer le projet" });
+  await trigger.click();
+  const dialog = page.getByRole("dialog", { name: "Supprimer le projet ?" });
+  await expect(dialog).toBeVisible();
+  for (let i = 0; i < 6; i++) {
+    await page.keyboard.press("Tab");
+    expect(await dialog.evaluate((el) => el.contains(document.activeElement))).toBe(true);
+  }
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+});
+
+test("DropdownMenu: opens with the keyboard, moves with arrows, opens a submenu", async ({
+  page,
+}) => {
+  const trigger = page.getByRole("button", { name: "Actions" });
+  await trigger.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("menuitem", { name: /Modifier/ })).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.getByRole("menuitem", { name: /Dupliquer/ })).toBeFocused();
+  await page.getByRole("menuitem", { name: "Partager" }).focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByRole("menuitem", { name: "Copier le lien" })).toBeFocused();
+  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape");
+  await expect(trigger).toBeFocused();
+});
+
+test("Tooltip: appears on keyboard focus", async ({ page }) => {
+  await page.getByRole("button", { name: "Livraison" }).focus();
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("tooltip")).toHaveText(/⌘I/);
+});
+
+test("Tabs: arrow keys move between tabs and skip disabled ones", async ({ page }) => {
+  const list = page.getByRole("tablist", { name: "Réglages (pill)" });
+  await list.getByRole("tab", { name: "Profil" }).focus();
+  await hold(page, "ArrowRight");
+  await expect(list.getByRole("tab", { name: "Facturation" })).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+  await hold(page, "ArrowRight");
+  await expect(list.getByRole("tab", { name: "Profil" })).toBeFocused();
+});
