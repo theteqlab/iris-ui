@@ -26,6 +26,7 @@ body {
 
 Pick the palette and mode with attributes on `<html>`:
 
+<!-- prettier-ignore -->
 ```html
 <html data-palette="nacre" data-mode="system">
 ```
@@ -51,10 +52,10 @@ palette, so only iris-ui colors are available.
 
 ## Exports
 
-| Path | Content |
-| --- | --- |
+| Path                                           | Content                             |
+| ---------------------------------------------- | ----------------------------------- |
 | `@irisui/tokens` / `@irisui/tokens/tokens.css` | All tokens as CSS custom properties |
-| `@irisui/tokens/tailwind.css` | Tokens + Tailwind v4 theme bridge |
+| `@irisui/tokens/tailwind.css`                  | Tokens + Tailwind v4 theme bridge   |
 
 ## License
 

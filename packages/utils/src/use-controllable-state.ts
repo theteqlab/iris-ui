@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 export interface UseControllableStateParams<T> {
   /** Controlled value. When defined, the component is controlled. */
@@ -24,20 +26,24 @@ export function useControllableState<T>({
   const isControlled = value !== undefined;
   const current = isControlled ? value : uncontrolled;
 
+  // Refs are synced after render (not during it) so `setValue` stays stable.
   const onChangeRef = useRef(onChange);
-  useEffect(() => {
-    onChangeRef.current = onChange;
-  });
-
   const currentRef = useRef(current);
-  currentRef.current = current;
+  useIsomorphicLayoutEffect(() => {
+    onChangeRef.current = onChange;
+    currentRef.current = current;
+  });
 
   const setValue = useCallback<SetStateFn<T>>(
     (next) => {
       const resolved =
         typeof next === "function" ? (next as (prev: T) => T)(currentRef.current) : next;
       if (Object.is(resolved, currentRef.current)) return;
-      if (!isControlled) setUncontrolled(resolved);
+      if (!isControlled) {
+        // Several updates in one event must chain, before the next render syncs the ref.
+        currentRef.current = resolved;
+        setUncontrolled(resolved);
+      }
       onChangeRef.current?.(resolved);
     },
     [isControlled],

@@ -4,8 +4,12 @@
   "description": "CSS design tokens for the iris-ui library.",
   "license": "MIT",
   "type": "module",
-  "sideEffects": ["*.css"],
-  "files": ["src"],
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "src"
+  ],
   "exports": {
     ".": "./src/tokens.css",
     "./tokens.css": "./src/tokens.css",
