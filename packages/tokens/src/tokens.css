@@ -292,6 +292,9 @@
   --blur: 28px;
   --blur-small: 14px;
 
+  /* niveau 3 — composants */
+  --dialog-width: 460px;
+
   /* film holographique : reste clair dans les deux modes */
   --look-holo-border: rgb(255 255 255 / 0.95);
 
@@ -363,6 +366,13 @@
   --control-border: rgb(21 19 42 / 0.3);
   --track-border: rgb(255 255 255 / 0.7);
   --menu-hover: linear-gradient(90deg, color-mix(in srgb, var(--holo-1) 50%, transparent), color-mix(in srgb, var(--holo-2) 50%, transparent), color-mix(in srgb, var(--holo-3) 50%, transparent));
+
+  /* tons (tone="1" à "5") : base, liseré, texte sur fond neutre, fond pâle */
+  --tone-1: var(--tone-1-base); --tone-1-edge: var(--tone-1-deep); --tone-1-text: var(--tone-1-deep); --tone-1-soft: var(--tone-1-tint-light);
+  --tone-2: var(--tone-2-base); --tone-2-edge: var(--tone-2-deep); --tone-2-text: var(--tone-2-deep); --tone-2-soft: var(--tone-2-tint-light);
+  --tone-3: var(--tone-3-base); --tone-3-edge: var(--tone-3-deep); --tone-3-text: var(--tone-3-deep); --tone-3-soft: var(--tone-3-tint-light);
+  --tone-4: var(--tone-4-base); --tone-4-edge: var(--tone-4-deep); --tone-4-text: var(--tone-4-deep); --tone-4-soft: var(--tone-4-tint-light);
+  --tone-5: var(--tone-5-base); --tone-5-edge: var(--tone-5-deep); --tone-5-text: var(--tone-5-deep); --tone-5-soft: var(--tone-5-tint-light);
 }
 
 /* ---------- Niveau 2 — Sémantique, mode sombre ---------- */
@@ -421,6 +431,13 @@
   --control-border: rgb(255 255 255 / 0.3);
   --track-border: rgb(255 255 255 / 0.12);
   --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
+
+  /* tons : texte et fond pâle éclaircis sur fond sombre */
+  --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
+  --tone-2-text: color-mix(in srgb, var(--tone-2-base) 45%, var(--white)); --tone-2-soft: color-mix(in srgb, var(--tone-2-base) 22%, var(--look-outline-bg));
+  --tone-3-text: color-mix(in srgb, var(--tone-3-base) 45%, var(--white)); --tone-3-soft: color-mix(in srgb, var(--tone-3-base) 22%, var(--look-outline-bg));
+  --tone-4-text: color-mix(in srgb, var(--tone-4-base) 45%, var(--white)); --tone-4-soft: color-mix(in srgb, var(--tone-4-base) 22%, var(--look-outline-bg));
+  --tone-5-text: color-mix(in srgb, var(--tone-5-base) 45%, var(--white)); --tone-5-soft: color-mix(in srgb, var(--tone-5-base) 22%, var(--look-outline-bg));
 }
 
 /* data-mode="system" : suit le réglage du système */
@@ -450,6 +467,11 @@
     --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --look-outline-bg: #1A1733;
     --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
     --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
+    --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
+    --tone-2-text: color-mix(in srgb, var(--tone-2-base) 45%, var(--white)); --tone-2-soft: color-mix(in srgb, var(--tone-2-base) 22%, var(--look-outline-bg));
+    --tone-3-text: color-mix(in srgb, var(--tone-3-base) 45%, var(--white)); --tone-3-soft: color-mix(in srgb, var(--tone-3-base) 22%, var(--look-outline-bg));
+    --tone-4-text: color-mix(in srgb, var(--tone-4-base) 45%, var(--white)); --tone-4-soft: color-mix(in srgb, var(--tone-4-base) 22%, var(--look-outline-bg));
+    --tone-5-text: color-mix(in srgb, var(--tone-5-base) 45%, var(--white)); --tone-5-soft: color-mix(in srgb, var(--tone-5-base) 22%, var(--look-outline-bg));
   }
 }
 
