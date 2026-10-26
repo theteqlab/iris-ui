@@ -132,6 +132,7 @@ import {
   type Tone,
 } from "@irisui/ui";
 import { cn } from "@irisui/utils";
+import { MapShowcase } from "./MapShowcase";
 import { useEffect, useState, type ReactNode } from "react";
 
 const LOOKS: Look[] = ["holo", "glass", "solid", "outline", "ghost"];
@@ -902,6 +903,7 @@ export function Showcase() {
       <MoreControls />
       <Navigation />
       <Security />
+      <MapShowcase />
       <Toaster />
     </>
   );

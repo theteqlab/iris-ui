@@ -1,0 +1,146 @@
+---
+title: Map
+description: A map of free OpenStreetMap tiles in the theme's colours, with pins at positions or addresses.
+---
+
+<Demo name="map/basic" />
+
+## Features
+
+- Free vector tiles from [OpenFreeMap](https://openfreemap.org), with OpenStreetMap data:
+  no key, no account, no request limit.
+- Land, water, parks, roads and labels take the palette's colours, and are recoloured
+  when the palette or the mode changes.
+- Pins at a position or at an address, in the holographic film or a tone, with an
+  optional popover.
+- The view fits the pins on its own; zoom buttons in glass.
+- Its own entry, `@irisui/ui/map`: apps without a map never load MapLibre.
+- Built on [MapLibre GL JS](https://maplibre.org).
+
+## Installation
+
+<Tabs items={["pnpm", "npm", "yarn"]}>
+  <Tab value="pnpm">
+
+```sh
+pnpm add @irisui/ui @irisui/tokens maplibre-gl
+```
+
+  </Tab>
+  <Tab value="npm">
+
+```sh
+npm install @irisui/ui @irisui/tokens maplibre-gl
+```
+
+  </Tab>
+  <Tab value="yarn">
+
+```sh
+yarn add @irisui/ui @irisui/tokens maplibre-gl
+```
+
+  </Tab>
+</Tabs>
+
+Import MapLibre's stylesheet once, and tell MapLibre where its worker is served: bundlers
+do not copy it.
+
+```ts title="Vite"
+import "maplibre-gl/dist/maplibre-gl.css";
+import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
+```
+
+```ts title="Next.js"
+import "maplibre-gl/dist/maplibre-gl.css";
+const workerUrl = new URL("maplibre-gl/dist/maplibre-gl-worker.mjs", import.meta.url).href;
+```
+
+Or copy `node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs` to your public folder and
+pass its path.
+
+## Usage
+
+```tsx
+import { Map, MapMarker } from "@irisui/ui/map";
+
+export default () => (
+  <Map aria-label="Our shop" center={[4.83, 45.76]} workerUrl={workerUrl} className="h-96">
+    <MapMarker lngLat={[4.83, 45.76]} label="Lyon shop" />
+  </Map>
+);
+```
+
+Positions are `[longitude, latitude]`, the order of MapLibre and GeoJSON.
+
+## API reference
+
+### Map
+
+<PropsTable
+  entry="map"
+  type="MapProps"
+  pick={[
+    "aria-label",
+    "center",
+    "zoom",
+    "minZoom",
+    "maxZoom",
+    "fitToMarkers",
+    "styleUrl",
+    "geocoder",
+    "zoomControls",
+    "interactive",
+    "workerUrl",
+    "onLoad",
+  ]}
+/>
+
+### MapMarker
+
+<PropsTable
+  entry="map"
+  type="MapMarkerProps"
+  pick={["lngLat", "address", "label", "tone", "children", "onClick", "onGeocode"]}
+/>
+
+### Geocoders
+
+A geocoder turns an address into a position. Each address is looked up once per page.
+
+| Geocoder         | Coverage  | Service                                                                       |
+| ---------------- | --------- | ----------------------------------------------------------------------------- |
+| `photonGeocoder` | Worldwide | [Photon](https://photon.komoot.io), OpenStreetMap data, shared public service |
+| `banGeocoder`    | France    | [Base Adresse Nationale](https://adresse.data.gouv.fr), open data             |
+
+Or your own function: `(address, signal) => Promise<[lng, lat] | null>`. For heavy traffic,
+host Photon or geocode on your server and pass positions.
+
+## Examples
+
+### Addresses
+
+<Demo name="map/addresses" />
+
+## Accessibility
+
+The map is a focusable region named by `aria-label`; the pins are buttons named by
+`label`, reached with <kbd>Tab</kbd> after the map, and their popovers behave like
+[Popover](/docs/components/popover). Anything the map shows must also be available as
+text (an address, a list of places): a map alone is not accessible to everyone.
+
+<KeyboardTable
+  keys={[
+    ["Tab", "Moves to the map, then to each pin and the zoom buttons."],
+    ["ArrowRight", "Pans the map (when it has the focus)."],
+    ["+", "Zooms in."],
+    ["-", "Zooms out."],
+    ["Enter", "Opens the popover of the focused pin."],
+    ["Esc", "Closes the popover."],
+  ]}
+/>
+
+## Credits
+
+Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, tiles by
+OpenFreeMap. The attribution stays in the corner of the map, as the licence requires.

@@ -8,7 +8,10 @@ const generator = createGenerator({
   cache: false,
 });
 
-const entry = path.join(process.cwd(), "../../packages/ui/src/index.ts");
+const entries = {
+  main: path.join(process.cwd(), "../../packages/ui/src/index.ts"),
+  map: path.join(process.cwd(), "../../packages/ui/src/map/index.ts"),
+};
 
 /** Optional props already show a "?": drop `| undefined` (and the parentheses it needed). */
 const withoutUndefined = (type: string) =>
@@ -30,13 +33,22 @@ function clean(entry: DocEntry) {
  * Props of an exported type, read from the source and its JSDoc. `pick` keeps the
  * props worth documenting (the rest are the element's HTML attributes).
  */
-export function PropsTable({ type, pick }: { type: string; pick?: string[] }) {
+export function PropsTable({
+  type,
+  pick,
+  entry = "main",
+}: {
+  type: string;
+  pick?: string[];
+  /** The package entry exporting the type: `main` (`@irisui/ui`) or `map` (`@irisui/ui/map`). */
+  entry?: keyof typeof entries;
+}) {
   // One Pick per prop keeps them in the order given.
   const picked = pick ? pick.map((p) => `Pick<${type}, ${JSON.stringify(p)}>`).join(" & ") : type;
   return (
     <AutoTypeTable
       generator={generator}
-      path={entry}
+      path={entries[entry]}
       name="Props"
       type={`import type { ${type} } from "./index";\nexport type Props = ${picked};`}
       shiki={{ themes: codeThemes }}

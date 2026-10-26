@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { expect, test, type Page } from "@playwright/test";
+import { stubMapTiles } from "./map-tiles";
 
 const axeSource = readFileSync(
   createRequire(import.meta.url).resolve("axe-core/axe.min.js"),
@@ -40,6 +41,10 @@ const pages = [
     .filter((file) => file.endsWith(".mdx"))
     .map((file) => `components/${file.replace(/\.mdx$/, "")}`),
 ];
+
+test.beforeEach(async ({ page }) => {
+  await stubMapTiles(page);
+});
 
 for (const slug of pages) {
   for (const colorScheme of ["light", "dark"] as const) {

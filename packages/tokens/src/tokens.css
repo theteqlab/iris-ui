@@ -364,6 +364,17 @@
   --look-glass-border: rgb(255 255 255 / 0.8);
   --look-glass-highlight: rgb(255 255 255 / 0.85);
   --edge-highlight: rgb(255 255 255 / 0.6);
+
+  /* map (Map component) */
+  --map-land: color-mix(in srgb, var(--bg) 70%, var(--white));
+  --map-water: color-mix(in srgb, var(--tone-2) 45%, var(--white));
+  --map-park: color-mix(in srgb, var(--tone-3) 30%, var(--white));
+  --map-building: color-mix(in srgb, var(--ink) 7%, var(--bg));
+  --map-road: var(--white);
+  --map-road-major: color-mix(in srgb, var(--tone-4) 35%, var(--white));
+  --map-boundary: color-mix(in srgb, var(--ink) 25%, transparent);
+  --map-label: var(--text-muted);
+  --map-label-halo: var(--white);
   --look-outline-bg: var(--white);
   --text-on-danger: var(--white);
   --control-border: rgb(21 19 42 / 0.3);
@@ -433,6 +444,17 @@
   --look-glass-border: rgb(255 255 255 / 0.25);
   --look-glass-highlight: rgb(255 255 255 / 0.35);
   --edge-highlight: rgb(255 255 255 / 0.12);
+
+  /* map (Map component) */
+  --map-land: color-mix(in srgb, var(--white) 6%, var(--night));
+  --map-water: color-mix(in srgb, var(--tone-2) 22%, var(--night));
+  --map-park: color-mix(in srgb, var(--tone-3) 14%, var(--night));
+  --map-building: color-mix(in srgb, var(--white) 11%, var(--night));
+  --map-road: color-mix(in srgb, var(--white) 18%, var(--night));
+  --map-road-major: color-mix(in srgb, var(--tone-4) 32%, var(--night));
+  --map-boundary: rgb(255 255 255 / 0.25);
+  --map-label: var(--text-muted);
+  --map-label-halo: var(--night);
   --look-outline-bg: #1A1733;
   --text-on-danger: var(--night);
   --control-border: rgb(255 255 255 / 0.3);
@@ -474,6 +496,7 @@
     --surface-holo-shadow: 0 0 0 1px rgb(255 255 255 / 0.2), 0 8px 22px rgb(0 0 0 / 0.45);
     --is-dark: 1; --look-glass-tint: 26%; --look-glass-wash: rgb(255 255 255 / 0.04); --look-glass-text: var(--white);
     --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --edge-highlight: rgb(255 255 255 / 0.12); --look-outline-bg: #1A1733;
+    --map-land: color-mix(in srgb, var(--white) 6%, var(--night)); --map-water: color-mix(in srgb, var(--tone-2) 22%, var(--night)); --map-park: color-mix(in srgb, var(--tone-3) 14%, var(--night)); --map-building: color-mix(in srgb, var(--white) 11%, var(--night)); --map-road: color-mix(in srgb, var(--white) 18%, var(--night)); --map-road-major: color-mix(in srgb, var(--tone-4) 32%, var(--night)); --map-boundary: rgb(255 255 255 / 0.25); --map-label: var(--text-muted); --map-label-halo: var(--night);
     --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --avatar-ring: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
     --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
     --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));

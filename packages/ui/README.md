@@ -85,10 +85,30 @@ Every component forwards its ref, merges `className` and exposes `data-state`,
 ### Texts
 
 Texts rendered by the components ("Loading", the character counter, the select
-placeholder, the dialog's "Close", the toast region and close labels, the password button, the code boxes) are in English by default. Wrap your app in
+placeholder, the dialog's "Close", the toast region and close labels, the password button, the code boxes, the map zoom buttons) are in English by default. Wrap your app in
 `<LocaleProvider messages={fr}>` for French, or pass your own `Messages`; each
 text can also be overridden by a prop (`loadingLabel`, `counterLabel`,
 `placeholder`, `closeLabel`).
+
+## Map
+
+`@irisui/ui/map` is a separate entry, so that apps without a map never load MapLibre.
+It needs `maplibre-gl` (an optional peer dependency):
+
+```tsx
+import "maplibre-gl/dist/maplibre-gl.css";
+import { Map, MapMarker } from "@irisui/ui/map";
+
+<Map aria-label="Our shops" workerUrl={workerUrl} className="h-96">
+  <MapMarker lngLat={[4.83, 45.76]} label="Lyon shop" />
+  <MapMarker address="8 bd du Port, 80000 Amiens" label="Amiens shop" tone={2} />
+</Map>;
+```
+
+Free OpenFreeMap tiles (OpenStreetMap data, no key), recoloured with the palette and
+mode; pins at positions or addresses (`photonGeocoder` worldwide by default,
+`banGeocoder` for France, or your own). Bundlers do not copy MapLibre's worker: pass its
+URL as `workerUrl` (with Vite, `import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url"`).
 
 ## Theme
 

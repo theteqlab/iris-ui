@@ -10,6 +10,7 @@ const root = resolve(dir);
 const types: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript",
+  ".mjs": "text/javascript",
   ".css": "text/css",
   ".json": "application/json",
   ".txt": "text/plain; charset=utf-8",

@@ -20,6 +20,9 @@ export interface Messages {
   hidePassword: string;
   /** Each box of a OneTimePasswordField. */
   codeCharacter: (index: number, length: number) => string;
+  /** Map zoom buttons. */
+  zoomIn: string;
+  zoomOut: string;
 }
 
 export const en: Messages = {
@@ -32,6 +35,8 @@ export const en: Messages = {
   showPassword: "Show password",
   hidePassword: "Hide password",
   codeCharacter: (index, length) => `Character ${index} of ${length}`,
+  zoomIn: "Zoom in",
+  zoomOut: "Zoom out",
 };
 
 export const fr: Messages = {
@@ -44,6 +49,8 @@ export const fr: Messages = {
   showPassword: "Afficher le mot de passe",
   hidePassword: "Masquer le mot de passe",
   codeCharacter: (index, length) => `Caractère ${index} sur ${length}`,
+  zoomIn: "Zoom avant",
+  zoomOut: "Zoom arrière",
 };
 
 const MessagesContext = createContext<Messages>(en);

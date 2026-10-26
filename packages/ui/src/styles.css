@@ -667,6 +667,61 @@
     animation: iris-pop-out var(--duration-fast) var(--ease-out);
   }
 
+  /* ---------- Map: themed tiles, holographic pins ---------- */
+  .iris-map {
+    background: var(--map-land);
+    font-family: var(--font-sans);
+  }
+  .iris-map .maplibregl-canvas:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -2px;
+  }
+  .iris-map .maplibregl-ctrl-attrib {
+    background: var(--glass-strong);
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    border-radius: var(--radius-pill);
+  }
+  .iris-map .maplibregl-ctrl-attrib a {
+    color: var(--link);
+  }
+  /* The pin: a teardrop pointing at the position, in the film (or a tone), white edged. */
+  .iris-map-pin-head {
+    position: absolute;
+    inset: 4px 6px 8px;
+    border-radius: 50% 50% 50% 0;
+    rotate: -45deg;
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    border: 2px solid var(--white);
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--ink) 35%, transparent);
+    transition: scale var(--duration-fast) var(--ease-out);
+  }
+  .iris-map-pin-head::after {
+    content: "";
+    position: absolute;
+    inset: 32%;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .iris-map-pin[data-tone] .iris-map-pin-head {
+    background: var(--t-base);
+  }
+  .iris-map-pin[data-tone] .iris-map-pin-head::after {
+    background: var(--t-fg);
+  }
+  .iris-map-pin:hover .iris-map-pin-head,
+  .iris-map-pin[data-state="open"] .iris-map-pin-head {
+    scale: 1.12;
+  }
+  .iris-map-pin:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-pill);
+  }
+
   /* ---------- ScrollArea ---------- */
   .iris-scroll-thumb {
     background: color-mix(in srgb, var(--text-muted) 45%, transparent);

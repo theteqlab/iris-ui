@@ -5,6 +5,7 @@
 @import "@irisui/tokens/tokens.css";
 @import "@irisui/tokens/tailwind-theme.css";
 @import "@irisui/ui/styles.css";
+@import "maplibre-gl/dist/maplibre-gl.css";
 
 @source "../components";
 @source "../content";
