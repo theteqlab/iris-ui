@@ -1,0 +1,63 @@
+---
+title: Collapsible
+description: Shows or hides a piece of content from a button.
+---
+
+<Demo name="collapsible/basic" />
+
+## Features
+
+- Controlled or uncontrolled.
+- Height animation on open and close, removed with reduced motion.
+- Built on [Radix Collapsible](https://www.radix-ui.com/primitives/docs/components/collapsible).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@irisui/ui";
+
+export default () => (
+  <Collapsible>
+    <CollapsibleTrigger />
+    <CollapsibleContent />
+  </Collapsible>
+);
+```
+
+## API reference
+
+### Collapsible
+
+<TypeTable
+  type={{
+    open: { type: "boolean", description: "Controlled open state. Use with `onOpenChange`." },
+    defaultOpen: { type: "boolean", default: "false" },
+    onOpenChange: { type: "(open: boolean) => void" },
+    disabled: { type: "boolean", default: "false" },
+  }}
+/>
+
+### CollapsibleTrigger
+
+The button that toggles the content. Use `asChild` to render your own Button.
+`data-state` is `"open"` or `"closed"`.
+
+### CollapsibleContent
+
+<PropsTable type="CollapsibleContentProps" pick={["forceMount", "asChild"]} />
+
+## Accessibility
+
+The trigger has `aria-expanded` and `aria-controls`. For several sections with
+headings, prefer an [Accordion](/docs/components/accordion).
+
+<KeyboardTable
+  keys={[
+    ["Space", "Opens or closes the content."],
+    ["Enter", "Opens or closes the content."],
+  ]}
+/>

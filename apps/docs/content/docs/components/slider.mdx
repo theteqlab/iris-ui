@@ -1,0 +1,86 @@
+---
+title: Slider
+description: Picks a value, or a range, by moving a thumb along a rail.
+---
+
+<Demo name="slider/basic" />
+
+## Features
+
+- One thumb for a value, two for a range (from `value` or `defaultValue`).
+- The range shows the holographic film, or a tone.
+- 24 px thumbs, a 44 px tall touch area; horizontal or vertical.
+- Takes its name from a [Field](/docs/components/field) label.
+- Built on [Radix Slider](https://www.radix-ui.com/primitives/docs/components/slider).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Slider } from "@irisui/ui";
+
+export default () => <Slider aria-label="Volume" defaultValue={[60]} />;
+```
+
+## API reference
+
+### Slider
+
+Also takes every prop of [Radix `Slider.Root`](https://www.radix-ui.com/primitives/docs/components/slider#root).
+
+<PropsTable
+  type="SliderProps"
+  pick={[
+    "value",
+    "defaultValue",
+    "onValueChange",
+    "onValueCommit",
+    "min",
+    "max",
+    "step",
+    "minStepsBetweenThumbs",
+    "orientation",
+    "tone",
+    "thumbLabels",
+    "disabled",
+    "name",
+  ]}
+/>
+
+| Data attribute     | Values                              |
+| ------------------ | ----------------------------------- |
+| `data-orientation` | `"horizontal" \| "vertical"`        |
+| `data-tone`        | `"1"` to `"5"`, `"ink"`, `"danger"` |
+| `data-disabled`    | Present when disabled               |
+
+## Examples
+
+### Range
+
+<Demo name="slider/range" />
+
+### Vertical
+
+<Demo name="slider/vertical" />
+
+## Accessibility
+
+Follows the [WAI-ARIA slider pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/):
+each thumb is a `slider` with its value. Name a single thumb with `aria-label` or a
+Field label, and each thumb of a range with `thumbLabels`.
+
+<KeyboardTable
+  keys={[
+    ["ArrowRight", "Increases the value by one step."],
+    ["ArrowUp", "Increases the value by one step."],
+    ["ArrowLeft", "Decreases the value by one step."],
+    ["ArrowDown", "Decreases the value by one step."],
+    ["PageUp", "Increases the value by ten steps."],
+    ["PageDown", "Decreases the value by ten steps."],
+    ["Home", "Sets the minimum."],
+    ["End", "Sets the maximum."],
+  ]}
+/>

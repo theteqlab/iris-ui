@@ -1,0 +1,52 @@
+---
+title: Toggle
+description: A button that stays pressed, to turn an option on or off.
+---
+
+<Demo name="toggle/basic" />
+
+## Features
+
+- Pressed, it turns solid ink; released, it is transparent.
+- 36, 44 and 56 px heights, square when it holds an icon alone.
+- Controlled or uncontrolled.
+- Built on [Radix Toggle](https://www.radix-ui.com/primitives/docs/components/toggle).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Toggle } from "@irisui/ui";
+
+export default () => <Toggle>Show grid</Toggle>;
+```
+
+## API reference
+
+### Toggle
+
+<PropsTable
+  type="ToggleProps"
+  pick={["pressed", "defaultPressed", "onPressedChange", "size", "disabled", "asChild"]}
+/>
+
+| Data attribute  | Values                 |
+| --------------- | ---------------------- |
+| `data-state`    | `"on" \| "off"`        |
+| `data-size`     | `"sm" \| "md" \| "lg"` |
+| `data-disabled` | Present when disabled  |
+
+## Accessibility
+
+A `button` with `aria-pressed`. With an icon alone, name it with `aria-label`. For an
+option that applies at once in settings, prefer a [Switch](/docs/components/switch).
+
+<KeyboardTable
+  keys={[
+    ["Space", "Presses or releases the toggle."],
+    ["Enter", "Presses or releases the toggle."],
+  ]}
+/>

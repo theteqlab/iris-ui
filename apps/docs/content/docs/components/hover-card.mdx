@@ -1,0 +1,53 @@
+---
+title: HoverCard
+description: A preview of what a link points to, shown when the pointer rests on it.
+---
+
+<Demo name="hover-card/basic" />
+
+## Features
+
+- Opens after 500 ms on hover, closes 200 ms after the pointer leaves.
+- Opaque glass, an optional arrow; flips and shifts to stay on screen.
+- The trigger stays a plain link.
+- Built on [Radix Hover Card](https://www.radix-ui.com/primitives/docs/components/hover-card).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@irisui/ui";
+
+export default () => (
+  <HoverCard>
+    <HoverCardTrigger />
+    <HoverCardContent />
+  </HoverCard>
+);
+```
+
+## API reference
+
+### HoverCard
+
+<PropsTable
+  type="HoverCardProps"
+  pick={["openDelay", "closeDelay", "open", "defaultOpen", "onOpenChange"]}
+/>
+
+### HoverCardTrigger
+
+An `<a>`. Use `asChild` to keep your own link component.
+
+### HoverCardContent
+
+<PropsTable type="HoverCardContentProps" pick={["arrow", "side", "align", "sideOffset"]} />
+
+## Accessibility
+
+The card is for sighted pointer users only: keyboard focus and screen readers do not
+open it. Never put information or actions that exist nowhere else in it; the link it
+belongs to must lead to the same content.

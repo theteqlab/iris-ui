@@ -1,0 +1,79 @@
+---
+title: NavigationMenu
+description: A site's main navigation, with panels of links opened from the bar.
+---
+
+<Demo name="navigation-menu/basic" />
+
+## Features
+
+- Panels open on hover or on click, in one shared viewport that resizes between them.
+- Top-level links next to the triggers, styled alike with `navigationMenuTriggerClass`.
+- `active` marks the current page (`aria-current="page"`).
+- Built on [Radix Navigation Menu](https://www.radix-ui.com/primitives/docs/components/navigation-menu).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@irisui/ui";
+
+export default () => (
+  <NavigationMenu>
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger />
+        <NavigationMenuContent>
+          <NavigationMenuLink />
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuLink />
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+);
+```
+
+## API reference
+
+### NavigationMenu
+
+A `<nav>`: `value` / `onValueChange` for the open item, `delayDuration` (default 200).
+See [Radix `NavigationMenu.Root`](https://www.radix-ui.com/primitives/docs/components/navigation-menu#root).
+
+### NavigationMenuTrigger, NavigationMenuContent
+
+An item's button and its panel. `data-state` is `"open"` or `"closed"`.
+
+### NavigationMenuLink
+
+An `<a>`: `href`, `active` (`data-active` and `aria-current="page"`), `asChild` for your
+router's link.
+
+## Accessibility
+
+Name the navigation with `aria-label`. Triggers are buttons with `aria-expanded`; the
+links stay links.
+
+<KeyboardTable
+  keys={[
+    ["Tab", "Moves to the next trigger or link, then into an open panel."],
+    ["Space", "Opens or closes the focused trigger's panel."],
+    ["Enter", "Opens or closes the panel, or follows the link."],
+    ["ArrowRight", "Moves to the next top-level entry."],
+    ["ArrowLeft", "Moves to the previous top-level entry."],
+    ["ArrowDown", "Moves into the open panel."],
+    ["Esc", "Closes the panel and returns focus to its trigger."],
+  ]}
+/>

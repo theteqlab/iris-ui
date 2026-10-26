@@ -1,10 +1,12 @@
 import { expect, test } from "@playwright/test";
+import { stubMapTiles } from "./map-tiles";
 
 // Keyboard behaviour that jsdom cannot reproduce, checked in a real browser.
 // Keys are held and typed at a human pace: Radix selects a radio on focus only
 // while the arrow key is down, and its typeahead ignores instant bursts.
 
 test.beforeEach(async ({ page }) => {
+  await stubMapTiles(page);
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
 });
@@ -94,7 +96,7 @@ test("DropdownMenu: opens with the keyboard, moves with arrows, opens a submenu"
 });
 
 test("Tooltip: appears on keyboard focus", async ({ page }) => {
-  await page.getByRole("button", { name: "Livraison" }).focus();
+  await page.getByRole("button", { name: "Livraison", exact: true }).focus();
   await page.keyboard.press("Tab");
   await expect(page.getByRole("tooltip")).toHaveText(/⌘I/);
 });
@@ -128,4 +130,25 @@ test("Toast: shown in a live region, runs its action, stays while hovered", asyn
 
   await toast.getByRole("button", { name: "Réessayer" }).click();
   await expect(region.getByText("Nouvelle tentative…")).toBeVisible();
+});
+
+test("Map: themed land, labelled pins, popover from the keyboard", async ({ page }) => {
+  const map = page.getByTestId("section-map");
+  await map.scrollIntoViewIfNeeded();
+  await expect(map.getByRole("region", { name: "Nos boutiques à Lyon" })).toBeVisible();
+  // The canvas fills the map, and the pins are where they can be clicked.
+  const canvas = await map.locator("canvas").boundingBox();
+  expect(canvas?.height).toBeGreaterThan(300);
+  const pin = map.getByRole("button", { name: "Boutique Bellecour" });
+  await pin.click();
+  await expect(page.getByRole("dialog", { name: "Boutique Bellecour" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await pin.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("dialog", { name: "Boutique Bellecour" })).toContainText(
+    "9 h à 19 h",
+  );
+  await page.keyboard.press("Escape");
+  await expect(pin).toBeFocused();
+  await map.getByRole("button", { name: "Zoom avant" }).click();
 });

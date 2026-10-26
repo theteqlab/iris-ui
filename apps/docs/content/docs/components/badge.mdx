@@ -8,7 +8,9 @@ description: A short status or category label. Not interactive.
 ## Features
 
 - Looks `holo`, `glass`, `solid` and `outline`, with the same tones as Button.
-- An optional dot, in the text colour, for statuses.
+- Status badges (`success`, `warning`, `danger`, `info`, `neutral`) in the status colours
+  shared with Alert and Toast.
+- An optional dot, in the text colour.
 
 ## Installation
 
@@ -32,7 +34,7 @@ export default () => (
 
 Renders a `<span>`.
 
-<PropsTable type="BadgeProps" pick={["look", "tone", "dot"]} />
+<PropsTable type="BadgeProps" pick={["look", "tone", "status", "dot"]} />
 
 | Data attribute | Values                                      |
 | -------------- | ------------------------------------------- |
@@ -40,6 +42,13 @@ Renders a `<span>`.
 | `data-tone`    | `"1"` to `"5"`, `"ink"`, `"danger"`         |
 
 ## Examples
+
+### Status
+
+For a state with a meaning: validated, pending, failed. The tint sits on an opaque
+surface, so the text keeps its contrast on any background.
+
+<Demo name="badge/status" />
 
 ### Tones
 
@@ -51,5 +60,6 @@ Renders a `<span>`.
 
 ## Accessibility
 
-A badge is plain text. When its colour carries meaning (online, offline), say it in
-the text too: colour alone is not enough.
+A badge is plain text. When its colour carries meaning (paid, failed, online), say it
+in the text too: colour alone is not enough. Every status passes WCAG AA contrast in
+the 8 palette × mode combinations.

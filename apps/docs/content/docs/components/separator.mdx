@@ -1,0 +1,39 @@
+---
+title: Separator
+description: A thin line between groups of content, horizontal or vertical.
+---
+
+<Demo name="separator/basic" />
+
+## Features
+
+- Horizontal or vertical, 1 px in the theme's line colour.
+- Decorative by default; announced as a `separator` when it divides sections.
+- Built on [Radix Separator](https://www.radix-ui.com/primitives/docs/components/separator).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Separator } from "@irisui/ui";
+
+export default () => <Separator />;
+```
+
+## API reference
+
+### Separator
+
+<PropsTable type="SeparatorProps" pick={["orientation", "decorative", "asChild"]} />
+
+| Data attribute     | Values                       |
+| ------------------ | ---------------------------- |
+| `data-orientation` | `"horizontal" \| "vertical"` |
+
+## Accessibility
+
+A decorative separator is hidden from assistive technology. With
+`decorative={false}`, it has `role="separator"` and its `aria-orientation`.

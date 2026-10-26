@@ -1,0 +1,70 @@
+---
+title: ContextMenu
+description: A menu opened at the pointer with a right click or a long press.
+---
+
+<Demo name="context-menu/basic" />
+
+## Features
+
+- Opens where the pointer is, with a right click or a long press on touch screens.
+- Same items as the [DropdownMenu](/docs/components/dropdown-menu): checkbox and radio
+  items, labels, separators, shortcuts, submenus, `variant="danger"`.
+- Built on [Radix Context Menu](https://www.radix-ui.com/primitives/docs/components/context-menu).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@irisui/ui";
+
+export default () => (
+  <ContextMenu>
+    <ContextMenuTrigger />
+    <ContextMenuContent>
+      <ContextMenuItem />
+    </ContextMenuContent>
+  </ContextMenu>
+);
+```
+
+The other parts mirror the DropdownMenu: `ContextMenuCheckboxItem`,
+`ContextMenuRadioGroup`, `ContextMenuRadioItem`, `ContextMenuLabel`,
+`ContextMenuSeparator`, `ContextMenuShortcut`, `ContextMenuSub`, `ContextMenuSubTrigger`,
+`ContextMenuSubContent`.
+
+## API reference
+
+### ContextMenu
+
+The root: `onOpenChange`, `modal`. See
+[Radix `ContextMenu.Root`](https://www.radix-ui.com/primitives/docs/components/context-menu#root).
+
+### ContextMenuTrigger
+
+The area that opens the menu. `data-state` is `"open"` or `"closed"`.
+
+### ContextMenuItem
+
+<PropsTable type="ContextMenuItemProps" pick={["variant", "disabled", "onSelect", "textValue"]} />
+
+## Accessibility
+
+Follows the [WAI-ARIA menu pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/).
+A context menu is hard to discover and cannot be opened from every keyboard: keep
+another way to reach the same actions, such as a [DropdownMenu](/docs/components/dropdown-menu).
+
+<KeyboardTable
+  keys={[
+    ["Shift + F10", "Opens the menu from the focused trigger (in most browsers)."],
+    ["ArrowDown", "Moves to the next item."],
+    ["ArrowUp", "Moves to the previous item."],
+    ["ArrowRight", "Opens a submenu."],
+    ["ArrowLeft", "Closes a submenu."],
+    ["Enter", "Activates the item."],
+    ["Esc", "Closes the menu."],
+  ]}
+/>

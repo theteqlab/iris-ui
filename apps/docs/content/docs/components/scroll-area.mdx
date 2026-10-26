@@ -1,0 +1,51 @@
+---
+title: ScrollArea
+description: Native scrolling with thin scrollbars in the theme's colours.
+---
+
+<Demo name="scroll-area/basic" />
+
+## Features
+
+- Scrolls with the wheel, touch and keyboard, like any native area.
+- Thin rounded bars that do not take space, shown on hover by default.
+- Vertical, horizontal or both.
+- Built on [Radix Scroll Area](https://www.radix-ui.com/primitives/docs/components/scroll-area).
+
+## Installation
+
+<Install />
+
+## Usage
+
+Give the area a height (or a width): its content scrolls inside.
+
+```tsx
+import { ScrollArea } from "@irisui/ui";
+
+export default () => <ScrollArea className="h-64">{/* long content */}</ScrollArea>;
+```
+
+## API reference
+
+### ScrollArea
+
+Also takes every prop of [Radix `ScrollArea.Root`](https://www.radix-ui.com/primitives/docs/components/scroll-area#root).
+
+<PropsTable type="ScrollAreaProps" pick={["scrollbars", "type", "scrollHideDelay", "dir"]} />
+
+### ScrollBar
+
+A bar and its thumb, rendered by `ScrollArea`. Exported for custom layouts.
+
+## Examples
+
+### Horizontal, always visible
+
+<Demo name="scroll-area/horizontal" />
+
+## Accessibility
+
+The viewport is focusable, so the keyboard can scroll it; name it with `aria-label`
+when it holds a list. The bars are for the pointer and are hidden from assistive
+technology.

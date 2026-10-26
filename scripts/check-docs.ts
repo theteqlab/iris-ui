@@ -10,6 +10,8 @@ const pages = "apps/docs/content/docs/components";
 const demos = "apps/docs/components/demos";
 // Folders of packages/ui that hold helpers, not components.
 const notComponents = new Set(["lib", "locale", "theme"]);
+// Helper files next to a component.
+const notComponentFiles = new Set(["icons.tsx"]);
 
 const errors: string[] = [];
 
@@ -18,7 +20,10 @@ const components = readdirSync(ui)
   .filter((entry) => statSync(join(ui, entry)).isDirectory() && !notComponents.has(entry))
   .flatMap((folder) =>
     readdirSync(join(ui, folder))
-      .filter((file) => file.endsWith(".tsx") && !file.endsWith(".test.tsx"))
+      .filter(
+        (file) =>
+          file.endsWith(".tsx") && !file.endsWith(".test.tsx") && !notComponentFiles.has(file),
+      )
       .map((file) => file.slice(0, -4)),
   );
 

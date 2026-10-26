@@ -1,0 +1,71 @@
+---
+title: Toolbar
+description: A row of controls (buttons, toggle groups, links) behind a single Tab stop.
+---
+
+<Demo name="toolbar/basic" />
+
+## Features
+
+- One Tab stop; arrow keys move between the controls.
+- Buttons, links, toggle groups and separators, styled like [Toggle](/docs/components/toggle).
+- Horizontal or vertical.
+- Built on [Radix Toolbar](https://www.radix-ui.com/primitives/docs/components/toolbar).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import {
+  Toolbar,
+  ToolbarButton,
+  ToolbarLink,
+  ToolbarSeparator,
+  ToolbarToggleGroup,
+  ToolbarToggleItem,
+} from "@irisui/ui";
+
+export default () => (
+  <Toolbar>
+    <ToolbarToggleGroup type="multiple">
+      <ToolbarToggleItem value="…" />
+    </ToolbarToggleGroup>
+    <ToolbarSeparator />
+    <ToolbarButton />
+    <ToolbarLink />
+  </Toolbar>
+);
+```
+
+## API reference
+
+### Toolbar
+
+`orientation` (default horizontal), `loop`, `dir`. See
+[Radix `Toolbar.Root`](https://www.radix-ui.com/primitives/docs/components/toolbar#root).
+
+### ToolbarToggleGroup, ToolbarToggleItem
+
+Like a [ToggleGroup](/docs/components/toggle-group): `type`, `value` / `onValueChange`.
+
+### ToolbarButton, ToolbarLink, ToolbarSeparator
+
+A button, a link and a line between groups.
+
+## Accessibility
+
+Follows the [WAI-ARIA toolbar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/).
+Name it with `aria-label`, and each icon-only control too.
+
+<KeyboardTable
+  keys={[
+    ["Tab", "Moves focus into the toolbar, then out of it."],
+    ["ArrowRight", "Moves to the next control."],
+    ["ArrowLeft", "Moves to the previous control."],
+    ["Home", "Moves to the first control."],
+    ["End", "Moves to the last control."],
+  ]}
+/>

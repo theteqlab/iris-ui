@@ -2,6 +2,13 @@ import { cn } from "@irisui/utils";
 import * as MenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { forwardRef, type ComponentPropsWithoutRef, type HTMLAttributes } from "react";
 import { CheckIcon, ChevronRightIcon } from "../lib/icons";
+import {
+  menuItem as item,
+  menuLabel,
+  menuPanel as panel,
+  menuSeparator,
+  menuShortcut,
+} from "../lib/menu";
 
 /** Root: `open` / `onOpenChange` / `defaultOpen`, `modal`. */
 export const DropdownMenu = MenuPrimitive.Root;
@@ -10,14 +17,6 @@ export const DropdownMenuGroup = MenuPrimitive.Group;
 export const DropdownMenuPortal = MenuPrimitive.Portal;
 export const DropdownMenuSub = MenuPrimitive.Sub;
 export const DropdownMenuRadioGroup = MenuPrimitive.RadioGroup;
-
-const panel =
-  "iris-popover iris-floating z-50 box-border min-w-60 rounded-card p-1.5 font-sans text-md outline-none";
-const item = [
-  "iris-option relative flex min-h-11 cursor-pointer items-center gap-3 rounded-field px-3",
-  "outline-none select-none data-disabled:cursor-not-allowed",
-  "[&_svg]:pointer-events-none [&_svg]:size-[18px] [&_svg]:shrink-0",
-];
 
 export const DropdownMenuContent = forwardRef<
   HTMLDivElement,
@@ -86,36 +85,19 @@ export const DropdownMenuLabel = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof MenuPrimitive.Label>
 >(function DropdownMenuLabel({ className, ...props }, ref) {
-  return (
-    <MenuPrimitive.Label
-      ref={ref}
-      className={cn("px-3 pt-2 pb-1 font-mono text-xs text-text-muted", className)}
-      {...props}
-    />
-  );
+  return <MenuPrimitive.Label ref={ref} className={cn(menuLabel, className)} {...props} />;
 });
 
 export const DropdownMenuSeparator = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof MenuPrimitive.Separator>
 >(function DropdownMenuSeparator({ className, ...props }, ref) {
-  return (
-    <MenuPrimitive.Separator
-      ref={ref}
-      className={cn("mx-1 my-1.5 h-px bg-line", className)}
-      {...props}
-    />
-  );
+  return <MenuPrimitive.Separator ref={ref} className={cn(menuSeparator, className)} {...props} />;
 });
 
 /** Keyboard shortcut shown at the end of an item. */
 export function DropdownMenuShortcut({ className, ...props }: HTMLAttributes<HTMLElement>) {
-  return (
-    <kbd
-      className={cn("ml-auto font-mono text-xs tracking-wide text-text-muted", className)}
-      {...props}
-    />
-  );
+  return <kbd className={cn(menuShortcut, className)} {...props} />;
 }
 
 export const DropdownMenuSubTrigger = forwardRef<

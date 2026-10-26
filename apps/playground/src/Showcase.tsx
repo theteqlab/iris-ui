@@ -1,5 +1,59 @@
 import {
+  Form,
+  FormControl,
+  FormField,
+  FormLabel,
+  FormMessage,
+  FormSubmit,
+  OneTimePasswordField,
+  PasswordToggleField,
+  AspectRatio,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  Toolbar,
+  ToolbarButton,
+  ToolbarSeparator,
+  ToolbarToggleGroup,
+  ToolbarToggleItem,
+  VisuallyHidden,
+  navigationMenuTriggerClass,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Alert,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   AlertDescription,
   AlertTitle,
   Avatar,
@@ -49,6 +103,7 @@ import {
   Progress,
   RadioGroup,
   RadioGroupItem,
+  ScrollArea,
   Select,
   SelectContent,
   SelectGroup,
@@ -57,6 +112,8 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
+  Separator,
+  Slider,
   Switch,
   Tabs,
   TabsContent,
@@ -64,6 +121,9 @@ import {
   TabsTrigger,
   Textarea,
   Toaster,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -72,6 +132,7 @@ import {
   type Tone,
 } from "@irisui/ui";
 import { cn } from "@irisui/utils";
+import { MapShowcase } from "./MapShowcase";
 import { useEffect, useState, type ReactNode } from "react";
 
 const LOOKS: Look[] = ["holo", "glass", "solid", "outline", "ghost"];
@@ -220,6 +281,16 @@ function Badges() {
           En retard
         </Badge>
       </Row>
+      <Row label="status">
+        <Badge status="success">Validé</Badge>
+        <Badge status="warning">En attente</Badge>
+        <Badge status="danger">Refusé</Badge>
+        <Badge status="info">Nouveau</Badge>
+        <Badge status="neutral">Brouillon</Badge>
+        <Badge status="success" dot={false}>
+          Payé
+        </Badge>
+      </Row>
     </Section>
   );
 }
@@ -356,7 +427,7 @@ function Surfaces() {
             <CardDescription>variant="glass"</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="m-0">Surface floutée au liseré irisé.</p>
+            <p className="m-0">Surface floutée, bord blanc fin.</p>
           </CardContent>
           <CardFooter>
             <Button look="outline" tone={2} size="sm">
@@ -593,6 +664,233 @@ function Feedback() {
   );
 }
 
+const TAGS = Array.from({ length: 30 }, (_, i) => `Étiquette ${i + 1}`);
+
+function MoreControls() {
+  const [volume, setVolume] = useState([60]);
+  return (
+    <Section id="more" title="Accordion · AlertDialog · Slider · Toggle · ScrollArea · Separator">
+      <Accordion type="single" collapsible defaultValue="livraison">
+        <AccordionItem value="livraison">
+          <AccordionTrigger>Délais de livraison</AccordionTrigger>
+          <AccordionContent>Sous 2 jours ouvrés en France métropolitaine.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="retours">
+          <AccordionTrigger>Retours</AccordionTrigger>
+          <AccordionContent>Gratuits pendant 30 jours.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="garantie" disabled>
+          <AccordionTrigger>Garantie (désactivé)</AccordionTrigger>
+          <AccordionContent>2 ans.</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      <Row label="Slider">
+        <div className="flex w-full max-w-md flex-col gap-6">
+          <Field>
+            <FieldLabel>Volume · {volume[0]} %</FieldLabel>
+            <Slider value={volume} onValueChange={setVolume} />
+          </Field>
+          <Slider defaultValue={[20, 70]} thumbLabels={["Prix minimum", "Prix maximum"]} tone={3} />
+          <Slider aria-label="Désactivé" defaultValue={[30]} disabled />
+        </div>
+      </Row>
+      <Row label="Toggle · ToggleGroup">
+        <Toggle aria-label="Gras" defaultPressed>
+          <strong>G</strong>
+        </Toggle>
+        <Toggle size="sm">Grille</Toggle>
+        <Separator orientation="vertical" className="h-8" />
+        <ToggleGroup type="single" defaultValue="semaine" aria-label="Période">
+          <ToggleGroupItem value="jour">Jour</ToggleGroupItem>
+          <ToggleGroupItem value="semaine">Semaine</ToggleGroupItem>
+          <ToggleGroupItem value="mois">Mois</ToggleGroupItem>
+        </ToggleGroup>
+      </Row>
+      <Row label="ScrollArea">
+        <ScrollArea className="h-40 w-64 rounded-field border border-line">
+          <ul className="m-0 flex list-none flex-col gap-2 p-4">
+            {TAGS.map((tag) => (
+              <li key={tag} className="text-sm">
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </ScrollArea>
+      </Row>
+      <Row label="AlertDialog">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button look="outline" tone="danger">
+              Vider la corbeille
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Vider la corbeille ?</AlertDialogTitle>
+              <AlertDialogDescription>Les 12 éléments seront supprimés.</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Annuler</AlertDialogCancel>
+              <AlertDialogAction tone="danger">Vider</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </Row>
+    </Section>
+  );
+}
+
+function Navigation() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Section
+      id="nav"
+      title="Menubar · NavigationMenu · Toolbar · ContextMenu · HoverCard · Collapsible"
+    >
+      <Row label="NavigationMenu">
+        <NavigationMenu aria-label="Principale">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Produits</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="m-0 grid w-80 list-none gap-1 p-0">
+                  <li>
+                    <NavigationMenuLink href="#nav">Composants</NavigationMenuLink>
+                  </li>
+                  <li>
+                    <NavigationMenuLink href="#nav">Jetons</NavigationMenuLink>
+                  </li>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="#nav" active className={navigationMenuTriggerClass}>
+                Documentation
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </Row>
+      <Row label="Menubar">
+        <Menubar aria-label="Éditeur">
+          <MenubarMenu>
+            <MenubarTrigger>Fichier</MenubarTrigger>
+            <MenubarContent>
+              <MenubarItem>
+                Nouveau <MenubarShortcut>⌘N</MenubarShortcut>
+              </MenubarItem>
+              <MenubarItem>Ouvrir…</MenubarItem>
+              <MenubarSeparator />
+              <MenubarItem variant="danger">Supprimer</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTrigger>Affichage</MenubarTrigger>
+            <MenubarContent>
+              <MenubarItem>Zoom avant</MenubarItem>
+              <MenubarItem>Zoom arrière</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
+      </Row>
+      <Row label="Toolbar">
+        <Toolbar aria-label="Mise en forme">
+          <ToolbarToggleGroup type="multiple" aria-label="Style" defaultValue={["gras"]}>
+            <ToolbarToggleItem value="gras" aria-label="Gras">
+              <strong>G</strong>
+            </ToolbarToggleItem>
+            <ToolbarToggleItem value="italique" aria-label="Italique">
+              <em>I</em>
+            </ToolbarToggleItem>
+          </ToolbarToggleGroup>
+          <ToolbarSeparator />
+          <ToolbarButton>Partager</ToolbarButton>
+        </Toolbar>
+      </Row>
+      <Row label="ContextMenu · HoverCard">
+        <ContextMenu>
+          <ContextMenuTrigger className="flex h-24 w-64 items-center justify-center rounded-field border border-dashed border-line text-sm text-text-muted">
+            Clic droit ici
+          </ContextMenuTrigger>
+          <ContextMenuContent>
+            <ContextMenuItem>
+              Renommer <ContextMenuShortcut>F2</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem>Dupliquer</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem variant="danger">Supprimer</ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
+        <HoverCard>
+          <HoverCardTrigger href="#nav" className="font-bold text-link">
+            @camille
+          </HoverCardTrigger>
+          <HoverCardContent>
+            <strong>Camille Laurent</strong>
+            <p className="m-0 text-sm text-text-muted">Designer à Lyon, 42 projets.</p>
+          </HoverCardContent>
+        </HoverCard>
+      </Row>
+      <Row label="Collapsible · AspectRatio · VisuallyHidden">
+        <Collapsible open={open} onOpenChange={setOpen} className="flex w-64 flex-col gap-2">
+          <CollapsibleTrigger asChild>
+            <Button look="ghost" size="sm">
+              {open ? "Masquer" : "Voir"} les 3 dépôts
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="flex flex-col gap-1 text-sm">
+            <span>iris-ui</span>
+            <span>iris-docs</span>
+            <span>iris-site</span>
+          </CollapsibleContent>
+        </Collapsible>
+        <div className="w-48">
+          <AspectRatio ratio={16 / 9} className="rounded-field bg-track">
+            <span className="flex size-full items-center justify-center text-sm text-text-muted">
+              16 / 9
+            </span>
+          </AspectRatio>
+        </div>
+        <IconButton look="glass" aria-label="Réglages">
+          <GearIcon />
+          <VisuallyHidden>(ouvre les réglages)</VisuallyHidden>
+        </IconButton>
+      </Row>
+    </Section>
+  );
+}
+
+function Security() {
+  return (
+    <Section id="security" title="Form · PasswordToggleField · OneTimePasswordField">
+      <Form className="max-w-sm" onSubmit={(e) => e.preventDefault()}>
+        <FormField name="email">
+          <FormLabel>E-mail</FormLabel>
+          <FormControl asChild>
+            <Input type="email" required />
+          </FormControl>
+          <FormMessage match="valueMissing">Indiquez votre e-mail.</FormMessage>
+          <FormMessage match="typeMismatch">Cet e-mail n'est pas valide.</FormMessage>
+        </FormField>
+        <Field>
+          <FieldLabel>Mot de passe</FieldLabel>
+          <PasswordToggleField autoComplete="new-password" defaultValue="iris-2026" />
+          <FieldDescription>12 caractères minimum.</FieldDescription>
+        </Field>
+        <Field>
+          <FieldLabel>Code reçu par SMS</FieldLabel>
+          <OneTimePasswordField />
+        </Field>
+        <FormSubmit asChild>
+          <Button look="solid" className="self-start">
+            Créer le compte
+          </Button>
+        </FormSubmit>
+      </Form>
+    </Section>
+  );
+}
+
 export function Showcase() {
   return (
     <>
@@ -602,6 +900,10 @@ export function Showcase() {
       <Choices />
       <Surfaces />
       <Feedback />
+      <MoreControls />
+      <Navigation />
+      <Security />
+      <MapShowcase />
       <Toaster />
     </>
   );

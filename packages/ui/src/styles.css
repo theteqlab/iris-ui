@@ -64,7 +64,7 @@
     --t-glass-bg: var(--glass-strong);
     --t-glass-bg-hover: var(--glass-strong);
     --t-glass-text: var(--text);
-    --t-glass-edge: var(--rim-b);
+    --t-glass-edge: color-mix(in srgb, var(--ink) 45%, transparent);
   }
   .iris-look[data-tone="danger"] {
     --t-base: var(--danger);
@@ -126,19 +126,17 @@
     box-shadow:
       inset 0 1px 0 var(--white),
       0 0 0 1px color-mix(in srgb, var(--t-deep) 30%, transparent),
-      0 8px 22px color-mix(in srgb, var(--t-base) calc(55% * var(--shadow-mix)), transparent);
+      0 4px 14px color-mix(in srgb, var(--t-base) calc(40% * var(--shadow-mix)), transparent);
   }
-  /* holo with ink or danger: solid fill, holographic rim. */
+  /* holo with ink or danger: a plain fill, like solid (no film on a strong colour). */
   .iris-look[data-look="holo"]:is([data-tone="ink"], [data-tone="danger"]) {
-    background:
-      linear-gradient(var(--t-base), var(--t-base)) padding-box,
-      var(--holo) border-box;
-    background-size:
-      100% 100%,
-      200% 100%;
-    border: 2px solid transparent;
+    background: var(--t-base);
+    border: 1px solid var(--t-base);
+    animation: none;
     color: var(--t-fg);
-    box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) calc(30% * var(--shadow-mix)), transparent);
+    box-shadow:
+      0 1px 2px color-mix(in srgb, var(--ink) 25%, transparent),
+      0 4px 12px color-mix(in srgb, var(--ink) calc(22% * var(--shadow-mix)), transparent);
   }
 
   .iris-look[data-look="glass"] {
@@ -148,41 +146,63 @@
     color: var(--t-glass-text);
     border: 1px solid var(--look-glass-border);
     box-shadow:
-      inset 1.5px 1.5px 0 var(--look-glass-highlight),
-      inset -1.5px -1.5px 0 var(--t-glass-edge),
-      0 6px 16px color-mix(in srgb, var(--t-glass-edge) calc(35% * var(--shadow-mix)), transparent);
+      inset 0 1px 0 var(--look-glass-highlight),
+      0 6px 16px color-mix(in srgb, var(--t-glass-edge) calc(30% * var(--shadow-mix)), transparent);
   }
 
   .iris-look[data-look="solid"] {
-    background:
-      linear-gradient(var(--t-base), var(--t-base)) padding-box,
-      var(--holo-deep) border-box;
-    background-size:
-      100% 100%,
-      200% 100%;
-    animation: holo-shift var(--holo-speed) linear infinite;
-    border: 2.5px solid transparent;
+    background: var(--t-base);
+    border: 1px solid var(--t-base);
     color: var(--t-fg);
-    box-shadow: 0 8px 20px
-      color-mix(in srgb, var(--t-base) calc(45% * var(--shadow-mix)), transparent);
+    box-shadow:
+      0 1px 2px color-mix(in srgb, var(--t-base) 30%, transparent),
+      0 4px 12px color-mix(in srgb, var(--t-base) calc(28% * var(--shadow-mix)), transparent);
   }
 
   .iris-look[data-look="outline"] {
-    background:
-      linear-gradient(var(--look-outline-bg), var(--look-outline-bg)) padding-box,
-      var(--holo-deep) border-box;
-    background-size:
-      100% 100%,
-      200% 100%;
-    animation: holo-shift var(--holo-speed) linear infinite;
-    border: 2px solid transparent;
+    background: var(--look-outline-bg);
+    border: 1.5px solid var(--t-outline-text);
     color: var(--t-outline-text);
     font-weight: var(--weight-bold);
   }
 
-  /* Badges: same looks, more compact rims. */
-  .iris-badge:is([data-look="solid"], [data-look="outline"]) {
-    border-width: 1.5px;
+  /* Badges: same looks, flat (a label is not a button), thinner outline. */
+  .iris-look.iris-badge[data-look],
+  .iris-look.iris-badge[data-look][data-tone] {
+    box-shadow: none;
+  }
+  .iris-look.iris-badge[data-look="holo"]:not([data-tone="ink"], [data-tone="danger"]) {
+    box-shadow: inset 0 1px 0 var(--white);
+  }
+  .iris-badge[data-look="outline"] {
+    border-width: 1px;
+  }
+  /* Status badges: the status tint over the opaque surface, like a Toast, so that the
+     text keeps its contrast on any background. */
+  .iris-badge[data-status] {
+    background: linear-gradient(var(--s-soft), var(--s-soft)), var(--popover);
+    color: var(--s-text);
+    border: 1px solid color-mix(in srgb, var(--s-text) 28%, transparent);
+  }
+  .iris-badge[data-status="neutral"] {
+    --s-soft: var(--track);
+    --s-text: var(--text-muted);
+  }
+  .iris-badge[data-status="info"] {
+    --s-soft: var(--info-soft);
+    --s-text: var(--info-text);
+  }
+  .iris-badge[data-status="success"] {
+    --s-soft: var(--success-soft);
+    --s-text: var(--success-text);
+  }
+  .iris-badge[data-status="warning"] {
+    --s-soft: var(--warning-soft);
+    --s-text: var(--warning-text);
+  }
+  .iris-badge[data-status="danger"] {
+    --s-soft: var(--danger-soft);
+    --s-text: var(--danger-text);
   }
 
   .iris-look[data-look="ghost"] {
@@ -199,6 +219,12 @@
     .iris-interactive:where(:not([data-disabled], [aria-busy="true"])):hover {
       --shadow-mix: 1.25;
     }
+    /* Buttons lift by a pixel under the pointer. */
+    .iris-look.iris-interactive:where(
+        :not([data-look="ghost"], [data-disabled], [aria-busy="true"])
+      ):hover {
+      transform: translateY(-1px);
+    }
     .iris-interactive[data-look="holo"]:where(:not([data-disabled], [aria-busy="true"])):hover {
       filter: brightness(1.04);
       animation-duration: calc(var(--holo-speed) / 2);
@@ -208,20 +234,11 @@
     }
     .iris-interactive[data-look="solid"]:where(:not([data-disabled], [aria-busy="true"])):hover {
       --t-base-hover: color-mix(in srgb, var(--t-base) 92%, var(--ink));
-      background:
-        linear-gradient(var(--t-base-hover), var(--t-base-hover)) padding-box,
-        var(--holo-deep) border-box;
-      background-size:
-        100% 100%,
-        200% 100%;
+      background: var(--t-base-hover);
+      border-color: var(--t-base-hover);
     }
     .iris-interactive[data-look="outline"]:where(:not([data-disabled], [aria-busy="true"])):hover {
-      background:
-        linear-gradient(var(--t-tint), var(--t-tint)) padding-box,
-        var(--holo-deep) border-box;
-      background-size:
-        100% 100%,
-        200% 100%;
+      background: var(--t-tint);
     }
     .iris-interactive[data-look="ghost"]:where(:not([data-disabled], [aria-busy="true"])):hover {
       background: var(--glass);
@@ -457,12 +474,6 @@
   .iris-field::placeholder {
     color: var(--text-muted);
   }
-  /* Focus: the border gives way to the iridescent rim, plus the focus ring. */
-  .iris-field:focus-within:not([data-invalid]),
-  .iris-field:focus-visible:not([data-invalid]) {
-    border-color: transparent;
-    box-shadow: var(--rim-edge), var(--field-shadow);
-  }
   .iris-field:has(:focus-visible),
   .iris-field:focus-visible {
     outline: 2px solid var(--focus-ring);
@@ -471,6 +482,17 @@
   .iris-field[data-invalid] {
     border-color: var(--danger);
     box-shadow: 0 0 0 1px var(--danger);
+  }
+  /* Form: Radix marks the native control, inside the visible box. */
+  .iris-field:has(> :is(input, textarea)[data-invalid]) {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 1px var(--danger);
+  }
+  @media (hover: hover) {
+    .iris-password-toggle:not(:disabled):hover {
+      background: var(--glass);
+      color: var(--text);
+    }
   }
   .iris-field[data-invalid]:has(:focus-visible),
   .iris-field[data-invalid]:focus-visible {
@@ -518,7 +540,7 @@
     transition: transform var(--duration-base) var(--ease-out);
   }
 
-  /* Floating panels (Select, DropdownMenu, Popover): opaque, with the iridescent rim. */
+  /* Floating panels (Select, DropdownMenu, Popover): opaque glass. */
   .iris-popover {
     background: var(--popover);
     color: var(--text);
@@ -530,6 +552,182 @@
   }
   .iris-option[data-disabled] {
     opacity: var(--disabled-opacity);
+  }
+
+  /* ---------- Accordion ---------- */
+  .iris-accordion-chevron {
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  .iris-accordion-trigger[data-state="open"] .iris-accordion-chevron {
+    transform: rotate(180deg);
+  }
+  @media (hover: hover) {
+    .iris-accordion-trigger:not([data-disabled]):hover {
+      background: var(--glass);
+    }
+  }
+  .iris-accordion-content[data-state="open"] {
+    animation: iris-accordion-open var(--duration-base) var(--ease-out);
+  }
+  .iris-accordion-content[data-state="closed"] {
+    animation: iris-accordion-close var(--duration-fast) var(--ease-out);
+  }
+
+  /* ---------- Slider: track, holographic range (or a tone), white thumb ---------- */
+  .iris-slider-track {
+    background: var(--track);
+    box-shadow: inset 0 0 0 1px var(--track-border);
+  }
+  .iris-slider-range {
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    animation: holo-shift var(--holo-speed) linear infinite;
+  }
+  .iris-slider[data-tone] .iris-slider-range {
+    background: var(--t-base);
+    animation: none;
+  }
+  .iris-slider-thumb {
+    background: var(--white);
+    border: 1px solid var(--control-border);
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--ink) 25%, transparent);
+  }
+
+  /* ---------- Toggle, ToggleGroup: pressed is solid ink ---------- */
+  .iris-toggle {
+    background: transparent;
+    color: var(--text);
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .iris-toggle:is([data-state="off"]):not([data-disabled]):hover {
+      background: var(--glass);
+    }
+  }
+  .iris-toggle[data-state="on"] {
+    background: var(--selected-bg);
+    color: var(--selected-text);
+  }
+
+  /* ---------- Collapsible ---------- */
+  .iris-collapsible-content[data-state="open"] {
+    animation: iris-collapsible-open var(--duration-base) var(--ease-out);
+  }
+  .iris-collapsible-content[data-state="closed"] {
+    animation: iris-collapsible-close var(--duration-fast) var(--ease-out);
+  }
+
+  /* ---------- Menubar, NavigationMenu: bar entries ---------- */
+  .iris-menubar {
+    background: var(--track);
+  }
+  .iris-nav-link {
+    color: var(--text);
+  }
+  .iris-menubar-trigger,
+  .iris-nav-trigger {
+    background: transparent;
+    color: var(--text);
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .iris-menubar-trigger:not([data-disabled]):hover,
+    .iris-nav-trigger:not([data-disabled]):hover,
+    .iris-nav-link:hover {
+      background: var(--menu-hover);
+    }
+  }
+  .iris-menubar-trigger:is([data-state="open"], [data-highlighted]),
+  .iris-nav-trigger[data-state="open"] {
+    background: var(--menu-hover);
+  }
+  .iris-nav-chevron {
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  .iris-nav-trigger[data-state="open"] .iris-nav-chevron {
+    transform: rotate(180deg);
+  }
+  .iris-nav-link[data-active] {
+    background: var(--selected-bg);
+    color: var(--selected-text);
+  }
+  .iris-nav-viewport {
+    transition:
+      width var(--duration-base) var(--ease-out),
+      height var(--duration-base) var(--ease-out);
+  }
+  .iris-nav-viewport[data-state="open"] {
+    animation: iris-pop-in var(--duration-base) var(--ease-out);
+  }
+  .iris-nav-viewport[data-state="closed"] {
+    animation: iris-pop-out var(--duration-fast) var(--ease-out);
+  }
+
+  /* ---------- Map: themed tiles, holographic pins ---------- */
+  .iris-map {
+    background: var(--map-land);
+    font-family: var(--font-sans);
+  }
+  .iris-map .maplibregl-canvas:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -2px;
+  }
+  .iris-map .maplibregl-ctrl-attrib {
+    background: var(--glass-strong);
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    border-radius: var(--radius-pill);
+  }
+  .iris-map .maplibregl-ctrl-attrib a {
+    color: var(--link);
+  }
+  /* The pin: a teardrop pointing at the position, in the film (or a tone), white edged. */
+  .iris-map-pin-head {
+    position: absolute;
+    inset: 4px 6px 8px;
+    border-radius: 50% 50% 50% 0;
+    rotate: -45deg;
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    border: 2px solid var(--white);
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--ink) 35%, transparent);
+    transition: scale var(--duration-fast) var(--ease-out);
+  }
+  .iris-map-pin-head::after {
+    content: "";
+    position: absolute;
+    inset: 32%;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .iris-map-pin[data-tone] .iris-map-pin-head {
+    background: var(--t-base);
+  }
+  .iris-map-pin[data-tone] .iris-map-pin-head::after {
+    background: var(--t-fg);
+  }
+  .iris-map-pin:hover .iris-map-pin-head,
+  .iris-map-pin[data-state="open"] .iris-map-pin-head {
+    scale: 1.12;
+  }
+  .iris-map-pin:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-pill);
+  }
+
+  /* ---------- ScrollArea ---------- */
+  .iris-scroll-thumb {
+    background: color-mix(in srgb, var(--text-muted) 45%, transparent);
+  }
+  .iris-scroll-thumb:hover {
+    background: color-mix(in srgb, var(--text-muted) 70%, transparent);
   }
 }
 
@@ -568,6 +766,40 @@
   to {
     opacity: 0;
     scale: 0.96;
+  }
+}
+
+@keyframes iris-accordion-open {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes iris-accordion-close {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes iris-collapsible-open {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+@keyframes iris-collapsible-close {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
   }
 }
 

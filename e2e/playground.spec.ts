@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { expect, test } from "@playwright/test";
+import { stubMapTiles } from "./map-tiles";
 
 const PALETTES = ["nacre", "aurore", "couchant", "glacier"] as const;
 const MODES = ["light", "dark"] as const;
@@ -31,6 +32,7 @@ for (const palette of PALETTES) {
         ([key, value]) => window.localStorage.setItem(key, value),
         [STORAGE_KEY, JSON.stringify({ palette, mode })],
       );
+      await stubMapTiles(page);
       await page.goto("/");
 
       const html = page.locator("html");

@@ -13,6 +13,7 @@
     "@irisui/tokens": "workspace:*",
     "@irisui/ui": "workspace:*",
     "@irisui/utils": "workspace:*",
+    "maplibre-gl": "6.14.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },

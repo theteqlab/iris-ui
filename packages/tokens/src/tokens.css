@@ -346,7 +346,7 @@
   --success: #0F7A63;  --success-soft: rgb(214 246 236 / 0.72);  --success-text: #0B5E4C;
   --warning: #F4DE95;  --warning-soft: rgb(255 243 210 / 0.78);  --warning-text: #6E5512;
   --danger:  #B3245E;  --danger-soft:  rgb(252 224 236 / 0.78);  --danger-text:  #A81F57;
-  --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 12%, rgb(255 255 255 / 0.78)); --info-text: var(--link);
+  --info: #3461D1;     --info-soft: rgb(224 233 255 / 0.8);     --info-text: #2A50B5;
 
   --chart-1: var(--chart-light-1); --chart-2: var(--chart-light-2); --chart-3: var(--chart-light-3);
 
@@ -363,6 +363,18 @@
   --look-glass-text: var(--ink);
   --look-glass-border: rgb(255 255 255 / 0.8);
   --look-glass-highlight: rgb(255 255 255 / 0.85);
+  --edge-highlight: rgb(255 255 255 / 0.6);
+
+  /* map (Map component) */
+  --map-land: color-mix(in srgb, var(--bg) 70%, var(--white));
+  --map-water: color-mix(in srgb, var(--tone-2) 45%, var(--white));
+  --map-park: color-mix(in srgb, var(--tone-3) 30%, var(--white));
+  --map-building: color-mix(in srgb, var(--ink) 7%, var(--bg));
+  --map-road: var(--white);
+  --map-road-major: color-mix(in srgb, var(--tone-4) 35%, var(--white));
+  --map-boundary: color-mix(in srgb, var(--ink) 25%, transparent);
+  --map-label: var(--text-muted);
+  --map-label-halo: var(--white);
   --look-outline-bg: var(--white);
   --text-on-danger: var(--white);
   --control-border: rgb(21 19 42 / 0.3);
@@ -414,7 +426,7 @@
   --success: #4FD1AE;  --success-soft: rgb(79 209 174 / 0.14);   --success-text: #7FE3C6;
   --warning: #F4DE95;  --warning-soft: rgb(244 222 149 / 0.14);  --warning-text: #F4DE95;
   --danger:  #FF7AA8;  --danger-soft:  rgb(255 122 168 / 0.14);  --danger-text:  #FF90B5;
-  --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 14%, transparent); --info-text: var(--link);
+  --info: #8FB0FF;     --info-soft: rgb(143 176 255 / 0.14);    --info-text: #A9C2FF;
 
   --chart-1: var(--chart-dark-1); --chart-2: var(--chart-dark-2); --chart-3: var(--chart-dark-3);
 
@@ -431,6 +443,18 @@
   --look-glass-text: var(--white);
   --look-glass-border: rgb(255 255 255 / 0.25);
   --look-glass-highlight: rgb(255 255 255 / 0.35);
+  --edge-highlight: rgb(255 255 255 / 0.12);
+
+  /* map (Map component) */
+  --map-land: color-mix(in srgb, var(--white) 6%, var(--night));
+  --map-water: color-mix(in srgb, var(--tone-2) 22%, var(--night));
+  --map-park: color-mix(in srgb, var(--tone-3) 14%, var(--night));
+  --map-building: color-mix(in srgb, var(--white) 11%, var(--night));
+  --map-road: color-mix(in srgb, var(--white) 18%, var(--night));
+  --map-road-major: color-mix(in srgb, var(--tone-4) 32%, var(--night));
+  --map-boundary: rgb(255 255 255 / 0.25);
+  --map-label: var(--text-muted);
+  --map-label-halo: var(--night);
   --look-outline-bg: #1A1733;
   --text-on-danger: var(--night);
   --control-border: rgb(255 255 255 / 0.3);
@@ -465,13 +489,14 @@
     --success: #4FD1AE; --success-soft: rgb(79 209 174 / 0.14); --success-text: #7FE3C6;
     --warning-soft: rgb(244 222 149 / 0.14); --warning-text: #F4DE95;
     --danger: #FF7AA8; --danger-soft: rgb(255 122 168 / 0.14); --danger-text: #FF90B5;
-    --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 14%, transparent); --info-text: var(--link);
+    --info: #8FB0FF; --info-soft: rgb(143 176 255 / 0.14); --info-text: #A9C2FF;
     --chart-1: var(--chart-dark-1); --chart-2: var(--chart-dark-2); --chart-3: var(--chart-dark-3);
     --selected-bg: #F1EEF8; --selected-text: var(--ink);
     --track: rgb(255 255 255 / 0.08); --overlay: rgb(0 0 0 / 0.35);
     --surface-holo-shadow: 0 0 0 1px rgb(255 255 255 / 0.2), 0 8px 22px rgb(0 0 0 / 0.45);
     --is-dark: 1; --look-glass-tint: 26%; --look-glass-wash: rgb(255 255 255 / 0.04); --look-glass-text: var(--white);
-    --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --look-outline-bg: #1A1733;
+    --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --edge-highlight: rgb(255 255 255 / 0.12); --look-outline-bg: #1A1733;
+    --map-land: color-mix(in srgb, var(--white) 6%, var(--night)); --map-water: color-mix(in srgb, var(--tone-2) 22%, var(--night)); --map-park: color-mix(in srgb, var(--tone-3) 14%, var(--night)); --map-building: color-mix(in srgb, var(--white) 11%, var(--night)); --map-road: color-mix(in srgb, var(--white) 18%, var(--night)); --map-road-major: color-mix(in srgb, var(--tone-4) 32%, var(--night)); --map-boundary: rgb(255 255 255 / 0.25); --map-label: var(--text-muted); --map-label-halo: var(--night);
     --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --avatar-ring: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
     --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
     --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
@@ -484,7 +509,8 @@
 
 /* ---------- Effets composés (lus par les composants) ---------- */
 :root, [data-mode] {
-  --rim-edge: inset 1.5px 1.5px 0 var(--rim-a), inset -1.5px -1.5px 0 var(--rim-b);
+  /* Glass edge: a thin white highlight along the top (the border stays plain). */
+  --rim-edge: inset 0 1px 0 var(--edge-highlight);
   --bg-glow:
     radial-gradient(circle 460px at 8% 2%,  rgb(var(--blob-1) / var(--glow-alpha)), transparent 70%),
     radial-gradient(circle 520px at 92% 6%, rgb(var(--blob-2) / var(--glow-alpha)), transparent 70%),

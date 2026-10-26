@@ -10,7 +10,7 @@ export default function CardVariants() {
           <CardTitle>Glass</CardTitle>
           <CardDescription>The default surface.</CardDescription>
         </CardHeader>
-        <CardContent>Frosted glass with the iridescent rim.</CardContent>
+        <CardContent>Frosted glass, a thin white edge.</CardContent>
       </Card>
       <Card variant="strong">
         <CardHeader>
