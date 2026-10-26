@@ -1,5 +1,5 @@
 // Cloudflare Worker serving the documentation site: static files only, no server code.
-// Build: pnpm build:docs. Deploy: npx wrangler deploy.
+// Build: pnpm build:docs. Deploy: npx wrangler deploy (main) or npx wrangler preview (branches).
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "iris-ui",
@@ -9,5 +9,7 @@
     // The export makes a folder per page (/docs/button/index.html).
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
-  }
+  },
+  // Pull requests deploy a preview (npx wrangler preview), with the settings above.
+  "previews": {}
 }
