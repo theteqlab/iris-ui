@@ -1,4 +1,37 @@
 import {
+  AspectRatio,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  Toolbar,
+  ToolbarButton,
+  ToolbarSeparator,
+  ToolbarToggleGroup,
+  ToolbarToggleItem,
+  VisuallyHidden,
+  navigationMenuTriggerClass,
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -698,6 +731,126 @@ function MoreControls() {
   );
 }
 
+function Navigation() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Section
+      id="nav"
+      title="Menubar · NavigationMenu · Toolbar · ContextMenu · HoverCard · Collapsible"
+    >
+      <Row label="NavigationMenu">
+        <NavigationMenu aria-label="Principale">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Produits</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="m-0 grid w-80 list-none gap-1 p-0">
+                  <li>
+                    <NavigationMenuLink href="#nav">Composants</NavigationMenuLink>
+                  </li>
+                  <li>
+                    <NavigationMenuLink href="#nav">Jetons</NavigationMenuLink>
+                  </li>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink href="#nav" active className={navigationMenuTriggerClass}>
+                Documentation
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </Row>
+      <Row label="Menubar">
+        <Menubar aria-label="Éditeur">
+          <MenubarMenu>
+            <MenubarTrigger>Fichier</MenubarTrigger>
+            <MenubarContent>
+              <MenubarItem>
+                Nouveau <MenubarShortcut>⌘N</MenubarShortcut>
+              </MenubarItem>
+              <MenubarItem>Ouvrir…</MenubarItem>
+              <MenubarSeparator />
+              <MenubarItem variant="danger">Supprimer</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTrigger>Affichage</MenubarTrigger>
+            <MenubarContent>
+              <MenubarItem>Zoom avant</MenubarItem>
+              <MenubarItem>Zoom arrière</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
+      </Row>
+      <Row label="Toolbar">
+        <Toolbar aria-label="Mise en forme">
+          <ToolbarToggleGroup type="multiple" aria-label="Style" defaultValue={["gras"]}>
+            <ToolbarToggleItem value="gras" aria-label="Gras">
+              <strong>G</strong>
+            </ToolbarToggleItem>
+            <ToolbarToggleItem value="italique" aria-label="Italique">
+              <em>I</em>
+            </ToolbarToggleItem>
+          </ToolbarToggleGroup>
+          <ToolbarSeparator />
+          <ToolbarButton>Partager</ToolbarButton>
+        </Toolbar>
+      </Row>
+      <Row label="ContextMenu · HoverCard">
+        <ContextMenu>
+          <ContextMenuTrigger className="flex h-24 w-64 items-center justify-center rounded-field border border-dashed border-line text-sm text-text-muted">
+            Clic droit ici
+          </ContextMenuTrigger>
+          <ContextMenuContent>
+            <ContextMenuItem>
+              Renommer <ContextMenuShortcut>F2</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem>Dupliquer</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem variant="danger">Supprimer</ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
+        <HoverCard>
+          <HoverCardTrigger href="#nav" className="font-bold text-link">
+            @camille
+          </HoverCardTrigger>
+          <HoverCardContent>
+            <strong>Camille Laurent</strong>
+            <p className="m-0 text-sm text-text-muted">Designer à Lyon, 42 projets.</p>
+          </HoverCardContent>
+        </HoverCard>
+      </Row>
+      <Row label="Collapsible · AspectRatio · VisuallyHidden">
+        <Collapsible open={open} onOpenChange={setOpen} className="flex w-64 flex-col gap-2">
+          <CollapsibleTrigger asChild>
+            <Button look="ghost" size="sm">
+              {open ? "Masquer" : "Voir"} les 3 dépôts
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="flex flex-col gap-1 text-sm">
+            <span>iris-ui</span>
+            <span>iris-docs</span>
+            <span>iris-site</span>
+          </CollapsibleContent>
+        </Collapsible>
+        <div className="w-48">
+          <AspectRatio ratio={16 / 9} className="rounded-field bg-track">
+            <span className="flex size-full items-center justify-center text-sm text-text-muted">
+              16 / 9
+            </span>
+          </AspectRatio>
+        </div>
+        <IconButton look="glass" aria-label="Réglages">
+          <GearIcon />
+          <VisuallyHidden>(ouvre les réglages)</VisuallyHidden>
+        </IconButton>
+      </Row>
+    </Section>
+  );
+}
+
 export function Showcase() {
   return (
     <>
@@ -708,6 +861,7 @@ export function Showcase() {
       <Surfaces />
       <Feedback />
       <MoreControls />
+      <Navigation />
       <Toaster />
     </>
   );

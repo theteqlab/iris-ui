@@ -51,6 +51,14 @@ Import the tokens and the component styles once in your global CSS (see
 | `Toggle`            | Pressed state in solid ink, `size`                                                                                                                                                         |
 | `ToggleGroup`       | `type="single"` or `"multiple"`, with `ToggleGroupItem`, `size`                                                                                                                            |
 | `ScrollArea`        | Native scrolling with thin themed bars, `scrollbars` (`vertical` · `horizontal` · `both`)                                                                                                  |
+| `Collapsible`       | Shows or hides content, with `CollapsibleTrigger`, `CollapsibleContent`                                                                                                                    |
+| `ContextMenu`       | Right click or long press; same items as `DropdownMenu`                                                                                                                                    |
+| `HoverCard`         | Link preview on hover (500 ms), optional `arrow`                                                                                                                                           |
+| `Menubar`           | A row of menus, with `MenubarMenu`, `MenubarTrigger`, `MenubarContent` and the `DropdownMenu` items                                                                                        |
+| `NavigationMenu`    | Main navigation: triggers with panels of links, `navigationMenuTriggerClass` for top-level links, `active`                                                                                 |
+| `Toolbar`           | One Tab stop: `ToolbarButton`, `ToolbarLink`, `ToolbarToggleGroup`, `ToolbarSeparator`                                                                                                     |
+| `AspectRatio`       | Keeps a `ratio`                                                                                                                                                                            |
+| `VisuallyHidden`    | Read by screen readers, not shown                                                                                                                                                          |
 
 ```tsx
 import { Button, Field, FieldError, FieldLabel, Input } from "@irisui/ui";

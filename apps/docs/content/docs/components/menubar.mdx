@@ -1,0 +1,68 @@
+---
+title: Menubar
+description: A row of menus, like an application's menu bar.
+---
+
+<Demo name="menubar/basic" />
+
+## Features
+
+- One Tab stop for the whole bar; arrow keys move between menus and open them.
+- Same items as the [DropdownMenu](/docs/components/dropdown-menu).
+- Built on [Radix Menubar](https://www.radix-ui.com/primitives/docs/components/menubar).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "@irisui/ui";
+
+export default () => (
+  <Menubar>
+    <MenubarMenu>
+      <MenubarTrigger />
+      <MenubarContent>
+        <MenubarItem />
+      </MenubarContent>
+    </MenubarMenu>
+  </Menubar>
+);
+```
+
+The other parts mirror the DropdownMenu: `MenubarCheckboxItem`, `MenubarRadioGroup`,
+`MenubarRadioItem`, `MenubarLabel`, `MenubarSeparator`, `MenubarShortcut`, `MenubarSub`,
+`MenubarSubTrigger`, `MenubarSubContent`.
+
+## API reference
+
+### Menubar
+
+The bar: `value` / `onValueChange` for the open menu, `loop`. See
+[Radix `Menubar.Root`](https://www.radix-ui.com/primitives/docs/components/menubar#root).
+
+### MenubarTrigger
+
+A menu's button. `data-state` is `"open"` or `"closed"`.
+
+### MenubarItem
+
+<PropsTable type="MenubarItemProps" pick={["variant", "disabled", "onSelect"]} />
+
+## Accessibility
+
+Follows the [WAI-ARIA menubar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/).
+Name the bar with `aria-label`.
+
+<KeyboardTable
+  keys={[
+    ["Tab", "Moves focus into the bar, then out of it."],
+    ["ArrowRight", "Moves to the next menu (open if one is open)."],
+    ["ArrowLeft", "Moves to the previous menu."],
+    ["ArrowDown", "Opens the menu, or moves to the next item."],
+    ["Enter", "Opens the menu, or activates the item."],
+    ["Esc", "Closes the menu."],
+  ]}
+/>

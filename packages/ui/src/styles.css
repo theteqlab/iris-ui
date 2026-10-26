@@ -602,6 +602,60 @@
     color: var(--selected-text);
   }
 
+  /* ---------- Collapsible ---------- */
+  .iris-collapsible-content[data-state="open"] {
+    animation: iris-collapsible-open var(--duration-base) var(--ease-out);
+  }
+  .iris-collapsible-content[data-state="closed"] {
+    animation: iris-collapsible-close var(--duration-fast) var(--ease-out);
+  }
+
+  /* ---------- Menubar, NavigationMenu: bar entries ---------- */
+  .iris-menubar {
+    background: var(--track);
+  }
+  .iris-nav-link {
+    color: var(--text);
+  }
+  .iris-menubar-trigger,
+  .iris-nav-trigger {
+    background: transparent;
+    color: var(--text);
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .iris-menubar-trigger:not([data-disabled]):hover,
+    .iris-nav-trigger:not([data-disabled]):hover,
+    .iris-nav-link:hover {
+      background: var(--menu-hover);
+    }
+  }
+  .iris-menubar-trigger:is([data-state="open"], [data-highlighted]),
+  .iris-nav-trigger[data-state="open"] {
+    background: var(--menu-hover);
+  }
+  .iris-nav-chevron {
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  .iris-nav-trigger[data-state="open"] .iris-nav-chevron {
+    transform: rotate(180deg);
+  }
+  .iris-nav-link[data-active] {
+    background: var(--selected-bg);
+    color: var(--selected-text);
+  }
+  .iris-nav-viewport {
+    transition:
+      width var(--duration-base) var(--ease-out),
+      height var(--duration-base) var(--ease-out);
+  }
+  .iris-nav-viewport[data-state="open"] {
+    animation: iris-pop-in var(--duration-base) var(--ease-out);
+  }
+  .iris-nav-viewport[data-state="closed"] {
+    animation: iris-pop-out var(--duration-fast) var(--ease-out);
+  }
+
   /* ---------- ScrollArea ---------- */
   .iris-scroll-thumb {
     background: color-mix(in srgb, var(--text-muted) 45%, transparent);
@@ -660,6 +714,23 @@
 @keyframes iris-accordion-close {
   from {
     height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes iris-collapsible-open {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+@keyframes iris-collapsible-close {
+  from {
+    height: var(--radix-collapsible-content-height);
   }
   to {
     height: 0;

@@ -1,0 +1,41 @@
+---
+title: VisuallyHidden
+description: Content read by screen readers but not shown.
+---
+
+<Demo name="visually-hidden/basic" />
+
+## Features
+
+- Hidden on screen, kept in the accessibility tree.
+- Use `asChild` to hide your own element.
+- Built on [Radix Visually Hidden](https://www.radix-ui.com/primitives/docs/utilities/visually-hidden).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { VisuallyHidden } from "@irisui/ui";
+
+export default () => (
+  <button type="button">
+    <GearIcon aria-hidden="true" />
+    <VisuallyHidden>Settings</VisuallyHidden>
+  </button>
+);
+```
+
+## API reference
+
+### VisuallyHidden
+
+A `<span>`. Takes `asChild` and every native attribute.
+
+## Accessibility
+
+Use it to complete a visible label ("Read more" → "Read more about the Team plan") or
+to name a control that has none. For a button with an icon alone, `aria-label` on the
+button does the same.
