@@ -1,0 +1,91 @@
+---
+title: Popover
+description: A floating panel in opaque glass, opened from a button, for short content or a small form.
+---
+
+<Demo name="popover/basic" />
+
+## Features
+
+- Flips and shifts to stay on screen; `side` and `align` choose its place.
+- An optional arrow pointing to the trigger.
+- Focus moves inside on open and back to the trigger on close.
+- Built on [Radix Popover](https://www.radix-ui.com/primitives/docs/components/popover).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "@irisui/ui";
+
+export default () => (
+  <Popover>
+    <PopoverTrigger />
+    <PopoverContent>
+      <PopoverClose />
+    </PopoverContent>
+  </Popover>
+);
+```
+
+## API reference
+
+### Popover
+
+The root: `open` / `onOpenChange` / `defaultOpen`, `modal`. See
+[Radix `Popover.Root`](https://www.radix-ui.com/primitives/docs/components/popover#root).
+
+### PopoverTrigger
+
+The button that opens the panel. `data-state` is `"open"` or `"closed"`.
+
+### PopoverContent
+
+Also takes every prop of [Radix `Popover.Content`](https://www.radix-ui.com/primitives/docs/components/popover#content).
+
+<PropsTable
+  type="PopoverContentProps"
+  pick={[
+    "arrow",
+    "side",
+    "align",
+    "sideOffset",
+    "onOpenAutoFocus",
+    "onCloseAutoFocus",
+    "onEscapeKeyDown",
+  ]}
+/>
+
+| Data attribute | Values                                   |
+| -------------- | ---------------------------------------- |
+| `data-state`   | `"open" \| "closed"`                     |
+| `data-side`    | `"top" \| "right" \| "bottom" \| "left"` |
+| `data-align`   | `"start" \| "center" \| "end"`           |
+
+### PopoverClose, PopoverAnchor
+
+A button that closes the panel, and an element to position it against instead of the
+trigger.
+
+## Examples
+
+### Arrow, above the trigger
+
+<Demo name="popover/arrow" />
+
+## Accessibility
+
+The panel is a `dialog`: name it with `aria-label` or a heading referenced by
+`aria-labelledby`.
+
+<KeyboardTable
+  keys={[
+    ["Space", "Opens or closes the popover."],
+    ["Enter", "Opens or closes the popover."],
+    ["Tab", "Moves focus to the next element in the popover."],
+    ["Esc", "Closes the popover and returns focus to the trigger."],
+  ]}
+/>

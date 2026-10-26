@@ -1,0 +1,71 @@
+---
+title: Avatar
+description: A person's picture, with their initials while it loads or if it fails.
+---
+
+<Demo name="avatar/basic" />
+
+## Features
+
+- 32, 44 and 56 px; initials on an ink or tone background.
+- The fallback shows until the image has loaded, and stays if it fails.
+- `AvatarGroup` overlaps avatars by 12 px.
+- Built on [Radix Avatar](https://www.radix-ui.com/primitives/docs/components/avatar).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from "@irisui/ui";
+
+export default () => (
+  <AvatarGroup>
+    <Avatar>
+      <AvatarImage />
+      <AvatarFallback />
+    </Avatar>
+  </AvatarGroup>
+);
+```
+
+## API reference
+
+### Avatar
+
+<PropsTable type="AvatarProps" pick={["size", "tone"]} />
+
+| Data attribute | Values                              |
+| -------------- | ----------------------------------- |
+| `data-size`    | `"sm" \| "md" \| "lg"`              |
+| `data-tone`    | `"1"` to `"5"`, `"ink"`, `"danger"` |
+
+### AvatarImage
+
+An `<img>`: `src` and `alt` are required for a meaningful picture.
+
+### AvatarFallback
+
+Initials or an icon. `delayMs` waits before showing it, to avoid a flash on fast
+connections.
+
+### AvatarGroup
+
+A `role="group"` row. Give it an `aria-label` when it stands for a list of people.
+
+## Examples
+
+### Sizes and tones
+
+<Demo name="avatar/sizes" />
+
+### Group
+
+<Demo name="avatar/group" />
+
+## Accessibility
+
+Give `AvatarImage` the person's name as `alt`, or an empty `alt` when the name is
+already next to it. In a group, name the group instead.

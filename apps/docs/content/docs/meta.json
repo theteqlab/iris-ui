@@ -1,4 +1,1 @@
-{
-  "title": "iris-ui",
-  "pages": ["index", "---Components---", "...components"]
-}
+{ "title": "iris-ui", "pages": ["index", "...components"] }

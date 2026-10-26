@@ -1,0 +1,78 @@
+---
+title: Tabs
+description: Switches between panels of content, with a pill or an underline look.
+---
+
+<Demo name="tabs/basic" />
+
+## Features
+
+- Two looks: `pill` (the active tab is solid ink) and `underline` (a 3 px holographic line).
+- Arrow keys move between tabs.
+- Controlled or uncontrolled.
+- Built on [Radix Tabs](https://www.radix-ui.com/primitives/docs/components/tabs).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@irisui/ui";
+
+export default () => (
+  <Tabs>
+    <TabsList>
+      <TabsTrigger />
+    </TabsList>
+    <TabsContent />
+  </Tabs>
+);
+```
+
+## API reference
+
+### Tabs
+
+<PropsTable
+  type="TabsProps"
+  pick={["look", "value", "defaultValue", "onValueChange", "activationMode"]}
+/>
+
+| Data attribute | Values                  |
+| -------------- | ----------------------- |
+| `data-look`    | `"pill" \| "underline"` |
+
+### TabsList
+
+Holds the triggers. Name it with `aria-label`.
+
+### TabsTrigger
+
+`value` links it to its panel; `disabled` skips it. `data-state` is `"active"` or
+`"inactive"`.
+
+### TabsContent
+
+The panel for a `value`. `data-state` is `"active"` or `"inactive"`.
+
+## Examples
+
+### Underline
+
+<Demo name="tabs/underline" />
+
+## Accessibility
+
+Follows the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
+
+<KeyboardTable
+  keys={[
+    ["Tab", "Moves focus to the active tab, then into its panel."],
+    ["ArrowRight", "Moves to the next tab."],
+    ["ArrowLeft", "Moves to the previous tab."],
+    ["Home", "Moves to the first tab."],
+    ["End", "Moves to the last tab."],
+  ]}
+/>

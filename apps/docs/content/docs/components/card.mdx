@@ -1,0 +1,71 @@
+---
+title: Card
+description: A surface grouping related content, in frosted glass, holographic film or ink glass.
+---
+
+<Demo name="card/basic" />
+
+## Features
+
+- Three surfaces: `glass` (default), `strong` (the film) and `ink`.
+- Header, title, description, content and footer parts.
+- `asChild` on the card (a link, an `<article>`) and on the title (to pick its level).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@irisui/ui";
+
+export default () => (
+  <Card>
+    <CardHeader>
+      <CardTitle />
+      <CardDescription />
+    </CardHeader>
+    <CardContent />
+    <CardFooter />
+  </Card>
+);
+```
+
+## API reference
+
+### Card
+
+Renders a `<div>`.
+
+<PropsTable type="CardProps" pick={["variant", "asChild"]} />
+
+| Data attribute | Values                         |
+| -------------- | ------------------------------ |
+| `data-variant` | `"glass" \| "strong" \| "ink"` |
+
+### CardTitle
+
+An `<h3>` by default.
+
+<PropsTable type="CardTitleProps" pick={["asChild"]} />
+
+### CardHeader, CardDescription, CardContent, CardFooter
+
+Layout parts: `<div>`s, and a `<p>` for the description. The footer aligns its actions
+to the end.
+
+## Examples
+
+### Surfaces
+
+<Demo name="card/variants" />
+
+### As a link
+
+<Demo name="card/as-child" />
+
+## Accessibility
+
+A card is a layout container with no role. When it is a link, keep a single link
+(`asChild`) rather than nesting interactive elements inside it.

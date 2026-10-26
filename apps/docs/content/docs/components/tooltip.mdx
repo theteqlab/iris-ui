@@ -1,0 +1,75 @@
+---
+title: Tooltip
+description: A short label in an ink glass bubble, shown on hover after 300 ms and at once on keyboard focus.
+---
+
+<Demo name="tooltip/basic" />
+
+## Features
+
+- 300 ms delay on hover; keyboard focus opens it at once.
+- Flips and shifts to stay on screen.
+- A `TooltipProvider` shares the delay: moving to the next trigger opens it at once.
+- Built on [Radix Tooltip](https://www.radix-ui.com/primitives/docs/components/tooltip).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Tooltip, TooltipContent, TooltipTrigger } from "@irisui/ui";
+
+export default () => (
+  <Tooltip>
+    <TooltipTrigger />
+    <TooltipContent />
+  </Tooltip>
+);
+```
+
+## API reference
+
+### Tooltip
+
+Includes its own provider, so it works on its own.
+
+<PropsTable type="TooltipProps" pick={["delayDuration", "open", "defaultOpen", "onOpenChange"]} />
+
+### TooltipTrigger
+
+The element that shows the tooltip. Use `asChild` to keep your own button.
+
+### TooltipContent
+
+Takes every prop of [Radix `Tooltip.Content`](https://www.radix-ui.com/primitives/docs/components/tooltip#content):
+`side`, `align`, `sideOffset` (default 6)…
+
+| Data attribute | Values                                         |
+| -------------- | ---------------------------------------------- |
+| `data-state`   | `"closed" \| "delayed-open" \| "instant-open"` |
+| `data-side`    | `"top" \| "right" \| "bottom" \| "left"`       |
+
+### TooltipProvider
+
+Wrap several tooltips to share `delayDuration` and `skipDelayDuration`.
+
+## Examples
+
+### Sides
+
+<Demo name="tooltip/sides" />
+
+## Accessibility
+
+The content describes its trigger (`aria-describedby`). Keep it short, never put
+interactive content in it (use a [Popover](/docs/components/popover)), and do not rely
+on it for information touch users need.
+
+<KeyboardTable
+  keys={[
+    ["Tab", "Focusing the trigger opens the tooltip."],
+    ["Esc", "Closes the tooltip."],
+  ]}
+/>

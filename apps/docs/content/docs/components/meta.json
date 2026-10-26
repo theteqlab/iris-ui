@@ -1,4 +1,29 @@
 {
   "title": "Components",
-  "pages": ["dialog"]
+  "pages": [
+    "---Actions---",
+    "button",
+    "icon-button",
+    "badge",
+    "---Forms---",
+    "field",
+    "input",
+    "textarea",
+    "checkbox",
+    "radio-group",
+    "switch",
+    "select",
+    "---Surfaces---",
+    "card",
+    "dialog",
+    "dropdown-menu",
+    "popover",
+    "tooltip",
+    "tabs",
+    "---Feedback---",
+    "alert",
+    "toast",
+    "avatar",
+    "progress"
+  ]
 }

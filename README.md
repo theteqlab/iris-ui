@@ -24,6 +24,7 @@ Requires Node.js 24.11+ and pnpm (version pinned in `package.json`).
 pnpm install
 pnpm dev            # playground (apps/playground)
 pnpm --filter docs dev  # documentation site (apps/docs)
+pnpm build:docs     # static documentation site in apps/docs/out
 pnpm build
 pnpm typecheck
 pnpm lint           # ESLint

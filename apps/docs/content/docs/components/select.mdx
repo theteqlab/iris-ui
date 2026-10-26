@@ -1,0 +1,129 @@
+---
+title: Select
+description: Picks one value from a list, in an opaque glass panel.
+---
+
+<Demo name="select/basic" />
+
+## Features
+
+- Opens under its trigger, at least as wide, and stays on screen.
+- Typeahead: type the first letters to reach an option.
+- Groups, labels, separators and disabled options.
+- The placeholder comes from `LocaleProvider` ("Select…" or "Choisir…").
+- Takes its id, description and invalid state from its [Field](/docs/components/field).
+- Built on [Radix Select](https://www.radix-ui.com/primitives/docs/components/select).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@irisui/ui";
+
+export default () => (
+  <Select>
+    <SelectTrigger>
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel />
+        <SelectItem />
+      </SelectGroup>
+      <SelectSeparator />
+    </SelectContent>
+  </Select>
+);
+```
+
+## API reference
+
+### Select
+
+The root. Built on [Radix `Select.Root`](https://www.radix-ui.com/primitives/docs/components/select#root).
+
+<TypeTable
+  type={{
+    value: { type: "string", description: "Controlled value. Use with `onValueChange`." },
+    defaultValue: { type: "string", description: "Value on first render, when uncontrolled." },
+    onValueChange: {
+      type: "(value: string) => void",
+      description: "Called when an option is chosen.",
+    },
+    open: { type: "boolean", description: "Controlled open state." },
+    onOpenChange: { type: "(open: boolean) => void" },
+    disabled: { type: "boolean" },
+    required: { type: "boolean" },
+    name: { type: "string", description: "Name used when the form is submitted." },
+  }}
+/>
+
+### SelectTrigger
+
+<PropsTable type="SelectTriggerProps" pick={["size", "invalid"]} />
+
+| Data attribute     | Values                |
+| ------------------ | --------------------- |
+| `data-state`       | `"open" \| "closed"`  |
+| `data-placeholder` | Present with no value |
+| `data-invalid`     | Present when invalid  |
+
+### SelectValue
+
+<PropsTable type="SelectValueProps" pick={["placeholder"]} />
+
+### SelectContent
+
+<PropsTable type="SelectContentProps" pick={["position", "side", "sideOffset", "align"]} />
+
+### SelectItem
+
+<PropsTable type="SelectItemProps" pick={["value", "disabled", "textValue"]} />
+
+| Data attribute     | Values                     |
+| ------------------ | -------------------------- |
+| `data-state`       | `"checked" \| "unchecked"` |
+| `data-highlighted` | Present when active        |
+| `data-disabled`    | Present when disabled      |
+
+### SelectGroup, SelectLabel, SelectSeparator
+
+Group options under a title, and separate groups.
+
+## Examples
+
+### Groups
+
+<Demo name="select/groups" />
+
+### Required, with an error
+
+<Demo name="select/invalid" />
+
+## Accessibility
+
+Follows the [WAI-ARIA listbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/).
+
+<KeyboardTable
+  keys={[
+    ["Space", "Opens the list, or chooses the active option."],
+    ["Enter", "Opens the list, or chooses the active option."],
+    ["ArrowDown", "Opens the list, or moves to the next option."],
+    ["ArrowUp", "Opens the list, or moves to the previous option."],
+    ["Home", "Moves to the first option."],
+    ["End", "Moves to the last option."],
+    ["Esc", "Closes the list and returns focus to the trigger."],
+  ]}
+/>

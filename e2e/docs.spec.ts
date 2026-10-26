@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { expect, test, type Page } from "@playwright/test";
 
@@ -34,8 +34,34 @@ async function axeReport(page: Page): Promise<string[]> {
   );
 }
 
+const pages = [
+  "",
+  ...readdirSync("apps/docs/content/docs/components")
+    .filter((file) => file.endsWith(".mdx"))
+    .map((file) => `components/${file.replace(/\.mdx$/, "")}`),
+];
+
+for (const slug of pages) {
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`docs · /${slug} · ${colorScheme}`, async ({ page }) => {
+      const errors: string[] = [];
+      page.on("pageerror", (error) => errors.push(error.message));
+      page.on("console", (message) => {
+        if (message.type() === "error") errors.push(message.text());
+      });
+      await page.emulateMedia({ colorScheme });
+      await page.goto(`/docs/${slug}${slug ? "/" : ""}`);
+      await expect(page.locator("h1")).toBeVisible();
+
+      await page.addScriptTag({ content: axeSource });
+      expect(await axeReport(page)).toEqual([]);
+      expect(errors).toEqual([]);
+    });
+  }
+}
+
 for (const colorScheme of ["light", "dark"] as const) {
-  test(`docs · dialog page · ${colorScheme}`, async ({ page }) => {
+  test(`docs · open dialog · ${colorScheme}`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("console", (message) => {
@@ -48,8 +74,6 @@ for (const colorScheme of ["light", "dark"] as const) {
     await expect(page.locator("html")).toHaveAttribute("data-mode", colorScheme);
 
     await page.addScriptTag({ content: axeSource });
-    expect(await axeReport(page)).toEqual([]);
-
     // Open: the dialog over the page, contrast included.
     await page.getByRole("button", { name: "Edit profile" }).click();
     await expect(page.getByRole("dialog", { name: "Edit profile" })).toBeVisible();

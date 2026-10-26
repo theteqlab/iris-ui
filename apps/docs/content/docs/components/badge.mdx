@@ -1,0 +1,55 @@
+---
+title: Badge
+description: A short status or category label. Not interactive.
+---
+
+<Demo name="badge/basic" />
+
+## Features
+
+- Looks `holo`, `glass`, `solid` and `outline`, with the same tones as Button.
+- An optional dot, in the text colour, for statuses.
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Badge } from "@irisui/ui";
+
+export default () => (
+  <Badge look="outline" tone={3} dot>
+    Online
+  </Badge>
+);
+```
+
+## API reference
+
+### Badge
+
+Renders a `<span>`.
+
+<PropsTable type="BadgeProps" pick={["look", "tone", "dot"]} />
+
+| Data attribute | Values                                      |
+| -------------- | ------------------------------------------- |
+| `data-look`    | `"holo" \| "glass" \| "solid" \| "outline"` |
+| `data-tone`    | `"1"` to `"5"`, `"ink"`, `"danger"`         |
+
+## Examples
+
+### Tones
+
+<Demo name="badge/tones" />
+
+### With a dot
+
+<Demo name="badge/dot" />
+
+## Accessibility
+
+A badge is plain text. When its colour carries meaning (online, offline), say it in
+the text too: colour alone is not enough.

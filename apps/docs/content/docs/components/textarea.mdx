@@ -1,0 +1,58 @@
+---
+title: Textarea
+description: A multi-line text field that can grow with its content and count characters.
+---
+
+<Demo name="textarea/basic" />
+
+## Features
+
+- Grows with its content (`autoResize`) or is resized by hand.
+- A character counter, announced politely, turning red at the limit.
+- Invalid state from the `invalid` prop or from its [Field](/docs/components/field).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Field, FieldLabel, Textarea } from "@irisui/ui";
+
+export default () => (
+  <Field>
+    <FieldLabel>Message</FieldLabel>
+    <Textarea />
+  </Field>
+);
+```
+
+## API reference
+
+### Textarea
+
+<PropsTable
+  type="TextareaProps"
+  pick={["autoResize", "showCount", "maxLength", "counterLabel", "invalid", "rows"]}
+/>
+
+| Data attribute  | Values                |
+| --------------- | --------------------- |
+| `data-invalid`  | Present when invalid  |
+| `data-disabled` | Present when disabled |
+
+## Examples
+
+### Character count
+
+<Demo name="textarea/count" />
+
+### Auto-resize
+
+<Demo name="textarea/auto-resize" />
+
+## Accessibility
+
+The counter is linked to the field (`aria-describedby`) and announced politely as you
+type. Its text, "12 / 160 characters", comes from `LocaleProvider` or `counterLabel`.

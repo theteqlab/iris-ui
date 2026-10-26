@@ -1,0 +1,71 @@
+---
+title: Switch
+description: Turns a setting on or off at once. On, the rail shows the holographic film.
+---
+
+<Demo name="switch/basic" />
+
+## Features
+
+- A label is required by the types: visible children, `aria-label` or `aria-labelledby`.
+- Three sizes; the thumb slides in 200 ms (no animation with reduced motion).
+- Controlled or uncontrolled; submits with a form.
+- Built on [Radix Switch](https://www.radix-ui.com/primitives/docs/components/switch).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Switch } from "@irisui/ui";
+
+export default () => <Switch defaultChecked>Notifications</Switch>;
+```
+
+## API reference
+
+### Switch
+
+<PropsTable
+  type="SwitchProps"
+  pick={[
+    "size",
+    "checked",
+    "defaultChecked",
+    "onCheckedChange",
+    "disabled",
+    "required",
+    "name",
+    "value",
+  ]}
+/>
+
+| Data attribute  | Values                     |
+| --------------- | -------------------------- |
+| `data-state`    | `"checked" \| "unchecked"` |
+| `data-disabled` | Present when disabled      |
+
+## Examples
+
+### Sizes
+
+<Demo name="switch/sizes" />
+
+### Controlled
+
+<Demo name="switch/controlled" />
+
+## Accessibility
+
+Follows the [WAI-ARIA switch pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/):
+`role="switch"` with `aria-checked`. Use a switch for a setting that applies at once,
+and a [Checkbox](/docs/components/checkbox) for a choice submitted with a form.
+
+<KeyboardTable
+  keys={[
+    ["Space", "Turns the switch on or off."],
+    ["Enter", "Turns the switch on or off."],
+  ]}
+/>

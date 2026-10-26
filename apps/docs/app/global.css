@@ -20,3 +20,8 @@
 :root:not(.dark) {
   --color-fd-muted-foreground: hsl(0 0% 36%);
 }
+
+/* Code on the syntax theme's own background, the one its colours are AA on. */
+:root:not(.dark) figure.shiki {
+  background-color: var(--shiki-light-bg);
+}

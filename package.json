@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "turbo run dev --filter=playground",
     "build": "turbo run build",
+    "build:docs": "turbo run build --filter=docs...",
     "typecheck": "turbo run typecheck",
     "contrast": "node scripts/check-contrast.ts",
     "rename-scope": "node scripts/rename-scope.ts",

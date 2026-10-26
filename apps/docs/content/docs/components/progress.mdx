@@ -1,0 +1,52 @@
+---
+title: Progress
+description: Shows how far a task has gone, or that it is in progress.
+---
+
+<Demo name="progress/basic" />
+
+## Features
+
+- Determinate (`value` from 0 to `max`) or indeterminate (`null`: the film slides).
+- The holographic film by default, or a tone.
+- 20 px rail; no animation with reduced motion.
+- Built on [Radix Progress](https://www.radix-ui.com/primitives/docs/components/progress).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Progress } from "@irisui/ui";
+
+export default () => <Progress aria-label="Upload" value={60} />;
+```
+
+## API reference
+
+### Progress
+
+<PropsTable type="ProgressProps" pick={["value", "max", "tone", "getValueLabel"]} />
+
+| Data attribute | Values                                       |
+| -------------- | -------------------------------------------- |
+| `data-state`   | `"loading" \| "complete" \| "indeterminate"` |
+| `data-value`   | The value                                    |
+| `data-max`     | The maximum                                  |
+
+## Examples
+
+### Indeterminate
+
+<Demo name="progress/indeterminate" />
+
+### Tones
+
+<Demo name="progress/tones" />
+
+## Accessibility
+
+`role="progressbar"` with `aria-valuenow` and `aria-valuemax`. Name it with
+`aria-label` or `aria-labelledby`.

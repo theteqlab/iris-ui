@@ -1,3 +1,4 @@
+import { Toaster } from "@irisui/ui";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import type { ReactNode } from "react";
 import { PaletteScript } from "@/components/palette";
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           search={{ enabled: false }}
         >
           {children}
+          <Toaster />
         </RootProvider>
       </body>
     </html>
