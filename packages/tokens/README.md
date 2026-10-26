@@ -50,12 +50,23 @@ This exposes the semantic tokens as utilities (`bg-glass`, `text-text-muted`,
 `rounded-card`, `shadow-glass`, `text-h3`…) and removes Tailwind's default
 palette, so only iris-ui colors are available.
 
+To keep Tailwind's defaults next to iris-ui (to mix it with another design
+system), import the tokens and the mapping only:
+
+```css
+@import "tailwindcss";
+@import "@irisui/tokens/tokens.css";
+@import "@irisui/tokens/tailwind-theme.css";
+```
+
 ## Exports
 
 | Path                                           | Content                             |
 | ---------------------------------------------- | ----------------------------------- |
 | `@irisui/tokens` / `@irisui/tokens/tokens.css` | All tokens as CSS custom properties |
 | `@irisui/tokens/tailwind.css`                  | Tokens + Tailwind v4 theme bridge   |
+| `@irisui/tokens/tailwind-theme.css`            | The bridge's mapping only           |
+| `@irisui/tokens/tailwind-reset.css`            | Removes Tailwind's default theme    |
 
 ## License
 

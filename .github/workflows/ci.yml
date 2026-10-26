@@ -54,12 +54,13 @@ jobs:
           npm pkg set pnpm.overrides.react=18.3.1 pnpm.overrides.react-dom=18.3.1 \
             pnpm.overrides.@types/react=18.3.31 pnpm.overrides.@types/react-dom=18.3.7
       - run: pnpm install ${{ matrix.react == 19 && '--frozen-lockfile' || '--no-frozen-lockfile' }}
-      - run: pnpm typecheck
-      - run: pnpm build
+      # The docs site (Next.js, Fumadocs) needs React 19; the packages are checked on both.
+      - run: pnpm typecheck ${{ matrix.react == 18 && '--filter=!docs' || '' }}
+      - run: pnpm build ${{ matrix.react == 18 && '--filter=!docs' || '' }}
       - run: pnpm test
 
   e2e:
-    name: Playground (Playwright + axe)
+    name: Playground & docs (Playwright + axe)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

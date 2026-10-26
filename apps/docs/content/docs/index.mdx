@@ -1,0 +1,55 @@
+---
+title: Introduction
+description: Accessible React components in the Verre irisé style — frosted glass, iridescent rims and an animated holographic film.
+---
+
+iris-ui is built on [Radix UI](https://www.radix-ui.com/) and styled with CSS variables:
+4 palettes (Nacre, Aurore, Couchant, Glacier) × 2 modes (light, dark), chosen with two
+attributes on `<html>`, without JavaScript.
+
+Use the palette switcher at the bottom of the sidebar and the light / dark toggle to see
+every demo in each combination.
+
+## Installation
+
+<Tabs items={["pnpm", "npm", "yarn"]}>
+  <Tab value="pnpm">
+
+```sh
+pnpm add @irisui/ui @irisui/tokens
+```
+
+  </Tab>
+  <Tab value="npm">
+
+```sh
+npm install @irisui/ui @irisui/tokens
+```
+
+  </Tab>
+  <Tab value="yarn">
+
+```sh
+yarn add @irisui/ui @irisui/tokens
+```
+
+  </Tab>
+</Tabs>
+
+`react`, `react-dom` (18 or 19) and `tailwindcss` (v4) are peer dependencies. Import the
+tokens and the component styles once in your global CSS:
+
+```css title="globals.css"
+@import "tailwindcss";
+@import "@irisui/tokens/tailwind.css";
+@import "@irisui/ui/styles.css";
+```
+
+## Theme
+
+```html
+<html data-palette="aurore" data-mode="dark"></html>
+```
+
+`data-mode="system"` follows the operating system. `ThemeProvider` and `ThemeScript` are
+optional helpers that remember the user's choice.

@@ -4,98 +4,10 @@
             @import "@irisui/tokens/tailwind.css";
    Exposes ONLY the semantic tokens (level 2) as utilities. Tailwind's
    default palette is removed so that no hard-coded color can slip in.
-   `reference` : the theme variables are not re-emitted (tokens.css owns
-   them) ; `inline` : utilities read the token variables directly.
+   To keep Tailwind's defaults (next to another design system), import
+   tokens.css and tailwind-theme.css instead.
    ===================================================================== */
 
 @import "./tokens.css";
-
-@theme inline reference {
-  --color-*: initial;
-  --font-*: initial;
-  --text-*: initial;
-  --radius-*: initial;
-  --blur-*: initial;
-  --shadow-*: initial;
-  --inset-shadow-*: initial;
-  --drop-shadow-*: initial;
-
-  /* background & text */
-  --color-bg: var(--bg);
-  --color-text: var(--text);
-  --color-text-muted: var(--text-muted);
-  --color-text-on-holo: var(--text-on-holo);
-  --color-text-on-ink: var(--text-on-ink);
-  --color-line: var(--line);
-
-  /* surfaces */
-  --color-glass: var(--glass);
-  --color-glass-strong: var(--glass-strong);
-  --color-popover: var(--popover);
-  --color-glass-border: var(--glass-border);
-  --color-glass-ink: var(--glass-ink);
-  --color-solid-ink: var(--solid-ink);
-  --color-field: var(--field);
-  --color-field-border: var(--field-border);
-  --color-selected-bg: var(--selected-bg);
-  --color-selected-text: var(--selected-text);
-  --color-track: var(--track);
-  --color-overlay: var(--overlay);
-
-  /* accent */
-  --color-accent: var(--accent);
-  --color-link: var(--link);
-  --color-focus-ring: var(--focus-ring);
-
-  /* status */
-  --color-success: var(--success);
-  --color-success-soft: var(--success-soft);
-  --color-success-text: var(--success-text);
-  --color-warning: var(--warning);
-  --color-warning-soft: var(--warning-soft);
-  --color-warning-text: var(--warning-text);
-  --color-danger: var(--danger);
-  --color-danger-soft: var(--danger-soft);
-  --color-danger-text: var(--danger-text);
-  --color-info: var(--info);
-  --color-info-soft: var(--info-soft);
-  --color-info-text: var(--info-text);
-
-  /* data */
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-
-  /* typography */
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --text-xs: var(--text-xs);
-  --text-sm: var(--text-sm);
-  --text-md: var(--text-md);
-  --text-lg: var(--text-lg);
-  --text-h3: var(--text-h3);
-  --text-h2: var(--text-h2);
-  --text-h1: var(--text-h1);
-  --font-weight-regular: var(--weight-regular);
-  --font-weight-medium: var(--weight-medium);
-  --font-weight-bold: var(--weight-bold);
-  --tracking-display: var(--tracking-display);
-
-  /* shape */
-  --radius-pill: var(--radius-pill);
-  --radius-field: var(--radius-field);
-  --radius-check: var(--radius-check);
-  --radius-card: var(--radius-card);
-  --radius-panel: var(--radius-panel);
-
-  /* glass */
-  --blur-glass: var(--blur);
-  --blur-small: var(--blur-small);
-  --shadow-glass: var(--rim-edge), var(--glass-shadow);
-  --shadow-rim: var(--rim-edge);
-  --shadow-holo: var(--surface-holo-shadow);
-
-  /* motion */
-  --ease-out: var(--ease-out);
-  --animate-holo: holo-shift var(--holo-speed) linear infinite;
-}
+@import "./tailwind-reset.css";
+@import "./tailwind-theme.css";

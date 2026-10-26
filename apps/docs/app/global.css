@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+/* Tokens and the mapping only: Fumadocs' own chrome needs Tailwind's defaults. */
+@import "@irisui/tokens/tokens.css";
+@import "@irisui/tokens/tailwind-theme.css";
+@import "@irisui/ui/styles.css";
+
+@source "../components";
+@source "../content";
+
+/* Demos sit on the iris-ui page background of the chosen palette and mode. */
+.iris-docs-stage {
+  background: var(--bg-glow), var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+/* Fumadocs' light muted grey is under 4.5:1 on its own surfaces. */
+:root:not(.dark) {
+  --color-fd-muted-foreground: hsl(0 0% 36%);
+}

@@ -1,0 +1,194 @@
+---
+title: Dialog
+description: A window over the page, in strong glass with a holographic header. The rest of the page is inert while it is open.
+---
+
+<Demo name="dialog/basic" />
+
+## Features
+
+- Focus is trapped inside and returns to the trigger on close.
+- <kbd>Esc</kbd> and a click on the veil close it; both can be prevented.
+- The page behind does not scroll.
+- Title and description are announced when it opens.
+- Controlled or uncontrolled; three widths.
+- The close button label comes from `LocaleProvider` (English and French built in).
+
+## Installation
+
+<Tabs items={["pnpm", "npm", "yarn"]}>
+  <Tab value="pnpm">
+
+```sh
+pnpm add @irisui/ui @irisui/tokens
+```
+
+  </Tab>
+  <Tab value="npm">
+
+```sh
+npm install @irisui/ui @irisui/tokens
+```
+
+  </Tab>
+  <Tab value="yarn">
+
+```sh
+yarn add @irisui/ui @irisui/tokens
+```
+
+  </Tab>
+</Tabs>
+
+## Anatomy
+
+```tsx
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@irisui/ui";
+
+export default () => (
+  <Dialog>
+    <DialogTrigger />
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle />
+        <DialogDescription />
+      </DialogHeader>
+      <DialogBody />
+      <DialogFooter>
+        <DialogClose />
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+);
+```
+
+## API reference
+
+### Dialog
+
+Contains all the parts. Built on [Radix Dialog](https://www.radix-ui.com/primitives/docs/components/dialog#root).
+
+<TypeTable
+  type={{
+    open: { type: "boolean", description: "Controlled open state. Use with `onOpenChange`." },
+    defaultOpen: {
+      type: "boolean",
+      description: "Open state on first render, when uncontrolled.",
+      default: "false",
+    },
+    onOpenChange: {
+      type: "(open: boolean) => void",
+      description: "Called when the dialog opens or closes.",
+    },
+    modal: {
+      type: "boolean",
+      description: "When false, the page behind stays interactive and readable by screen readers.",
+      default: "true",
+    },
+  }}
+/>
+
+### DialogTrigger
+
+The button that opens the dialog. Use `asChild` to render your own `Button`.
+
+<TypeTable
+  type={{
+    asChild: {
+      type: "boolean",
+      description: "Merges its props onto its only child instead of rendering a `<button>`.",
+      default: "false",
+    },
+  }}
+/>
+
+| Data attribute | Values               |
+| -------------- | -------------------- |
+| `data-state`   | `"open" \| "closed"` |
+
+### DialogContent
+
+The veil and the panel, rendered in a portal. Also takes every prop of
+[Radix `Dialog.Content`](https://www.radix-ui.com/primitives/docs/components/dialog#content).
+
+<PropsTable
+  type="DialogContentProps"
+  pick={[
+    "size",
+    "showClose",
+    "closeLabel",
+    "onOpenAutoFocus",
+    "onCloseAutoFocus",
+    "onEscapeKeyDown",
+    "onInteractOutside",
+    "forceMount",
+  ]}
+/>
+
+| Data attribute | Values                 |
+| -------------- | ---------------------- |
+| `data-state`   | `"open" \| "closed"`   |
+| `data-size`    | `"sm" \| "md" \| "lg"` |
+
+### DialogHeader, DialogBody, DialogFooter
+
+Layout parts, plain `<div>`s. The header carries the holographic band and leaves room
+for the close button; the body scrolls when the content is taller than the screen; the
+footer aligns the actions to the end.
+
+### DialogTitle, DialogDescription
+
+Announced when the dialog opens. A title is required: hide it with a `sr-only` class
+if the design has none. Both accept `asChild`.
+
+### DialogClose
+
+Closes the dialog. Use `asChild` to render your own `Button`.
+
+## Examples
+
+### Controlled
+
+Keep the dialog open while the work is in progress, then close it from code.
+
+<Demo name="dialog/controlled" />
+
+### Destructive action
+
+No close button and no closing on a click outside: the user has to choose.
+
+<Demo name="dialog/danger" />
+
+### Long content
+
+`DialogBody` scrolls; the header and the actions stay visible.
+
+<Demo name="dialog/scroll" />
+
+## Accessibility
+
+Follows the [WAI-ARIA dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
+The panel has `role="dialog"` and `aria-modal`, labelled by `DialogTitle` and described
+by `DialogDescription`. The close button is 44 px wide and labelled.
+
+### Keyboard interactions
+
+<KeyboardTable
+  keys={[
+    ["Space", "Opens or closes the dialog, on the trigger or a close button."],
+    ["Enter", "Opens or closes the dialog, on the trigger or a close button."],
+    ["Tab", "Moves focus to the next focusable element inside the dialog."],
+    ["Shift + Tab", "Moves focus to the previous focusable element inside the dialog."],
+    ["Esc", "Closes the dialog and returns focus to the trigger."],
+  ]}
+/>

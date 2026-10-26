@@ -1,0 +1,11 @@
+/* Removes Tailwind's default scales, so that only iris-ui values exist. */
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --blur-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+}

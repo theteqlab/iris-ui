@@ -5,7 +5,16 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["**/dist/", "**/.turbo/", "**/test-results/", "**/playwright-report/"]),
+  globalIgnores([
+    "**/dist/",
+    "**/.turbo/",
+    "**/test-results/",
+    "**/playwright-report/",
+    "**/.next/",
+    "**/.source/",
+    "**/next-env.d.ts",
+    "apps/docs/out/",
+  ]),
   {
     files: ["**/*.{js,ts,tsx}"],
     extends: [js.configs.recommended, tseslint.configs.recommended],
