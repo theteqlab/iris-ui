@@ -128,15 +128,11 @@
       0 0 0 1px color-mix(in srgb, var(--t-deep) 30%, transparent),
       0 4px 14px color-mix(in srgb, var(--t-base) calc(40% * var(--shadow-mix)), transparent);
   }
-  /* holo with ink or danger: solid fill, holographic rim. */
+  /* holo with ink or danger: a plain fill, like solid (no film on a strong colour). */
   .iris-look[data-look="holo"]:is([data-tone="ink"], [data-tone="danger"]) {
-    background:
-      linear-gradient(var(--t-base), var(--t-base)) padding-box,
-      var(--holo) border-box;
-    background-size:
-      100% 100%,
-      200% 100%;
-    border: 2px solid transparent;
+    background: var(--t-base);
+    border: 1px solid var(--t-base);
+    animation: none;
     color: var(--t-fg);
     box-shadow:
       0 1px 2px color-mix(in srgb, var(--ink) 25%, transparent),
@@ -175,7 +171,7 @@
   .iris-look.iris-badge[data-look][data-tone] {
     box-shadow: none;
   }
-  .iris-look.iris-badge[data-look="holo"] {
+  .iris-look.iris-badge[data-look="holo"]:not([data-tone="ink"], [data-tone="danger"]) {
     box-shadow: inset 0 1px 0 var(--white);
   }
   .iris-badge[data-look="outline"] {

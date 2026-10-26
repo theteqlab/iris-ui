@@ -446,7 +446,7 @@ const lookPairs: Pair[] = TONE_IDS.flatMap((id): Pair[] => {
       label: `look holo · tone ${id}`,
       fg: (vars) => t(vars).fg,
       // Pastel tones tint the film at 45 % (the white sheen only lightens it);
-      // ink and danger are a solid fill with a holographic rim.
+      // ink and danger are a plain fill, like solid.
       on: filled
         ? (vars) => [t(vars).base]
         : (vars) =>
