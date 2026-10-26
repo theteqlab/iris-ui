@@ -7,7 +7,7 @@
     "demos": "node scripts/generate-demos.ts",
     "dev": "node scripts/generate-demos.ts && next dev",
     "build": "node scripts/generate-demos.ts && next build",
-    "typecheck": "node scripts/generate-demos.ts && fumadocs-mdx && tsc -p tsconfig.json"
+    "typecheck": "node scripts/generate-demos.ts && next typegen && tsc -p tsconfig.json"
   },
   "dependencies": {
     "@irisui/tokens": "workspace:*",
