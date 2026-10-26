@@ -1,0 +1,62 @@
+---
+title: Alert
+description: A message in the page about its state, with a circled icon in the tone's colour.
+---
+
+<Demo name="alert/basic" />
+
+## Features
+
+- Four tones: `info`, `success`, `warning`, `danger`.
+- Warnings and errors are announced at once (`role="alert"`), the others politely
+  (`role="status"`).
+- Replace the icon, or hide it.
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Alert, AlertDescription, AlertTitle } from "@irisui/ui";
+
+export default () => (
+  <Alert>
+    <AlertTitle />
+    <AlertDescription />
+  </Alert>
+);
+```
+
+## API reference
+
+### Alert
+
+Renders a `<div>`.
+
+<PropsTable type="AlertProps" pick={["tone", "icon", "role"]} />
+
+| Data attribute | Values                                         |
+| -------------- | ---------------------------------------------- |
+| `data-tone`    | `"info" \| "success" \| "warning" \| "danger"` |
+
+### AlertTitle, AlertDescription
+
+The bold title and the text, both `<p>`.
+
+## Examples
+
+### Tones
+
+<Demo name="alert/tones" />
+
+### Custom icon, no icon, action
+
+<Demo name="alert/icon" />
+
+## Accessibility
+
+An alert rendered with the page is read with the page; one added later is announced
+according to its role. For a short-lived message, use a [Toast](/docs/components/toast).
+The tone is never carried by colour alone: the icon and the text say it too.

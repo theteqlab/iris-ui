@@ -1,0 +1,101 @@
+---
+title: Button
+description: Triggers an action. Five looks, seven tones and three sizes, with a loading state that keeps its width.
+---
+
+<Demo name="button/basic" />
+
+## Features
+
+- Five looks: `holo` (the holographic film), `glass`, `solid`, `outline`, `ghost`.
+- Seven tones: the palette's 5 tones, `ink` and `danger`.
+- 36, 44 and 56 px heights; `md` is the 44 px touch target.
+- Loading state: spinner, same width, clicks blocked, `aria-busy` and an announced label.
+- `asChild` renders a link (or any element) with the button's styles.
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Button } from "@irisui/ui";
+
+export default () => (
+  <Button look="solid" tone={3}>
+    Save
+  </Button>
+);
+```
+
+## API reference
+
+### Button
+
+Renders a `<button type="button">`. Takes every native button prop.
+
+<PropsTable
+  type="ButtonProps"
+  pick={[
+    "look",
+    "tone",
+    "size",
+    "loading",
+    "loadingLabel",
+    "startIcon",
+    "endIcon",
+    "asChild",
+    "disabled",
+  ]}
+/>
+
+| Data attribute  | Values                                                  |
+| --------------- | ------------------------------------------------------- |
+| `data-look`     | `"holo" \| "glass" \| "solid" \| "outline" \| "ghost"`  |
+| `data-tone`     | `"1"` to `"5"`, `"ink"`, `"danger"`; absent with `holo` |
+| `data-size`     | `"sm" \| "md" \| "lg"`                                  |
+| `data-disabled` | Present when disabled                                   |
+
+## Examples
+
+### Tones
+
+With no `tone`, `holo` shows the plain film and the other looks use `ink`. Tones 1 to 5
+take their colours from the palette: switch palettes in the sidebar to see them change.
+
+<Demo name="button/tones" />
+
+### Sizes
+
+<Demo name="button/sizes" />
+
+### Icons
+
+<Demo name="button/icons" />
+
+### Loading
+
+Click _Save_. The label stays in the layout, so the button does not change width.
+
+<Demo name="button/loading" />
+
+### As a link
+
+<Demo name="button/as-child" />
+
+## Accessibility
+
+A native `<button>`: focusable, activated with <kbd>Enter</kbd> and <kbd>Space</kbd>,
+with a visible focus ring. While loading, `aria-busy` and `aria-disabled` are set and
+"Loading" (from `LocaleProvider`) is read instead of the label. Every look and tone
+passes WCAG AA contrast in the 8 palette × mode combinations.
+
+### Keyboard interactions
+
+<KeyboardTable
+  keys={[
+    ["Space", "Activates the button."],
+    ["Enter", "Activates the button."],
+  ]}
+/>

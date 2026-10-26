@@ -1,0 +1,67 @@
+---
+title: Checkbox
+description: Turns an option on or off, with an indeterminate state for "some of them".
+---
+
+<Demo name="checkbox/basic" />
+
+## Features
+
+- Its label is its children; the whole row is the 44 px click target.
+- Checked, unchecked and indeterminate (`checked="indeterminate"`).
+- Controlled or uncontrolled; submits with a form (`name`, `value`).
+- Built on [Radix Checkbox](https://www.radix-ui.com/primitives/docs/components/checkbox).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Checkbox } from "@irisui/ui";
+
+export default () => <Checkbox defaultChecked>Email me a summary</Checkbox>;
+```
+
+## API reference
+
+### Checkbox
+
+<PropsTable
+  type="CheckboxProps"
+  pick={[
+    "children",
+    "checked",
+    "defaultChecked",
+    "onCheckedChange",
+    "invalid",
+    "disabled",
+    "required",
+    "name",
+    "value",
+  ]}
+/>
+
+| Data attribute  | Values                                        |
+| --------------- | --------------------------------------------- |
+| `data-state`    | `"checked" \| "unchecked" \| "indeterminate"` |
+| `data-disabled` | Present when disabled                         |
+
+## Examples
+
+### Indeterminate
+
+<Demo name="checkbox/indeterminate" />
+
+### With an error
+
+<Demo name="checkbox/field" />
+
+## Accessibility
+
+Follows the [WAI-ARIA checkbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/):
+`role="checkbox"` with `aria-checked` (`mixed` when indeterminate). Without a visible
+label, set `aria-label`.
+
+<KeyboardTable keys={[["Space", "Checks or unchecks the box."]]} />

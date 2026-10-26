@@ -1,0 +1,98 @@
+---
+title: Toast
+description: A short message about an action, stacked at the bottom right and gone after a few seconds.
+---
+
+<Demo name="toast/basic" />
+
+## Features
+
+- `toast()`, `toast.success()`, `.info()`, `.warning()` and `.error()`, with a
+  description and an action.
+- Stacked bottom right, 360 px wide, paused while hovered or focused.
+- Announced to screen readers; the region and close labels come from `LocaleProvider`.
+- Built on [Sonner](https://sonner.emilkowal.ski/).
+
+## Installation
+
+<Install />
+
+Render `<Toaster />` once, at the root of your app:
+
+```tsx title="app/layout.tsx"
+import { Toaster } from "@irisui/ui";
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+```
+
+## Usage
+
+```tsx
+import { toast } from "@irisui/ui";
+
+toast.success("Saved", { description: "Your changes are live." });
+```
+
+## API reference
+
+### toast
+
+`toast(title, options)` and its variants return the toast's id;
+`toast.dismiss(id)` closes it. The main options:
+
+<TypeTable
+  type={{
+    description: { type: "ReactNode", description: "Text under the title." },
+    action: {
+      type: "{ label: ReactNode; onClick: () => void }",
+      description: "A button in the toast.",
+    },
+    duration: {
+      type: "number",
+      default: "4000",
+      description: "Time on screen, in ms. `Infinity` keeps it.",
+    },
+    id: { type: "string | number", description: "Reuse an id to update a toast." },
+    onDismiss: { type: "(toast) => void" },
+  }}
+/>
+
+See [Sonner's options](https://sonner.emilkowal.ski/toast) for the full list.
+
+### Toaster
+
+Takes every prop of Sonner's `Toaster`; iris-ui sets the position, the width, the
+icons and the styles.
+
+## Examples
+
+### Tones
+
+<Demo name="toast/tones" />
+
+### With an action
+
+<Demo name="toast/action" />
+
+## Accessibility
+
+Toasts are read in a live region named "Notifications". They pause while hovered or
+focused, so there is time to read or act. Do not put the only way to do something in
+a toast: it goes away.
+
+<KeyboardTable
+  keys={[
+    ["Alt + T", "Moves focus to the notifications and expands the stack."],
+    ["Tab", "Moves between the buttons of a toast."],
+    ["Esc", "Collapses the stack again."],
+  ]}
+/>

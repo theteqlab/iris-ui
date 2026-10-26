@@ -1,0 +1,62 @@
+---
+title: IconButton
+description: A round button holding only an icon. Same looks, tones and sizes as Button; its label is required.
+---
+
+<Demo name="icon-button/basic" />
+
+## Features
+
+- The `aria-label` is required by the types: an icon alone has no accessible name.
+- Square: 36, 44 or 56 px, with the 44 px target in `md`.
+- Same `look`, `tone`, `loading` and `asChild` as [Button](/docs/components/button).
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { IconButton } from "@irisui/ui";
+
+export default () => (
+  <IconButton aria-label="Settings">
+    <GearIcon />
+  </IconButton>
+);
+```
+
+## API reference
+
+### IconButton
+
+<PropsTable
+  type="IconButtonProps"
+  pick={["aria-label", "children", "look", "tone", "size", "loading", "loadingLabel", "asChild"]}
+/>
+
+Same data attributes as [Button](/docs/components/button#api-reference).
+
+## Examples
+
+### Sizes, tones and loading
+
+<Demo name="icon-button/sizes" />
+
+### With a tooltip
+
+Pair it with a [Tooltip](/docs/components/tooltip) to show the label on hover and focus.
+
+<Demo name="tooltip/basic" />
+
+## Accessibility
+
+The `aria-label` names the button; the icon inside is hidden from assistive technology.
+
+<KeyboardTable
+  keys={[
+    ["Space", "Activates the button."],
+    ["Enter", "Activates the button."],
+  ]}
+/>

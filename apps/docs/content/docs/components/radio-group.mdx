@@ -1,0 +1,84 @@
+---
+title: RadioGroup
+description: One choice among a few options, all visible.
+---
+
+<Demo name="radio-group/basic" />
+
+## Features
+
+- Arrow keys move the choice; <kbd>Tab</kbd> enters and leaves the group.
+- Inside a [Field](/docs/components/field), the `FieldLabel` names the group.
+- Vertical or horizontal.
+- Built on [Radix Radio Group](https://www.radix-ui.com/primitives/docs/components/radio-group).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "@irisui/ui";
+
+export default () => (
+  <RadioGroup>
+    <RadioGroupItem />
+  </RadioGroup>
+);
+```
+
+## API reference
+
+### RadioGroup
+
+<PropsTable
+  type="RadioGroupProps"
+  pick={[
+    "value",
+    "defaultValue",
+    "onValueChange",
+    "orientation",
+    "invalid",
+    "disabled",
+    "required",
+    "name",
+    "loop",
+  ]}
+/>
+
+| Data attribute  | Values                |
+| --------------- | --------------------- |
+| `data-disabled` | Present when disabled |
+
+### RadioGroupItem
+
+Its children are the label; the row is the 44 px click target.
+
+<PropsTable type="RadioGroupItemProps" pick={["value", "children", "disabled"]} />
+
+| Data attribute  | Values                     |
+| --------------- | -------------------------- |
+| `data-state`    | `"checked" \| "unchecked"` |
+| `data-disabled` | Present when disabled      |
+
+## Examples
+
+### Horizontal
+
+<Demo name="radio-group/horizontal" />
+
+## Accessibility
+
+Follows the [WAI-ARIA radio group pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/).
+
+<KeyboardTable
+  keys={[
+    ["Tab", "Moves focus to the checked item, or the first one."],
+    ["Space", "Checks the focused item."],
+    ["ArrowDown", "Moves focus to the next item and checks it."],
+    ["ArrowRight", "Moves focus to the next item and checks it."],
+    ["ArrowUp", "Moves focus to the previous item and checks it."],
+    ["ArrowLeft", "Moves focus to the previous item and checks it."],
+  ]}
+/>

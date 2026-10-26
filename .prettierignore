@@ -1,3 +1,7 @@
 pnpm-lock.yaml
 # Hand-aligned token tables.
 packages/tokens/src/*.css
+.next/
+.source/
+apps/docs/out/
+apps/docs/components/demos/index.ts

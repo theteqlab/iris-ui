@@ -9,8 +9,10 @@
   "scripts": {
     "dev": "turbo run dev --filter=playground",
     "build": "turbo run build",
+    "build:docs": "turbo run build --filter=docs...",
     "typecheck": "turbo run typecheck",
     "contrast": "node scripts/check-contrast.ts",
+    "check:docs": "node scripts/check-docs.ts",
     "rename-scope": "node scripts/rename-scope.ts",
     "changeset": "changeset",
     "format": "prettier --write --ignore-unknown \"{apps,packages,scripts,test,e2e,.github,.changeset}/**\" \"*.{js,ts,json,yaml,yml}\" README.md",

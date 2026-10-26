@@ -1,0 +1,67 @@
+---
+title: Input
+description: A single-line text field, with optional icon and end slot.
+---
+
+<Demo name="input/basic" />
+
+## Features
+
+- 36, 44 and 56 px heights.
+- A decorative start icon and an end slot (a unit, an icon, a button).
+- Invalid state from the `invalid` prop or from its [Field](/docs/components/field).
+- The ref and every native prop go to the `<input>`.
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Field, FieldLabel, Input } from "@irisui/ui";
+
+export default () => (
+  <Field>
+    <FieldLabel>Email</FieldLabel>
+    <Input type="email" />
+  </Field>
+);
+```
+
+## API reference
+
+### Input
+
+<PropsTable
+  type="InputProps"
+  pick={["size", "invalid", "startIcon", "endSlot", "inputClassName"]}
+/>
+
+`className` styles the visible box; `inputClassName` the native input inside it.
+
+| Data attribute  | Values                 |
+| --------------- | ---------------------- |
+| `data-size`     | `"sm" \| "md" \| "lg"` |
+| `data-invalid`  | Present when invalid   |
+| `data-disabled` | Present when disabled  |
+
+## Examples
+
+### Icon and end slot
+
+<Demo name="input/slots" />
+
+### Sizes
+
+<Demo name="input/sizes" />
+
+### Invalid and disabled
+
+<Demo name="input/invalid" />
+
+## Accessibility
+
+A native `<input>`. Name it with a [Field](/docs/components/field) label, or with
+`aria-label` when the context makes the label visible otherwise (a search box with a
+magnifier). Placeholders are not labels.

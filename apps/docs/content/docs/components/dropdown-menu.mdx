@@ -1,0 +1,137 @@
+---
+title: DropdownMenu
+description: A list of actions or options opened from a button, in an opaque glass panel.
+---
+
+<Demo name="dropdown-menu/basic" />
+
+## Features
+
+- Items, checkbox and radio items, labels, separators and shortcuts.
+- Submenus, opened with the pointer or the arrow keys.
+- `variant="danger"` for destructive actions.
+- Typeahead, focus management and collision handling.
+- Built on [Radix Dropdown Menu](https://www.radix-ui.com/primitives/docs/components/dropdown-menu).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@irisui/ui";
+
+export default () => (
+  <DropdownMenu>
+    <DropdownMenuTrigger />
+    <DropdownMenuContent>
+      <DropdownMenuLabel />
+      <DropdownMenuItem>
+        <DropdownMenuShortcut />
+      </DropdownMenuItem>
+      <DropdownMenuCheckboxItem />
+      <DropdownMenuRadioGroup>
+        <DropdownMenuRadioItem />
+      </DropdownMenuRadioGroup>
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger />
+        <DropdownMenuSubContent />
+      </DropdownMenuSub>
+      <DropdownMenuSeparator />
+    </DropdownMenuContent>
+  </DropdownMenu>
+);
+```
+
+## API reference
+
+### DropdownMenu
+
+The root. Built on [Radix `DropdownMenu.Root`](https://www.radix-ui.com/primitives/docs/components/dropdown-menu#root).
+
+<TypeTable
+  type={{
+    open: { type: "boolean", description: "Controlled open state. Use with `onOpenChange`." },
+    defaultOpen: { type: "boolean", default: "false" },
+    onOpenChange: { type: "(open: boolean) => void" },
+    modal: {
+      type: "boolean",
+      default: "true",
+      description: "When true, the rest of the page is inert while the menu is open.",
+    },
+  }}
+/>
+
+### DropdownMenuTrigger
+
+The button that opens the menu. Use `asChild` to render your own `Button`.
+
+| Data attribute | Values               |
+| -------------- | -------------------- |
+| `data-state`   | `"open" \| "closed"` |
+
+### DropdownMenuContent
+
+Opens under the trigger, aligned to its start (`sideOffset` 8, `align="start"`). Takes
+every prop of [Radix `DropdownMenu.Content`](https://www.radix-ui.com/primitives/docs/components/dropdown-menu#content):
+`side`, `align`, `sideOffset`, `loop`…
+
+### DropdownMenuItem
+
+<PropsTable type="DropdownMenuItemProps" pick={["variant", "disabled", "onSelect", "textValue"]} />
+
+| Data attribute     | Values                |
+| ------------------ | --------------------- |
+| `data-highlighted` | Present when active   |
+| `data-disabled`    | Present when disabled |
+
+### DropdownMenuCheckboxItem, DropdownMenuRadioItem
+
+Checkable items: `checked` / `onCheckedChange`, and `value` inside a
+`DropdownMenuRadioGroup` (`value` / `onValueChange`). `data-state` is `"checked"` or
+`"unchecked"`.
+
+### DropdownMenuShortcut
+
+The keyboard shortcut shown at the end of an item. Display only: bind the keys yourself.
+
+## Examples
+
+### Checkbox and radio items
+
+<Demo name="dropdown-menu/checkable" />
+
+### Submenu
+
+<Demo name="dropdown-menu/submenu" />
+
+## Accessibility
+
+Follows the [WAI-ARIA menu button pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/).
+
+<KeyboardTable
+  keys={[
+    ["Space", "Opens the menu, or activates the active item."],
+    ["Enter", "Opens the menu, or activates the active item."],
+    ["ArrowDown", "Opens the menu, or moves to the next item."],
+    ["ArrowUp", "Moves to the previous item."],
+    ["ArrowRight", "Opens the submenu of the active item."],
+    ["ArrowLeft", "Closes the submenu."],
+    ["Esc", "Closes the menu and returns focus to the trigger."],
+  ]}
+/>

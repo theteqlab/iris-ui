@@ -7,3 +7,8 @@ dist/
 .env*
 test-results/
 playwright-report/
+.next/
+.source/
+next-env.d.ts
+apps/docs/out/
+apps/docs/components/demos/index.ts

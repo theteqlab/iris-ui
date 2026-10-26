@@ -1,0 +1,78 @@
+---
+title: Field
+description: Groups a label, a control, a description and an error message, and links them for assistive technology.
+---
+
+<Demo name="field/basic" />
+
+## Features
+
+- The label points to the control (`htmlFor`), with an id generated for you.
+- The description and the error describe the control (`aria-describedby`).
+- Rendering a `FieldError` marks the control invalid (`aria-invalid` and the red ring).
+- `required` and `disabled` reach the control.
+- Works with [Input](/docs/components/input), [Textarea](/docs/components/textarea),
+  [Select](/docs/components/select), [Checkbox](/docs/components/checkbox),
+  [RadioGroup](/docs/components/radio-group) and [Switch](/docs/components/switch).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Field, FieldDescription, FieldError, FieldLabel } from "@irisui/ui";
+
+export default () => (
+  <Field>
+    <FieldLabel />
+    {/* Input, Textarea, Select… */}
+    <FieldDescription />
+    <FieldError />
+  </Field>
+);
+```
+
+## API reference
+
+### Field
+
+Renders a `<div>`.
+
+<PropsTable type="FieldProps" pick={["invalid", "required", "disabled", "id"]} />
+
+| Data attribute  | Values                |
+| --------------- | --------------------- |
+| `data-invalid`  | Present when invalid  |
+| `data-disabled` | Present when disabled |
+
+### FieldLabel
+
+A `<label>` built on [Radix Label](https://www.radix-ui.com/primitives/docs/components/label).
+
+### FieldDescription
+
+Help text under the control, a `<p>`.
+
+### FieldError
+
+The error message, a `<p>`. It renders nothing when its children are empty, so it can
+always stay in the tree: `<FieldError>{error}</FieldError>`.
+
+## Examples
+
+### Error
+
+Fix the address to clear the error.
+
+<Demo name="field/error" />
+
+### Disabled
+
+<Demo name="field/disabled" />
+
+## Accessibility
+
+A visible label is required for every control. The description and the error are read
+after the label when the control is focused; the error is in bold red, never red alone.
