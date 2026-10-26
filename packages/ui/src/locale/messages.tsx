@@ -14,6 +14,12 @@ export interface Messages {
   notifications: string;
   /** Close button of a toast. */
   closeNotification: string;
+  /** PasswordToggleField button, password hidden. */
+  showPassword: string;
+  /** PasswordToggleField button, password shown. */
+  hidePassword: string;
+  /** Each box of a OneTimePasswordField. */
+  codeCharacter: (index: number, length: number) => string;
 }
 
 export const en: Messages = {
@@ -23,6 +29,9 @@ export const en: Messages = {
   close: "Close",
   notifications: "Notifications",
   closeNotification: "Close notification",
+  showPassword: "Show password",
+  hidePassword: "Hide password",
+  codeCharacter: (index, length) => `Character ${index} of ${length}`,
 };
 
 export const fr: Messages = {
@@ -32,6 +41,9 @@ export const fr: Messages = {
   close: "Fermer",
   notifications: "Notifications",
   closeNotification: "Fermer la notification",
+  showPassword: "Afficher le mot de passe",
+  hidePassword: "Masquer le mot de passe",
+  codeCharacter: (index, length) => `Caractère ${index} sur ${length}`,
 };
 
 const MessagesContext = createContext<Messages>(en);

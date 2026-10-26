@@ -22,43 +22,46 @@ Import the tokens and the component styles once in your global CSS (see
 
 ## Components
 
-| Component           | Notes                                                                                                                                                                                      |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Button`            | `look` (`holo` · `glass` · `solid` · `outline` · `ghost`), `tone` (`1`–`5`, `ink`, `danger`), `size` (`sm` 36 px · `md` 44 px · `lg` 56 px), `loading`, `startIcon` / `endIcon`, `asChild` |
-| `IconButton`        | Same looks; round; `aria-label` required                                                                                                                                                   |
-| `Badge`             | Looks `holo` · `glass` · `solid` · `outline`, `tone`, `dot`; `status` (`success` · `warning` · `danger` · `info` · `neutral`)                                                              |
-| `Field`             | With `FieldLabel`, `FieldDescription`, `FieldError`: links label, help and error to the control                                                                                            |
-| `Input`             | `size`, `invalid`, `startIcon`, `endSlot`                                                                                                                                                  |
-| `Textarea`          | `autoResize`, `showCount` (with `maxLength`)                                                                                                                                               |
-| `Checkbox`          | Label as children; `checked="indeterminate"`                                                                                                                                               |
-| `RadioGroup`        | With `RadioGroupItem`; `orientation`                                                                                                                                                       |
-| `Switch`            | Label as children (or `aria-label`, required); `size`                                                                                                                                      |
-| `Select`            | With `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel`, `SelectSeparator`                                                                        |
-| `Card`              | `variant` (`glass` · `strong` · `ink`), with `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`                                                                     |
-| `Dialog`            | With `DialogTrigger`, `DialogContent` (`size`, close button), `DialogHeader`, `DialogTitle`, `DialogDescription`, `DialogBody`, `DialogFooter`, `DialogClose`                              |
-| `DropdownMenu`      | Items, checkbox and radio items, labels, separators, shortcuts, submenus, `variant="danger"`                                                                                               |
-| `Popover`           | `side`, `align`, optional `arrow`                                                                                                                                                          |
-| `Tooltip`           | 300 ms delay, opens on keyboard focus                                                                                                                                                      |
-| `Tabs`              | `look` (`pill` · `underline`), with `TabsList`, `TabsTrigger`, `TabsContent`                                                                                                               |
-| `Alert`             | `tone` (`info` · `success` · `warning` · `danger`), circled icon, `AlertTitle`, `AlertDescription`; `role="alert"` for warnings and errors, `status` otherwise                             |
-| `Toaster` / `toast` | Sonner: `toast()`, `toast.success()`, `.info()`, `.warning()`, `.error()`, with description and action; bottom right, 360 px, announced, paused on hover                                   |
-| `Avatar`            | `size` (32 · 44 · 56 px), `tone`, with `AvatarImage`, `AvatarFallback`; `AvatarGroup` overlaps by 12 px                                                                                    |
-| `Progress`          | `value` / `max`, `null` for indeterminate, optional `tone` (default: the holographic film)                                                                                                 |
-| `Accordion`         | `type="single"` (`collapsible`) or `"multiple"`, with `AccordionItem`, `AccordionTrigger` (`level`), `AccordionContent`                                                                    |
-| `AlertDialog`       | Confirmation: `AlertDialogAction` / `AlertDialogCancel` are Buttons, focus on Cancel, no closing on a click outside                                                                        |
-| `Separator`         | Horizontal or vertical, decorative by default                                                                                                                                              |
-| `Slider`            | One value or a range (`thumbLabels`), optional `tone`, horizontal or vertical                                                                                                              |
-| `Toggle`            | Pressed state in solid ink, `size`                                                                                                                                                         |
-| `ToggleGroup`       | `type="single"` or `"multiple"`, with `ToggleGroupItem`, `size`                                                                                                                            |
-| `ScrollArea`        | Native scrolling with thin themed bars, `scrollbars` (`vertical` · `horizontal` · `both`)                                                                                                  |
-| `Collapsible`       | Shows or hides content, with `CollapsibleTrigger`, `CollapsibleContent`                                                                                                                    |
-| `ContextMenu`       | Right click or long press; same items as `DropdownMenu`                                                                                                                                    |
-| `HoverCard`         | Link preview on hover (500 ms), optional `arrow`                                                                                                                                           |
-| `Menubar`           | A row of menus, with `MenubarMenu`, `MenubarTrigger`, `MenubarContent` and the `DropdownMenu` items                                                                                        |
-| `NavigationMenu`    | Main navigation: triggers with panels of links, `navigationMenuTriggerClass` for top-level links, `active`                                                                                 |
-| `Toolbar`           | One Tab stop: `ToolbarButton`, `ToolbarLink`, `ToolbarToggleGroup`, `ToolbarSeparator`                                                                                                     |
-| `AspectRatio`       | Keeps a `ratio`                                                                                                                                                                            |
-| `VisuallyHidden`    | Read by screen readers, not shown                                                                                                                                                          |
+| Component              | Notes                                                                                                                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Button`               | `look` (`holo` · `glass` · `solid` · `outline` · `ghost`), `tone` (`1`–`5`, `ink`, `danger`), `size` (`sm` 36 px · `md` 44 px · `lg` 56 px), `loading`, `startIcon` / `endIcon`, `asChild` |
+| `IconButton`           | Same looks; round; `aria-label` required                                                                                                                                                   |
+| `Badge`                | Looks `holo` · `glass` · `solid` · `outline`, `tone`, `dot`; `status` (`success` · `warning` · `danger` · `info` · `neutral`)                                                              |
+| `Field`                | With `FieldLabel`, `FieldDescription`, `FieldError`: links label, help and error to the control                                                                                            |
+| `Input`                | `size`, `invalid`, `startIcon`, `endSlot`                                                                                                                                                  |
+| `Textarea`             | `autoResize`, `showCount` (with `maxLength`)                                                                                                                                               |
+| `Checkbox`             | Label as children; `checked="indeterminate"`                                                                                                                                               |
+| `RadioGroup`           | With `RadioGroupItem`; `orientation`                                                                                                                                                       |
+| `Switch`               | Label as children (or `aria-label`, required); `size`                                                                                                                                      |
+| `Select`               | With `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel`, `SelectSeparator`                                                                        |
+| `Card`                 | `variant` (`glass` · `strong` · `ink`), with `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`                                                                     |
+| `Dialog`               | With `DialogTrigger`, `DialogContent` (`size`, close button), `DialogHeader`, `DialogTitle`, `DialogDescription`, `DialogBody`, `DialogFooter`, `DialogClose`                              |
+| `DropdownMenu`         | Items, checkbox and radio items, labels, separators, shortcuts, submenus, `variant="danger"`                                                                                               |
+| `Popover`              | `side`, `align`, optional `arrow`                                                                                                                                                          |
+| `Tooltip`              | 300 ms delay, opens on keyboard focus                                                                                                                                                      |
+| `Tabs`                 | `look` (`pill` · `underline`), with `TabsList`, `TabsTrigger`, `TabsContent`                                                                                                               |
+| `Alert`                | `tone` (`info` · `success` · `warning` · `danger`), circled icon, `AlertTitle`, `AlertDescription`; `role="alert"` for warnings and errors, `status` otherwise                             |
+| `Toaster` / `toast`    | Sonner: `toast()`, `toast.success()`, `.info()`, `.warning()`, `.error()`, with description and action; bottom right, 360 px, announced, paused on hover                                   |
+| `Avatar`               | `size` (32 · 44 · 56 px), `tone`, with `AvatarImage`, `AvatarFallback`; `AvatarGroup` overlaps by 12 px                                                                                    |
+| `Progress`             | `value` / `max`, `null` for indeterminate, optional `tone` (default: the holographic film)                                                                                                 |
+| `Accordion`            | `type="single"` (`collapsible`) or `"multiple"`, with `AccordionItem`, `AccordionTrigger` (`level`), `AccordionContent`                                                                    |
+| `AlertDialog`          | Confirmation: `AlertDialogAction` / `AlertDialogCancel` are Buttons, focus on Cancel, no closing on a click outside                                                                        |
+| `Separator`            | Horizontal or vertical, decorative by default                                                                                                                                              |
+| `Slider`               | One value or a range (`thumbLabels`), optional `tone`, horizontal or vertical                                                                                                              |
+| `Toggle`               | Pressed state in solid ink, `size`                                                                                                                                                         |
+| `ToggleGroup`          | `type="single"` or `"multiple"`, with `ToggleGroupItem`, `size`                                                                                                                            |
+| `ScrollArea`           | Native scrolling with thin themed bars, `scrollbars` (`vertical` · `horizontal` · `both`)                                                                                                  |
+| `Collapsible`          | Shows or hides content, with `CollapsibleTrigger`, `CollapsibleContent`                                                                                                                    |
+| `ContextMenu`          | Right click or long press; same items as `DropdownMenu`                                                                                                                                    |
+| `HoverCard`            | Link preview on hover (500 ms), optional `arrow`                                                                                                                                           |
+| `Menubar`              | A row of menus, with `MenubarMenu`, `MenubarTrigger`, `MenubarContent` and the `DropdownMenu` items                                                                                        |
+| `NavigationMenu`       | Main navigation: triggers with panels of links, `navigationMenuTriggerClass` for top-level links, `active`                                                                                 |
+| `Toolbar`              | One Tab stop: `ToolbarButton`, `ToolbarLink`, `ToolbarToggleGroup`, `ToolbarSeparator`                                                                                                     |
+| `AspectRatio`          | Keeps a `ratio`                                                                                                                                                                            |
+| `VisuallyHidden`       | Read by screen readers, not shown                                                                                                                                                          |
+| `Form`                 | Browser validation with `FormField`, `FormLabel`, `FormControl`, `FormMessage` (`match`), `FormSubmit`                                                                                     |
+| `PasswordToggleField`  | Password input with a show / hide button, `size`, `invalid`, `Field` support                                                                                                               |
+| `OneTimePasswordField` | One box per character, `length`, `validationType`, `autoSubmit`                                                                                                                            |
 
 ```tsx
 import { Button, Field, FieldError, FieldLabel, Input } from "@irisui/ui";
@@ -82,7 +85,7 @@ Every component forwards its ref, merges `className` and exposes `data-state`,
 ### Texts
 
 Texts rendered by the components ("Loading", the character counter, the select
-placeholder, the dialog's "Close", the toast region and close labels) are in English by default. Wrap your app in
+placeholder, the dialog's "Close", the toast region and close labels, the password button, the code boxes) are in English by default. Wrap your app in
 `<LocaleProvider messages={fr}>` for French, or pass your own `Messages`; each
 text can also be overridden by a prop (`loadingLabel`, `counterLabel`,
 `placeholder`, `closeLabel`).

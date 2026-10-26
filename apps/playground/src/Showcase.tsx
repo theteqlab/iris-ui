@@ -1,4 +1,12 @@
 import {
+  Form,
+  FormControl,
+  FormField,
+  FormLabel,
+  FormMessage,
+  FormSubmit,
+  OneTimePasswordField,
+  PasswordToggleField,
   AspectRatio,
   Collapsible,
   CollapsibleContent,
@@ -851,6 +859,37 @@ function Navigation() {
   );
 }
 
+function Security() {
+  return (
+    <Section id="security" title="Form · PasswordToggleField · OneTimePasswordField">
+      <Form className="max-w-sm" onSubmit={(e) => e.preventDefault()}>
+        <FormField name="email">
+          <FormLabel>E-mail</FormLabel>
+          <FormControl asChild>
+            <Input type="email" required />
+          </FormControl>
+          <FormMessage match="valueMissing">Indiquez votre e-mail.</FormMessage>
+          <FormMessage match="typeMismatch">Cet e-mail n'est pas valide.</FormMessage>
+        </FormField>
+        <Field>
+          <FieldLabel>Mot de passe</FieldLabel>
+          <PasswordToggleField autoComplete="new-password" defaultValue="iris-2026" />
+          <FieldDescription>12 caractères minimum.</FieldDescription>
+        </Field>
+        <Field>
+          <FieldLabel>Code reçu par SMS</FieldLabel>
+          <OneTimePasswordField />
+        </Field>
+        <FormSubmit asChild>
+          <Button look="solid" className="self-start">
+            Créer le compte
+          </Button>
+        </FormSubmit>
+      </Form>
+    </Section>
+  );
+}
+
 export function Showcase() {
   return (
     <>
@@ -862,6 +901,7 @@ export function Showcase() {
       <Feedback />
       <MoreControls />
       <Navigation />
+      <Security />
       <Toaster />
     </>
   );

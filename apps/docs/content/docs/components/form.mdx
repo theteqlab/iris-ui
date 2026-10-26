@@ -1,0 +1,88 @@
+---
+title: Form
+description: A form validated by the browser and your own rules, with messages after a submit attempt.
+---
+
+<Demo name="form/basic" />
+
+## Features
+
+- Uses the browser's checks: `required`, `type="email"`, `minLength`, `pattern`…
+- One message per check (`match`), or your own rule as a function.
+- Messages appear after a submit attempt and are linked to their control.
+- Controls are iris-ui inputs, with `asChild`.
+- Built on [Radix Form](https://www.radix-ui.com/primitives/docs/components/form) (preview).
+
+For fields you validate yourself, [Field](/docs/components/field) with `FieldError` is
+simpler.
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Form, FormControl, FormField, FormLabel, FormMessage, FormSubmit } from "@irisui/ui";
+
+export default () => (
+  <Form>
+    <FormField name="…">
+      <FormLabel />
+      <FormControl asChild>{/* Input, Textarea… */}</FormControl>
+      <FormMessage match="valueMissing" />
+    </FormField>
+    <FormSubmit asChild>{/* Button */}</FormSubmit>
+  </Form>
+);
+```
+
+## API reference
+
+### Form
+
+A `<form>`: `onSubmit`, `onClearServerErrors`. See
+[Radix `Form.Root`](https://www.radix-ui.com/primitives/docs/components/form#root).
+
+### FormField
+
+<TypeTable
+  type={{
+    name: { type: "string", required: true, description: "Name of the control." },
+    serverInvalid: {
+      type: "boolean",
+      description: "Marks the field invalid after a server check.",
+    },
+  }}
+/>
+
+`data-valid` or `data-invalid` is set after a submit attempt.
+
+### FormMessage
+
+<TypeTable
+  type={{
+    match: {
+      type: '"valueMissing" | "typeMismatch" | "patternMismatch" | "tooShort" | "tooLong" | "rangeUnderflow" | "rangeOverflow" | "stepMismatch" | "badInput" | ((value: string, formData: FormData) => boolean | Promise<boolean>)',
+      description: "When to show it. Without `match`, it shows when the control is invalid.",
+    },
+    forceMatch: { type: "boolean", description: "Shows it whatever the control's state." },
+  }}
+/>
+
+### FormLabel, FormControl, FormSubmit, FormValidityState
+
+The label, the control (use `asChild`), the submit button (use `asChild` with a Button),
+and a render prop that reads the control's validity.
+
+## Examples
+
+### Your own rule
+
+<Demo name="form/custom" />
+
+## Accessibility
+
+Each message is linked to its control (`aria-describedby`), and the first invalid
+control takes the focus after a submit attempt. Write messages that say how to fix the
+value, not only that it is wrong.

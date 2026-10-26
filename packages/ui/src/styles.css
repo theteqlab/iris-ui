@@ -483,6 +483,17 @@
     border-color: var(--danger);
     box-shadow: 0 0 0 1px var(--danger);
   }
+  /* Form: Radix marks the native control, inside the visible box. */
+  .iris-field:has(> :is(input, textarea)[data-invalid]) {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 1px var(--danger);
+  }
+  @media (hover: hover) {
+    .iris-password-toggle:not(:disabled):hover {
+      background: var(--glass);
+      color: var(--text);
+    }
+  }
   .iris-field[data-invalid]:has(:focus-visible),
   .iris-field[data-invalid]:focus-visible {
     outline-color: var(--danger);
