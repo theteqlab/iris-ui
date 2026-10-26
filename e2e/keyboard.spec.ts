@@ -94,7 +94,7 @@ test("DropdownMenu: opens with the keyboard, moves with arrows, opens a submenu"
 });
 
 test("Tooltip: appears on keyboard focus", async ({ page }) => {
-  await page.getByRole("button", { name: "Livraison" }).focus();
+  await page.getByRole("button", { name: "Livraison", exact: true }).focus();
   await page.keyboard.press("Tab");
   await expect(page.getByRole("tooltip")).toHaveText(/⌘I/);
 });

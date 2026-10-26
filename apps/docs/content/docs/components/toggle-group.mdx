@@ -1,0 +1,85 @@
+---
+title: ToggleGroup
+description: A set of toggles on a shared rail, for one choice or several.
+---
+
+<Demo name="toggle-group/basic" />
+
+## Features
+
+- One pressed item at most (`type="single"`) or several (`type="multiple"`).
+- Arrow keys move between items; <kbd>Tab</kbd> enters and leaves the group.
+- One `size` for every item.
+- Built on [Radix Toggle Group](https://www.radix-ui.com/primitives/docs/components/toggle-group).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "@irisui/ui";
+
+export default () => (
+  <ToggleGroup type="single">
+    <ToggleGroupItem value="…" />
+  </ToggleGroup>
+);
+```
+
+## API reference
+
+### ToggleGroup
+
+<TypeTable
+  type={{
+    type: { type: '"single" | "multiple"', required: true },
+    value: {
+      type: "string | string[]",
+      description: "Controlled pressed item(s). Use with `onValueChange`.",
+    },
+    defaultValue: { type: "string | string[]" },
+    onValueChange: { type: "(value: string | string[]) => void" },
+    size: {
+      type: '"sm" | "md" | "lg"',
+      default: '"md"',
+      description: "Height of the items: 36, 44 or 56 px.",
+    },
+    orientation: { type: '"horizontal" | "vertical"', default: '"horizontal"' },
+    disabled: { type: "boolean", default: "false" },
+    rovingFocus: {
+      type: "boolean",
+      default: "true",
+      description: "Arrow keys move between items.",
+    },
+  }}
+/>
+
+### ToggleGroupItem
+
+<PropsTable type="ToggleGroupItemProps" pick={["value", "disabled"]} />
+
+`data-state` is `"on"` or `"off"`.
+
+## Examples
+
+### Several items, icons only
+
+<Demo name="toggle-group/multiple" />
+
+## Accessibility
+
+Name the group with `aria-label`. With `type="single"`, the items are `radio` buttons in
+a `radiogroup`; with `type="multiple"`, `button`s with `aria-pressed`.
+
+<KeyboardTable
+  keys={[
+    ["Tab", "Moves focus to the pressed item, or the first one."],
+    ["Space", "Presses or releases the focused item."],
+    ["ArrowRight", "Moves focus to the next item."],
+    ["ArrowLeft", "Moves focus to the previous item."],
+    ["Home", "Moves focus to the first item."],
+    ["End", "Moves focus to the last item."],
+  ]}
+/>

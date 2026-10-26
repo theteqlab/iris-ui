@@ -1,5 +1,18 @@
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Alert,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   AlertDescription,
   AlertTitle,
   Avatar,
@@ -49,6 +62,7 @@ import {
   Progress,
   RadioGroup,
   RadioGroupItem,
+  ScrollArea,
   Select,
   SelectContent,
   SelectGroup,
@@ -57,6 +71,8 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
+  Separator,
+  Slider,
   Switch,
   Tabs,
   TabsContent,
@@ -64,6 +80,9 @@ import {
   TabsTrigger,
   Textarea,
   Toaster,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -603,6 +622,82 @@ function Feedback() {
   );
 }
 
+const TAGS = Array.from({ length: 30 }, (_, i) => `Étiquette ${i + 1}`);
+
+function MoreControls() {
+  const [volume, setVolume] = useState([60]);
+  return (
+    <Section id="more" title="Accordion · AlertDialog · Slider · Toggle · ScrollArea · Separator">
+      <Accordion type="single" collapsible defaultValue="livraison">
+        <AccordionItem value="livraison">
+          <AccordionTrigger>Délais de livraison</AccordionTrigger>
+          <AccordionContent>Sous 2 jours ouvrés en France métropolitaine.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="retours">
+          <AccordionTrigger>Retours</AccordionTrigger>
+          <AccordionContent>Gratuits pendant 30 jours.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="garantie" disabled>
+          <AccordionTrigger>Garantie (désactivé)</AccordionTrigger>
+          <AccordionContent>2 ans.</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      <Row label="Slider">
+        <div className="flex w-full max-w-md flex-col gap-6">
+          <Field>
+            <FieldLabel>Volume · {volume[0]} %</FieldLabel>
+            <Slider value={volume} onValueChange={setVolume} />
+          </Field>
+          <Slider defaultValue={[20, 70]} thumbLabels={["Prix minimum", "Prix maximum"]} tone={3} />
+          <Slider aria-label="Désactivé" defaultValue={[30]} disabled />
+        </div>
+      </Row>
+      <Row label="Toggle · ToggleGroup">
+        <Toggle aria-label="Gras" defaultPressed>
+          <strong>G</strong>
+        </Toggle>
+        <Toggle size="sm">Grille</Toggle>
+        <Separator orientation="vertical" className="h-8" />
+        <ToggleGroup type="single" defaultValue="semaine" aria-label="Période">
+          <ToggleGroupItem value="jour">Jour</ToggleGroupItem>
+          <ToggleGroupItem value="semaine">Semaine</ToggleGroupItem>
+          <ToggleGroupItem value="mois">Mois</ToggleGroupItem>
+        </ToggleGroup>
+      </Row>
+      <Row label="ScrollArea">
+        <ScrollArea className="h-40 w-64 rounded-field border border-line">
+          <ul className="m-0 flex list-none flex-col gap-2 p-4">
+            {TAGS.map((tag) => (
+              <li key={tag} className="text-sm">
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </ScrollArea>
+      </Row>
+      <Row label="AlertDialog">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button look="outline" tone="danger">
+              Vider la corbeille
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Vider la corbeille ?</AlertDialogTitle>
+              <AlertDialogDescription>Les 12 éléments seront supprimés.</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Annuler</AlertDialogCancel>
+              <AlertDialogAction tone="danger">Vider</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </Row>
+    </Section>
+  );
+}
+
 export function Showcase() {
   return (
     <>
@@ -612,6 +707,7 @@ export function Showcase() {
       <Choices />
       <Surfaces />
       <Feedback />
+      <MoreControls />
       <Toaster />
     </>
   );

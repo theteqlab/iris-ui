@@ -44,6 +44,13 @@ Import the tokens and the component styles once in your global CSS (see
 | `Toaster` / `toast` | Sonner: `toast()`, `toast.success()`, `.info()`, `.warning()`, `.error()`, with description and action; bottom right, 360 px, announced, paused on hover                                   |
 | `Avatar`            | `size` (32 · 44 · 56 px), `tone`, with `AvatarImage`, `AvatarFallback`; `AvatarGroup` overlaps by 12 px                                                                                    |
 | `Progress`          | `value` / `max`, `null` for indeterminate, optional `tone` (default: the holographic film)                                                                                                 |
+| `Accordion`         | `type="single"` (`collapsible`) or `"multiple"`, with `AccordionItem`, `AccordionTrigger` (`level`), `AccordionContent`                                                                    |
+| `AlertDialog`       | Confirmation: `AlertDialogAction` / `AlertDialogCancel` are Buttons, focus on Cancel, no closing on a click outside                                                                        |
+| `Separator`         | Horizontal or vertical, decorative by default                                                                                                                                              |
+| `Slider`            | One value or a range (`thumbLabels`), optional `tone`, horizontal or vertical                                                                                                              |
+| `Toggle`            | Pressed state in solid ink, `size`                                                                                                                                                         |
+| `ToggleGroup`       | `type="single"` or `"multiple"`, with `ToggleGroupItem`, `size`                                                                                                                            |
+| `ScrollArea`        | Native scrolling with thin themed bars, `scrollbars` (`vertical` · `horizontal` · `both`)                                                                                                  |
 
 ```tsx
 import { Button, Field, FieldError, FieldLabel, Input } from "@irisui/ui";

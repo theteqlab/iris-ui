@@ -1,0 +1,101 @@
+---
+title: Accordion
+description: A stack of sections, each opened from its header to show its content.
+---
+
+<Demo name="accordion/basic" />
+
+## Features
+
+- One section open at a time (`type="single"`, `collapsible` to close it) or several
+  (`type="multiple"`).
+- Each header is a real heading (`<h3>` by default, `level` to change it).
+- The panel opens with a height animation, removed with reduced motion.
+- Arrow keys move between headers.
+- Built on [Radix Accordion](https://www.radix-ui.com/primitives/docs/components/accordion).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@irisui/ui";
+
+export default () => (
+  <Accordion type="single">
+    <AccordionItem value="…">
+      <AccordionTrigger />
+      <AccordionContent />
+    </AccordionItem>
+  </Accordion>
+);
+```
+
+## API reference
+
+### Accordion
+
+The root. Built on [Radix `Accordion.Root`](https://www.radix-ui.com/primitives/docs/components/accordion#root).
+
+<TypeTable
+  type={{
+    type: {
+      type: '"single" | "multiple"',
+      required: true,
+      description: "One open section at most, or several.",
+    },
+    value: {
+      type: "string | string[]",
+      description: "Controlled open section(s). Use with `onValueChange`.",
+    },
+    defaultValue: { type: "string | string[]", description: "Open section(s) on first render." },
+    onValueChange: { type: "(value: string | string[]) => void" },
+    collapsible: {
+      type: "boolean",
+      default: "false",
+      description: 'With `type="single"`: the open section can be closed.',
+    },
+    disabled: { type: "boolean", default: "false" },
+  }}
+/>
+
+### AccordionItem
+
+<PropsTable type="AccordionItemProps" pick={["value", "disabled"]} />
+
+| Data attribute  | Values                |
+| --------------- | --------------------- |
+| `data-state`    | `"open" \| "closed"`  |
+| `data-disabled` | Present when disabled |
+
+### AccordionTrigger
+
+<PropsTable type="AccordionTriggerProps" pick={["level"]} />
+
+### AccordionContent
+
+The panel, a `region` named by its trigger.
+
+## Examples
+
+### Several open sections, in a card
+
+<Demo name="accordion/multiple" />
+
+## Accessibility
+
+Follows the [WAI-ARIA accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/).
+
+<KeyboardTable
+  keys={[
+    ["Space", "Opens or closes the section of the focused header."],
+    ["Enter", "Opens or closes the section of the focused header."],
+    ["Tab", "Moves focus to the next focusable element."],
+    ["ArrowDown", "Moves focus to the next header."],
+    ["ArrowUp", "Moves focus to the previous header."],
+    ["Home", "Moves focus to the first header."],
+    ["End", "Moves focus to the last header."],
+  ]}
+/>

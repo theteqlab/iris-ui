@@ -1,0 +1,106 @@
+---
+title: AlertDialog
+description: Interrupts the user with a question that needs an answer, such as confirming a destructive action.
+---
+
+<Demo name="alert-dialog/basic" />
+
+## Features
+
+- The focus starts on Cancel: the safe choice is the default.
+- No close button and no closing on a click outside; <kbd>Esc</kbd> cancels.
+- Action and Cancel are [Buttons](/docs/components/button): `look`, `tone`, `loading`.
+- Same panel as the [Dialog](/docs/components/dialog), 380 px wide by default.
+- Built on [Radix Alert Dialog](https://www.radix-ui.com/primitives/docs/components/alert-dialog).
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@irisui/ui";
+
+export default () => (
+  <AlertDialog>
+    <AlertDialogTrigger />
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle />
+        <AlertDialogDescription />
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel />
+        <AlertDialogAction />
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+);
+```
+
+## API reference
+
+### AlertDialog
+
+The root: `open` / `onOpenChange` / `defaultOpen`. See
+[Radix `AlertDialog.Root`](https://www.radix-ui.com/primitives/docs/components/alert-dialog#root).
+
+### AlertDialogTrigger
+
+The button that opens the dialog. Use `asChild` to render your own `Button`.
+
+### AlertDialogContent
+
+<PropsTable
+  type="AlertDialogContentProps"
+  pick={["size", "onOpenAutoFocus", "onCloseAutoFocus", "onEscapeKeyDown"]}
+/>
+
+| Data attribute | Values                 |
+| -------------- | ---------------------- |
+| `data-state`   | `"open" \| "closed"`   |
+| `data-size`    | `"sm" \| "md" \| "lg"` |
+
+### AlertDialogAction, AlertDialogCancel
+
+[Buttons](/docs/components/button#api-reference) that close the dialog: Action with
+`look="solid"`, Cancel with `look="ghost"` by default.
+
+### AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter
+
+The holographic band with the question and its consequences, then the actions.
+
+## Examples
+
+### Waiting for the action
+
+A plain Button instead of `AlertDialogAction` keeps the dialog open until the work is done.
+
+<Demo name="alert-dialog/async" />
+
+## Accessibility
+
+Follows the [WAI-ARIA alert dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/):
+`role="alertdialog"`, named by the title and described by the description, which both
+are read when it opens.
+
+<KeyboardTable
+  keys={[
+    ["Space", "Opens the dialog from the trigger, or activates the focused button."],
+    ["Enter", "Opens the dialog from the trigger, or activates the focused button."],
+    ["Tab", "Moves focus to the next button inside the dialog."],
+    ["Shift + Tab", "Moves focus to the previous button inside the dialog."],
+    ["Esc", "Cancels and returns focus to the trigger."],
+  ]}
+/>

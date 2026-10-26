@@ -542,6 +542,73 @@
   .iris-option[data-disabled] {
     opacity: var(--disabled-opacity);
   }
+
+  /* ---------- Accordion ---------- */
+  .iris-accordion-chevron {
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  .iris-accordion-trigger[data-state="open"] .iris-accordion-chevron {
+    transform: rotate(180deg);
+  }
+  @media (hover: hover) {
+    .iris-accordion-trigger:not([data-disabled]):hover {
+      background: var(--glass);
+    }
+  }
+  .iris-accordion-content[data-state="open"] {
+    animation: iris-accordion-open var(--duration-base) var(--ease-out);
+  }
+  .iris-accordion-content[data-state="closed"] {
+    animation: iris-accordion-close var(--duration-fast) var(--ease-out);
+  }
+
+  /* ---------- Slider: track, holographic range (or a tone), white thumb ---------- */
+  .iris-slider-track {
+    background: var(--track);
+    box-shadow: inset 0 0 0 1px var(--track-border);
+  }
+  .iris-slider-range {
+    background: var(--sheen), var(--holo);
+    background-size:
+      100% 100%,
+      200% 100%;
+    animation: holo-shift var(--holo-speed) linear infinite;
+  }
+  .iris-slider[data-tone] .iris-slider-range {
+    background: var(--t-base);
+    animation: none;
+  }
+  .iris-slider-thumb {
+    background: var(--white);
+    border: 1px solid var(--control-border);
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--ink) 25%, transparent);
+  }
+
+  /* ---------- Toggle, ToggleGroup: pressed is solid ink ---------- */
+  .iris-toggle {
+    background: transparent;
+    color: var(--text);
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .iris-toggle:is([data-state="off"]):not([data-disabled]):hover {
+      background: var(--glass);
+    }
+  }
+  .iris-toggle[data-state="on"] {
+    background: var(--selected-bg);
+    color: var(--selected-text);
+  }
+
+  /* ---------- ScrollArea ---------- */
+  .iris-scroll-thumb {
+    background: color-mix(in srgb, var(--text-muted) 45%, transparent);
+  }
+  .iris-scroll-thumb:hover {
+    background: color-mix(in srgb, var(--text-muted) 70%, transparent);
+  }
 }
 
 @keyframes iris-holo-3 {
@@ -579,6 +646,23 @@
   to {
     opacity: 0;
     scale: 0.96;
+  }
+}
+
+@keyframes iris-accordion-open {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes iris-accordion-close {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
   }
 }
 
