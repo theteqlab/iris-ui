@@ -363,6 +363,7 @@
   --look-glass-text: var(--ink);
   --look-glass-border: rgb(255 255 255 / 0.8);
   --look-glass-highlight: rgb(255 255 255 / 0.85);
+  --edge-highlight: rgb(255 255 255 / 0.6);
   --look-outline-bg: var(--white);
   --text-on-danger: var(--white);
   --control-border: rgb(21 19 42 / 0.3);
@@ -431,6 +432,7 @@
   --look-glass-text: var(--white);
   --look-glass-border: rgb(255 255 255 / 0.25);
   --look-glass-highlight: rgb(255 255 255 / 0.35);
+  --edge-highlight: rgb(255 255 255 / 0.12);
   --look-outline-bg: #1A1733;
   --text-on-danger: var(--night);
   --control-border: rgb(255 255 255 / 0.3);
@@ -471,7 +473,7 @@
     --track: rgb(255 255 255 / 0.08); --overlay: rgb(0 0 0 / 0.35);
     --surface-holo-shadow: 0 0 0 1px rgb(255 255 255 / 0.2), 0 8px 22px rgb(0 0 0 / 0.45);
     --is-dark: 1; --look-glass-tint: 26%; --look-glass-wash: rgb(255 255 255 / 0.04); --look-glass-text: var(--white);
-    --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --look-outline-bg: #1A1733;
+    --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --edge-highlight: rgb(255 255 255 / 0.12); --look-outline-bg: #1A1733;
     --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --avatar-ring: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
     --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
     --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
@@ -484,7 +486,8 @@
 
 /* ---------- Effets composés (lus par les composants) ---------- */
 :root, [data-mode] {
-  --rim-edge: inset 1.5px 1.5px 0 var(--rim-a), inset -1.5px -1.5px 0 var(--rim-b);
+  /* Glass edge: a thin white highlight along the top (the border stays plain). */
+  --rim-edge: inset 0 1px 0 var(--edge-highlight);
   --bg-glow:
     radial-gradient(circle 460px at 8% 2%,  rgb(var(--blob-1) / var(--glow-alpha)), transparent 70%),
     radial-gradient(circle 520px at 92% 6%, rgb(var(--blob-2) / var(--glow-alpha)), transparent 70%),

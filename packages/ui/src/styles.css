@@ -64,7 +64,7 @@
     --t-glass-bg: var(--glass-strong);
     --t-glass-bg-hover: var(--glass-strong);
     --t-glass-text: var(--text);
-    --t-glass-edge: var(--rim-b);
+    --t-glass-edge: color-mix(in srgb, var(--ink) 45%, transparent);
   }
   .iris-look[data-tone="danger"] {
     --t-base: var(--danger);
@@ -148,41 +148,28 @@
     color: var(--t-glass-text);
     border: 1px solid var(--look-glass-border);
     box-shadow:
-      inset 1.5px 1.5px 0 var(--look-glass-highlight),
-      inset -1.5px -1.5px 0 var(--t-glass-edge),
-      0 6px 16px color-mix(in srgb, var(--t-glass-edge) calc(35% * var(--shadow-mix)), transparent);
+      inset 0 1px 0 var(--look-glass-highlight),
+      0 6px 16px color-mix(in srgb, var(--t-glass-edge) calc(30% * var(--shadow-mix)), transparent);
   }
 
   .iris-look[data-look="solid"] {
-    background:
-      linear-gradient(var(--t-base), var(--t-base)) padding-box,
-      var(--holo-deep) border-box;
-    background-size:
-      100% 100%,
-      200% 100%;
-    animation: holo-shift var(--holo-speed) linear infinite;
-    border: 2.5px solid transparent;
+    background: var(--t-base);
+    border: 1px solid var(--t-base);
     color: var(--t-fg);
     box-shadow: 0 8px 20px
       color-mix(in srgb, var(--t-base) calc(45% * var(--shadow-mix)), transparent);
   }
 
   .iris-look[data-look="outline"] {
-    background:
-      linear-gradient(var(--look-outline-bg), var(--look-outline-bg)) padding-box,
-      var(--holo-deep) border-box;
-    background-size:
-      100% 100%,
-      200% 100%;
-    animation: holo-shift var(--holo-speed) linear infinite;
-    border: 2px solid transparent;
+    background: var(--look-outline-bg);
+    border: 1.5px solid var(--t-outline-text);
     color: var(--t-outline-text);
     font-weight: var(--weight-bold);
   }
 
-  /* Badges: same looks, more compact rims. */
-  .iris-badge:is([data-look="solid"], [data-look="outline"]) {
-    border-width: 1.5px;
+  /* Badges: same looks, thinner outline. */
+  .iris-badge[data-look="outline"] {
+    border-width: 1px;
   }
 
   .iris-look[data-look="ghost"] {
@@ -208,20 +195,11 @@
     }
     .iris-interactive[data-look="solid"]:where(:not([data-disabled], [aria-busy="true"])):hover {
       --t-base-hover: color-mix(in srgb, var(--t-base) 92%, var(--ink));
-      background:
-        linear-gradient(var(--t-base-hover), var(--t-base-hover)) padding-box,
-        var(--holo-deep) border-box;
-      background-size:
-        100% 100%,
-        200% 100%;
+      background: var(--t-base-hover);
+      border-color: var(--t-base-hover);
     }
     .iris-interactive[data-look="outline"]:where(:not([data-disabled], [aria-busy="true"])):hover {
-      background:
-        linear-gradient(var(--t-tint), var(--t-tint)) padding-box,
-        var(--holo-deep) border-box;
-      background-size:
-        100% 100%,
-        200% 100%;
+      background: var(--t-tint);
     }
     .iris-interactive[data-look="ghost"]:where(:not([data-disabled], [aria-busy="true"])):hover {
       background: var(--glass);
@@ -457,12 +435,6 @@
   .iris-field::placeholder {
     color: var(--text-muted);
   }
-  /* Focus: the border gives way to the iridescent rim, plus the focus ring. */
-  .iris-field:focus-within:not([data-invalid]),
-  .iris-field:focus-visible:not([data-invalid]) {
-    border-color: transparent;
-    box-shadow: var(--rim-edge), var(--field-shadow);
-  }
   .iris-field:has(:focus-visible),
   .iris-field:focus-visible {
     outline: 2px solid var(--focus-ring);
@@ -518,7 +490,7 @@
     transition: transform var(--duration-base) var(--ease-out);
   }
 
-  /* Floating panels (Select, DropdownMenu, Popover): opaque, with the iridescent rim. */
+  /* Floating panels (Select, DropdownMenu, Popover): opaque glass. */
   .iris-popover {
     background: var(--popover);
     color: var(--text);

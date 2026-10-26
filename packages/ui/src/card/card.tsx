@@ -5,7 +5,7 @@ import { forwardRef, type HTMLAttributes } from "react";
 export type CardVariant = "glass" | "strong" | "ink";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  /** `glass`: frosted glass with the iridescent rim; `strong`: holographic film; `ink`: ink glass. Default `glass`. */
+  /** `glass`: frosted glass; `strong`: holographic film; `ink`: ink glass. Default `glass`. */
   variant?: CardVariant | undefined;
   /** Renders the single child (an `article`, a link…) with the card's styles. */
   asChild?: boolean;

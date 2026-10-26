@@ -356,7 +356,7 @@ function Surfaces() {
             <CardDescription>variant="glass"</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="m-0">Surface floutée au liseré irisé.</p>
+            <p className="m-0">Surface floutée, bord blanc fin.</p>
           </CardContent>
           <CardFooter>
             <Button look="outline" tone={2} size="sm">
