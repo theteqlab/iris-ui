@@ -1,5 +1,24 @@
 # @irisui/ui
 
+## 0.5.0
+
+### Minor Changes
+
+- 21aef0a: Add `Map` and `MapMarker`, in the new `@irisui/ui/map` entry (MapLibre, an optional peer dependency): free OpenFreeMap tiles recoloured with the palette and mode, pins at positions or addresses (`photonGeocoder`, `banGeocoder` or your own), optional popovers, zoom buttons. New `--map-*` tokens and `Messages` `zoomIn` / `zoomOut`.
+- 21aef0a: Plainer edges. Glass surfaces, fields and menus lose the two-tone pink / blue rim for a plain white border with a thin highlight along the top (`--rim-edge`, new `--edge-highlight` token). The `solid` and `outline` looks drop their animated holographic border: `solid` is a flat fill, `outline` a 1.5 px border in the tone's text colour. The holographic film stays on the `holo` look, the `strong` card, the switch, the progress bar and the dialog header.
+- 21aef0a: Add Accordion, AlertDialog, Separator, Slider, Toggle, ToggleGroup and ScrollArea. Every Radix primitive moves to its October 2026 release, so that all share the same internal packages.
+- 21aef0a: Add Collapsible, ContextMenu, HoverCard, Menubar, NavigationMenu, Toolbar, AspectRatio and VisuallyHidden.
+- 21aef0a: Add Form, PasswordToggleField and OneTimePasswordField (Radix previews). New `Messages`: `showPassword`, `hidePassword`, `codeCharacter`.
+- 21aef0a: Status badges: `<Badge status="success">` (and `warning`, `danger`, `info`, `neutral`) shows a state in the status colours of Alert and Toast, with a dot. Badges are now flat (no drop shadow), slightly narrower and semibold. Solid and tinted holo buttons get a tighter shadow and lift by a pixel on hover. `holo` with `tone="ink"` or `"danger"` is now a plain fill, without the multicoloured border. `--info` is now the same blue in every palette (it was the palette's accent, coral in Couchant), so that it never reads as an error.
+
+### Patch Changes
+
+- Updated dependencies [21aef0a]
+- Updated dependencies [21aef0a]
+- Updated dependencies [21aef0a]
+- Updated dependencies [a6b2fc7]
+  - @irisui/tokens@0.5.0
+
 ## 0.4.0
 
 ### Minor Changes
