@@ -29,6 +29,28 @@ describe("Badge", () => {
     expect(screen.getByText("Online")).toHaveTextContent(/^Online$/);
   });
 
+  it("shows a status with its colours and a dot, instead of a look and a tone", () => {
+    const { container } = render(
+      <Badge status="success" look="solid" tone={2}>
+        Paid
+      </Badge>,
+    );
+    const badge = screen.getByText("Paid");
+    expect(badge).toHaveAttribute("data-status", "success");
+    expect(badge).not.toHaveAttribute("data-look");
+    expect(badge).not.toHaveAttribute("data-tone");
+    expect(container.querySelector("[aria-hidden='true']")).toBeInTheDocument();
+  });
+
+  it("hides the status dot with dot={false}", () => {
+    const { container } = render(
+      <Badge status="warning" dot={false}>
+        Pending
+      </Badge>,
+    );
+    expect(container.querySelector("[aria-hidden='true']")).toBeNull();
+  });
+
   it("forwards the ref and merges className", () => {
     const ref = createRef<HTMLSpanElement>();
     render(

@@ -220,6 +220,16 @@ function Badges() {
           En retard
         </Badge>
       </Row>
+      <Row label="status">
+        <Badge status="success">Validé</Badge>
+        <Badge status="warning">En attente</Badge>
+        <Badge status="danger">Refusé</Badge>
+        <Badge status="info">Nouveau</Badge>
+        <Badge status="neutral">Brouillon</Badge>
+        <Badge status="success" dot={false}>
+          Payé
+        </Badge>
+      </Row>
     </Section>
   );
 }

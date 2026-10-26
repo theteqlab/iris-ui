@@ -346,7 +346,7 @@
   --success: #0F7A63;  --success-soft: rgb(214 246 236 / 0.72);  --success-text: #0B5E4C;
   --warning: #F4DE95;  --warning-soft: rgb(255 243 210 / 0.78);  --warning-text: #6E5512;
   --danger:  #B3245E;  --danger-soft:  rgb(252 224 236 / 0.78);  --danger-text:  #A81F57;
-  --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 12%, rgb(255 255 255 / 0.78)); --info-text: var(--link);
+  --info: #3461D1;     --info-soft: rgb(224 233 255 / 0.8);     --info-text: #2A50B5;
 
   --chart-1: var(--chart-light-1); --chart-2: var(--chart-light-2); --chart-3: var(--chart-light-3);
 
@@ -415,7 +415,7 @@
   --success: #4FD1AE;  --success-soft: rgb(79 209 174 / 0.14);   --success-text: #7FE3C6;
   --warning: #F4DE95;  --warning-soft: rgb(244 222 149 / 0.14);  --warning-text: #F4DE95;
   --danger:  #FF7AA8;  --danger-soft:  rgb(255 122 168 / 0.14);  --danger-text:  #FF90B5;
-  --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 14%, transparent); --info-text: var(--link);
+  --info: #8FB0FF;     --info-soft: rgb(143 176 255 / 0.14);    --info-text: #A9C2FF;
 
   --chart-1: var(--chart-dark-1); --chart-2: var(--chart-dark-2); --chart-3: var(--chart-dark-3);
 
@@ -467,7 +467,7 @@
     --success: #4FD1AE; --success-soft: rgb(79 209 174 / 0.14); --success-text: #7FE3C6;
     --warning-soft: rgb(244 222 149 / 0.14); --warning-text: #F4DE95;
     --danger: #FF7AA8; --danger-soft: rgb(255 122 168 / 0.14); --danger-text: #FF90B5;
-    --info: var(--accent); --info-soft: color-mix(in srgb, var(--accent) 14%, transparent); --info-text: var(--link);
+    --info: #8FB0FF; --info-soft: rgb(143 176 255 / 0.14); --info-text: #A9C2FF;
     --chart-1: var(--chart-dark-1); --chart-2: var(--chart-dark-2); --chart-3: var(--chart-dark-3);
     --selected-bg: #F1EEF8; --selected-text: var(--ink);
     --track: rgb(255 255 255 / 0.08); --overlay: rgb(0 0 0 / 0.35);

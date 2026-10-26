@@ -488,7 +488,7 @@ const lookPairs: Pair[] = TONE_IDS.flatMap((id): Pair[] => {
 });
 pairs.push(...lookPairs);
 
-// Alert and Toast: body text on the soft status tint, over glass or the opaque surface.
+// Alert, Toast and status Badge: text on the soft status tint, over glass or the opaque surface.
 for (const s of ["info", "success", "warning", "danger"] as const) {
   pairs.push(
     {
@@ -499,7 +499,7 @@ for (const s of ["info", "success", "warning", "danger"] as const) {
       min: TEXT,
     },
     {
-      label: `--${s}-text / --${s}-soft (Toast)`,
+      label: `--${s}-text / --${s}-soft (Toast, status Badge)`,
       fg: `--${s}-text`,
       on: (vars) => [over(color(vars, `--${s}-soft`), color(vars, "--popover"))],
       surface: `${s}-soft`,
