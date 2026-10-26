@@ -14,6 +14,7 @@ export default defineConfig([
     "**/.source/",
     "**/next-env.d.ts",
     "apps/docs/out/",
+    "apps/docs/components/demos/index.ts",
   ]),
   {
     files: ["**/*.{js,ts,tsx}"],

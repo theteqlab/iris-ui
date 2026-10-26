@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "typecheck": "fumadocs-mdx && tsc -p tsconfig.json"
+    "demos": "node scripts/generate-demos.ts",
+    "dev": "node scripts/generate-demos.ts && next dev",
+    "build": "node scripts/generate-demos.ts && next build",
+    "typecheck": "node scripts/generate-demos.ts && fumadocs-mdx && tsc -p tsconfig.json"
   },
   "dependencies": {
     "@irisui/tokens": "workspace:*",
