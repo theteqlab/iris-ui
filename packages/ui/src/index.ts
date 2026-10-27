@@ -37,4 +37,5 @@ export * from "./visually-hidden";
 export * from "./form";
 export * from "./one-time-password-field";
 export * from "./password-toggle-field";
+export * from "./flag";
 export type { Look, Size, Tone } from "./lib/look";

@@ -722,6 +722,20 @@
     border-radius: var(--radius-pill);
   }
 
+  /* ---------- Flag: a hairline so that white flags show on white ---------- */
+  .iris-flag {
+    background: var(--track);
+    color: var(--text-muted);
+  }
+  .iris-flag::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px var(--line);
+    pointer-events: none;
+  }
+
   /* ---------- ScrollArea ---------- */
   .iris-scroll-thumb {
     background: color-mix(in srgb, var(--text-muted) 45%, transparent);

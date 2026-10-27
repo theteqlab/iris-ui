@@ -1,4 +1,5 @@
 import {
+  Flag,
   Form,
   FormControl,
   FormField,
@@ -891,6 +892,30 @@ function Security() {
   );
 }
 
+function Flags() {
+  return (
+    <Section id="flag" title="Flag">
+      <Row label="shape · size">
+        {(["sm", "md", "lg"] as const).map((size) => (
+          <Flag key={size} code="fr" size={size} />
+        ))}
+        <Flag code="jp" shape="square" size="lg" />
+        <Flag code="br" shape="round" size="lg" />
+        <Flag code="gb-sct" label="Écosse" size="lg" />
+        <Flag code="zz" size="lg" />
+      </Row>
+      <Row label="dans le texte">
+        <span className="inline-flex items-center gap-2">
+          <Flag code="it" decorative size="sm" /> Italie
+        </span>
+        <span className="inline-flex items-center gap-2">
+          <Flag code="ca" decorative size="sm" /> Canada
+        </span>
+      </Row>
+    </Section>
+  );
+}
+
 export function Showcase() {
   return (
     <>
@@ -903,6 +928,7 @@ export function Showcase() {
       <MoreControls />
       <Navigation />
       <Security />
+      <Flags />
       <MapShowcase />
       <Toaster />
     </>

@@ -1,12 +1,12 @@
 import { expect, test } from "@playwright/test";
-import { stubMapTiles } from "./map-tiles";
+import { stubExternalServices } from "./external-services";
 
 // Keyboard behaviour that jsdom cannot reproduce, checked in a real browser.
 // Keys are held and typed at a human pace: Radix selects a radio on focus only
 // while the arrow key is down, and its typeahead ignores instant bursts.
 
 test.beforeEach(async ({ page }) => {
-  await stubMapTiles(page);
+  await stubExternalServices(page);
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
 });
