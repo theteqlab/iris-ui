@@ -520,16 +520,26 @@ pairs.push(
   {
     label: "--text / --menu-hover (active option)",
     fg: "--text",
-    on: (vars) => {
-      const panel = color(vars, "--popover");
-      // Light: a gradient of holo 1–3 at 50 %; dark: the accent at 16 %.
-      const value = vars.get("--menu-hover") ?? "";
-      const layers = value.startsWith("linear-gradient")
-        ? [1, 2, 3].map((n) => mix(color(vars, `--holo-${n}`), 0.5, TRANSPARENT))
-        : [parseColor(value)];
-      return layers.map((layer) => over(layer, panel));
-    },
+    on: (vars) => [over(color(vars, "--menu-hover"), color(vars, "--popover"))],
     surface: "menu-hover",
+    min: TEXT,
+  },
+  {
+    label: "--text / --hover-bg (hovered ghost button, tab, toggle)",
+    fg: "--text",
+    on: layer("--hover-bg", glass),
+    surface: "hover-bg",
+    min: TEXT,
+  },
+  {
+    label: "--text / --navbar-bg at --navbar-opacity (Navbar over the page)",
+    fg: "--text",
+    on: (vars) => {
+      const alpha = parseFloat(vars.get("--navbar-opacity") ?? "1");
+      const bar = mix(color(vars, "--navbar-bg"), alpha, TRANSPARENT);
+      return page(vars).map((below) => over(bar, below));
+    },
+    surface: "navbar-bg",
     min: TEXT,
   },
   {

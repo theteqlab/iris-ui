@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { expect, test, type Page } from "@playwright/test";
-import { stubMapTiles } from "./map-tiles";
+import { stubExternalServices } from "./external-services";
 
 const axeSource = readFileSync(
   createRequire(import.meta.url).resolve("axe-core/axe.min.js"),
@@ -43,7 +43,7 @@ const pages = [
 ];
 
 test.beforeEach(async ({ page }) => {
-  await stubMapTiles(page);
+  await stubExternalServices(page);
 });
 
 for (const slug of pages) {

@@ -2,6 +2,8 @@ import { createContext, useContext, type ReactNode } from "react";
 
 /** Texts that components render themselves. Every one can also be overridden by props. */
 export interface Messages {
+  /** BCP 47 language of these texts, for names the browser translates (Flag). Default "en". */
+  locale?: string;
   /** Announced while a Button is loading. */
   loading: string;
   /** Textarea character counter. */
@@ -26,6 +28,7 @@ export interface Messages {
 }
 
 export const en: Messages = {
+  locale: "en",
   loading: "Loading",
   characterCount: (count, max) => `${count} / ${max} characters`,
   selectPlaceholder: "Select…",
@@ -40,6 +43,7 @@ export const en: Messages = {
 };
 
 export const fr: Messages = {
+  locale: "fr",
   loading: "Chargement",
   characterCount: (count, max) => `${count} / ${max} caractères`,
   selectPlaceholder: "Choisir…",

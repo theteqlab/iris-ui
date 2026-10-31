@@ -86,8 +86,8 @@ export const PasswordToggleField = forwardRef<HTMLInputElement, PasswordToggleFi
             }
             disabled={control.disabled}
             className={cn(
-              "iris-password-toggle iris-interactive flex size-9 shrink-0 cursor-pointer items-center",
-              "justify-center rounded-pill border-0 bg-transparent p-0 text-text-muted",
+              "iris-password-toggle iris-quiet iris-interactive flex size-9 shrink-0 cursor-pointer items-center",
+              "justify-center rounded-pill border-0 p-0",
               "disabled:cursor-not-allowed [&_svg]:size-[18px]",
             )}
           >

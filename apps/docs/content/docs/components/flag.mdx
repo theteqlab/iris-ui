@@ -1,0 +1,68 @@
+---
+title: Flag
+description: A country's flag, as a crisp SVG from flagcdn.com, named after the country in the user's language.
+---
+
+<Demo name="flag/basic" />
+
+## Features
+
+- Over 250 flags as SVG, sharp at every size: countries (ISO 3166-1 alpha-2) and
+  subdivisions (`gb-sct`, `us-ca`).
+- Three shapes (4:3, square, round) and three heights (16, 24, 32 px).
+- Named after the country in the language of `LocaleProvider` ("Germany", "Allemagne"),
+  by the browser: no list to maintain.
+- The country code shows if the image cannot load.
+- A hairline keeps white flags visible on light surfaces.
+- Served by [flagcdn.com](https://flagcdn.com) (Flagpedia), free and without a key; or
+  from your own server with `baseUrl`.
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Flag } from "@irisui/ui";
+
+export default () => <Flag code="fr" />;
+```
+
+## API reference
+
+### Flag
+
+Renders a `<span role="img">` holding the `<img>`.
+
+<PropsTable type="FlagProps" pick={["code", "size", "shape", "label", "decorative", "baseUrl"]} />
+
+| Data attribute | Values                          |
+| -------------- | ------------------------------- |
+| `data-code`    | The code, lowercase             |
+| `data-size`    | `"sm" \| "md" \| "lg"`          |
+| `data-shape`   | `"rect" \| "square" \| "round"` |
+
+## Examples
+
+### Shapes and sizes
+
+<Demo name="flag/shapes" />
+
+### In a list of countries
+
+When the name is written next to the flag, make the flag `decorative` so that it is not
+read twice.
+
+<Demo name="flag/country-select" />
+
+## Privacy
+
+Each flag is an image loaded from flagcdn.com, so the visitor's browser contacts that
+service. To keep every request on your own domain, copy the SVGs (from flagcdn or the
+`flag-icons` package) to your server and set `baseUrl`.
+
+## Accessibility
+
+The flag is an image named after the country. A flag is not a language: to pick a
+language, write its name ("Français"), with or without a flag.

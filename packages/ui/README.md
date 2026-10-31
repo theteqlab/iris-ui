@@ -62,6 +62,9 @@ Import the tokens and the component styles once in your global CSS (see
 | `Form`                 | Browser validation with `FormField`, `FormLabel`, `FormControl`, `FormMessage` (`match`), `FormSubmit`                                                                                     |
 | `PasswordToggleField`  | Password input with a show / hide button, `size`, `invalid`, `Field` support                                                                                                               |
 | `OneTimePasswordField` | One box per character, `length`, `validationType`, `autoSubmit`                                                                                                                            |
+| `Flag`                 | Country flag (SVG from flagcdn.com), `code`, `size`, `shape` (`rect` · `square` · `round`), named in the user's language, `decorative`, `baseUrl`                                          |
+| `Navbar`               | Top bar in frosted glass: `opacity` (0–1), `blur`, `variant` (`bar` · `floating`), `position` (`sticky` · `fixed` · `static`)                                                              |
+| `Footer`               | With `FooterColumns`, `FooterColumn` (`title`), `FooterLink`, `FooterBottom`; `variant` (`plain` · `glass`)                                                                                |
 
 ```tsx
 import { Button, Field, FieldError, FieldLabel, Input } from "@irisui/ui";

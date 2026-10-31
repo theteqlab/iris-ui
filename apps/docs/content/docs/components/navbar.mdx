@@ -1,0 +1,61 @@
+---
+title: Navbar
+description: A page's top bar in frosted glass, with a background opacity you set; what scrolls behind it is blurred.
+---
+
+<Demo name="navbar/basic" />
+
+## Features
+
+- Frosted glass: what passes behind is blurred (`backdrop-filter`).
+- `opacity` sets the background, from clear glass (0) to opaque (1).
+- `bar` (full width, bottom line) or `floating` (a rounded panel with a margin).
+- Sticky by default; or fixed, or in the flow.
+- Readable whatever the setting: reduced effects (`data-effects="reduced"`), high
+  contrast and browsers without backdrop blur make it opaque.
+- Glass buttons inside it do not blur a second time: blurs are never nested.
+
+## Installation
+
+<Install />
+
+## Usage
+
+```tsx
+import { Navbar } from "@irisui/ui";
+
+export default () => (
+  <Navbar opacity={0.7}>
+    <a href="/">Brand</a>
+    {/* NavigationMenu, buttons… */}
+  </Navbar>
+);
+```
+
+## API reference
+
+### Navbar
+
+A `<header>` (the page's banner). Takes every native attribute.
+
+<PropsTable type="NavbarProps" pick={["opacity", "blur", "variant", "position", "asChild"]} />
+
+The default opacity is the `--navbar-opacity` token (0.62 in light mode, 0.6 in dark mode).
+
+| Data attribute | Values                |
+| -------------- | --------------------- |
+| `data-variant` | `"bar" \| "floating"` |
+| `data-blur`    | Present when it blurs |
+
+## Examples
+
+### Floating
+
+<Demo name="navbar/floating" />
+
+## Accessibility
+
+A `<header>` at the top of the page is its `banner` landmark; put the main links in a
+[NavigationMenu](/docs/components/navigation-menu). The text keeps WCAG AA contrast at the
+default opacity in every palette and mode; below about 0.5, check it over your own content,
+as light content behind a dark bar lowers it.

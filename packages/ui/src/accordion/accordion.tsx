@@ -42,8 +42,8 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
           <AccordionPrimitive.Trigger
             ref={ref}
             className={cn(
-              "iris-accordion-trigger iris-interactive flex min-h-11 flex-1 cursor-pointer items-center",
-              "justify-between gap-4 rounded-field border-0 bg-transparent px-1 py-3 text-left",
+              "iris-accordion-trigger iris-quiet iris-interactive flex min-h-11 flex-1 cursor-pointer items-center",
+              "justify-between gap-4 rounded-field border-0 px-1 py-3 text-left",
               "font-sans text-md font-bold text-text data-disabled:cursor-not-allowed",
               className,
             )}

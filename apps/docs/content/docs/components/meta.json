@@ -30,6 +30,8 @@
     "context-menu",
     "menubar",
     "navigation-menu",
+    "navbar",
+    "footer",
     "popover",
     "hover-card",
     "tooltip",
@@ -42,6 +44,7 @@
     "alert",
     "toast",
     "avatar",
+    "flag",
     "progress",
     "---Maps---",
     "map"

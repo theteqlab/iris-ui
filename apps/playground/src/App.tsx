@@ -1,4 +1,16 @@
-import { MODES, PALETTES, useTheme, type Mode, type Palette } from "@irisui/ui";
+import {
+  Footer,
+  FooterBottom,
+  FooterColumn,
+  FooterColumns,
+  FooterLink,
+  MODES,
+  Navbar,
+  PALETTES,
+  useTheme,
+  type Mode,
+  type Palette,
+} from "@irisui/ui";
 import { cn } from "@irisui/utils";
 import { Showcase } from "./Showcase";
 
@@ -68,13 +80,7 @@ export function App() {
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-8 sm:px-8">
-      <header
-        className={cn(
-          "flex flex-wrap items-center justify-between gap-4 rounded-panel px-5 py-3",
-          "border border-glass-border bg-glass shadow-rim",
-          "backdrop-blur-glass backdrop-saturate-(--glass-saturate)",
-        )}
-      >
+      <Navbar variant="floating" className="flex-wrap justify-between">
         <span className="font-bold">Playground</span>
         <div className="flex flex-wrap items-center gap-4">
           <Segmented
@@ -94,7 +100,7 @@ export function App() {
             onChange={setMode}
           />
         </div>
-      </header>
+      </Navbar>
 
       <main className="flex flex-col gap-12">
         <h1 className="m-0 text-h2 leading-tight font-medium tracking-display">Composants</h1>
@@ -119,6 +125,23 @@ export function App() {
           </dl>
         </article>
       </main>
+
+      <Footer variant="glass">
+        <FooterColumns>
+          <FooterColumn title="Bibliothèque">
+            <FooterLink href="#button">Composants</FooterLink>
+            <FooterLink href="#map-title">Carte</FooterLink>
+          </FooterColumn>
+          <FooterColumn title="Projet">
+            <FooterLink href="https://github.com/theteqlab/iris-ui">GitHub</FooterLink>
+            <FooterLink href="https://www.npmjs.com/package/@irisui/ui">npm</FooterLink>
+          </FooterColumn>
+        </FooterColumns>
+        <FooterBottom>
+          <span>© 2026 theteqlab · MIT</span>
+          <span>Verre irisé</span>
+        </FooterBottom>
+      </Footer>
     </div>
   );
 }
