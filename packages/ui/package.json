@@ -1,6 +1,6 @@
 {
   "name": "@irisui/ui",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Accessible React components in the Verre irisé style.",
   "license": "MIT",
   "type": "module",
