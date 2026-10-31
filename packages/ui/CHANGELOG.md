@@ -1,5 +1,23 @@
 # @irisui/ui
 
+## 0.6.0
+
+### Minor Changes
+
+- d7eed2e: Add `Flag`: a country's flag as an SVG from flagcdn.com (or your own `baseUrl`), in three shapes and sizes, named after the country in the language of `LocaleProvider` through `Intl.DisplayNames`, with the country code as a fallback. `Messages` gains an optional `locale`; new `--radius-flag` token.
+- d7eed2e: Add `Navbar` (a top bar in frosted glass with an `opacity` setting, blurring what scrolls behind it, `bar` or `floating`) and `Footer` (columns of links and a bottom row). New tokens `--navbar-bg` and `--navbar-opacity`; reduced effects, high contrast and browsers without backdrop blur make the bar opaque.
+
+  Fix: glass surfaces now blur in every browser. The stylesheet declared `-webkit-backdrop-filter` after `backdrop-filter`, and the CSS minifier kept only the prefixed one, so the blur only showed in Safari.
+
+- d7eed2e: Neutral hover. The highlighted option of menus and lists, and the hover of ghost buttons, tabs, toggles, accordion headers, the password button and the toast buttons, now share one neutral tint of the text colour (new `--hover-bg` token; `--menu-hover` points to it). It replaces the holographic gradient of light mode and the accent tint of dark mode.
+
+### Patch Changes
+
+- Updated dependencies [d7eed2e]
+- Updated dependencies [d7eed2e]
+- Updated dependencies [d7eed2e]
+  - @irisui/tokens@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes
