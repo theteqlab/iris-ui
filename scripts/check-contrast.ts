@@ -532,6 +532,17 @@ pairs.push(
     min: TEXT,
   },
   {
+    label: "--text / --navbar-bg at --navbar-opacity (Navbar over the page)",
+    fg: "--text",
+    on: (vars) => {
+      const alpha = parseFloat(vars.get("--navbar-opacity") ?? "1");
+      const bar = mix(color(vars, "--navbar-bg"), alpha, TRANSPARENT);
+      return page(vars).map((below) => over(bar, below));
+    },
+    surface: "navbar-bg",
+    min: TEXT,
+  },
+  {
     label: "--danger-text / --popover (danger menu item)",
     fg: "--danger-text",
     on: solid("--popover"),

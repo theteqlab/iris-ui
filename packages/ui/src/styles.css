@@ -142,7 +142,6 @@
   .iris-look[data-look="glass"] {
     background: var(--t-glass-bg);
     backdrop-filter: blur(var(--blur-small)) saturate(180%);
-    -webkit-backdrop-filter: blur(var(--blur-small)) saturate(180%);
     color: var(--t-glass-text);
     border: 1px solid var(--look-glass-border);
     box-shadow:
@@ -289,7 +288,6 @@
   .iris-card[data-variant="glass"] {
     background: var(--glass);
     backdrop-filter: blur(var(--blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(var(--glass-saturate));
     color: var(--text);
     border: 1px solid var(--glass-border);
     box-shadow: var(--rim-edge), var(--glass-shadow);
@@ -314,7 +312,6 @@
     --text-muted: color-mix(in srgb, var(--text-on-ink) 78%, transparent);
     background: var(--glass-ink);
     backdrop-filter: blur(var(--blur));
-    -webkit-backdrop-filter: blur(var(--blur));
     color: var(--text);
     border: 1px solid var(--glass-border);
     box-shadow: var(--rim-edge);
@@ -740,6 +737,48 @@
     border-radius: inherit;
     box-shadow: inset 0 0 0 1px var(--line);
     pointer-events: none;
+  }
+
+  /* ---------- Navbar: frosted glass whose opacity is a setting ---------- */
+  .iris-navbar {
+    background: color-mix(
+      in srgb,
+      var(--navbar-bg) calc(max(var(--navbar-opacity), var(--navbar-opacity-floor, 0)) * 100%),
+      transparent
+    );
+    border-color: var(--glass-border);
+    box-shadow: var(--rim-edge);
+  }
+  .iris-navbar[data-variant="floating"] {
+    box-shadow: var(--rim-edge), var(--glass-shadow);
+  }
+  .iris-navbar[data-blur] {
+    backdrop-filter: blur(var(--blur)) saturate(var(--glass-saturate));
+  }
+  /* Blurs are never nested: glass controls inside the bar keep their tint only. */
+  .iris-navbar[data-blur] :is(.iris-look[data-look="glass"], .iris-card[data-variant="glass"]) {
+    backdrop-filter: none;
+  }
+
+  /* ---------- Footer ---------- */
+  .iris-footer {
+    border-color: var(--line);
+  }
+  .iris-footer[data-variant="glass"] {
+    background: var(--glass);
+    backdrop-filter: blur(var(--blur)) saturate(var(--glass-saturate));
+    border-color: var(--glass-border);
+    box-shadow: var(--rim-edge), var(--glass-shadow);
+  }
+  .iris-footer-link {
+    color: var(--text);
+  }
+  @media (hover: hover) {
+    .iris-footer-link:hover {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
   }
 
   /* ---------- ScrollArea ---------- */

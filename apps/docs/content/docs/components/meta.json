@@ -30,6 +30,8 @@
     "context-menu",
     "menubar",
     "navigation-menu",
+    "navbar",
+    "footer",
     "popover",
     "hover-card",
     "tooltip",

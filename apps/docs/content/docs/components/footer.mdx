@@ -1,0 +1,65 @@
+---
+title: Footer
+description: The page's footer, with columns of links and a bottom row for the copyright.
+---
+
+<Demo name="footer/basic" />
+
+## Features
+
+- Columns of links, each a named navigation landmark.
+- A bottom row for the copyright, legal links or a theme switch.
+- `plain` (on the page, with a top line) or `glass` (a frosted glass panel).
+- A responsive grid: 2, 3 then 4 columns.
+
+## Installation
+
+<Install />
+
+## Anatomy
+
+```tsx
+import { Footer, FooterBottom, FooterColumn, FooterColumns, FooterLink } from "@irisui/ui";
+
+export default () => (
+  <Footer>
+    <FooterColumns>
+      <FooterColumn title="…">
+        <FooterLink href="…" />
+      </FooterColumn>
+    </FooterColumns>
+    <FooterBottom />
+  </Footer>
+);
+```
+
+## API reference
+
+### Footer
+
+A `<footer>`.
+
+<PropsTable type="FooterProps" pick={["variant"]} />
+
+### FooterColumns
+
+The grid. Put a brand block in it too.
+
+### FooterColumn
+
+<PropsTable type="FooterColumnProps" pick={["title"]} />
+
+### FooterLink, FooterBottom
+
+A link in its list item, and the bottom row.
+
+## Examples
+
+### Glass
+
+<Demo name="footer/glass" />
+
+## Accessibility
+
+The page's `<footer>` is its `contentinfo` landmark. Each column is a `<nav>` named by
+its title, so screen reader users can jump to "Help" or "Legal" directly.

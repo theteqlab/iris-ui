@@ -1,4 +1,5 @@
 import {
+  Navbar,
   Flag,
   Form,
   FormControl,
@@ -916,6 +917,44 @@ function Flags() {
   );
 }
 
+const TILES = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2] as const;
+
+function NavbarDemo() {
+  const [opacity, setOpacity] = useState([0.6]);
+  return (
+    <Section id="navbar" title="Navbar · opacité du fond et flou" plain>
+      <Field className="max-w-sm">
+        <FieldLabel>Opacité · {Math.round((opacity[0] ?? 0) * 100)} %</FieldLabel>
+        <Slider value={opacity} onValueChange={setOpacity} min={0} max={1} step={0.05} />
+      </Field>
+      {/* The bar is sticky inside this scrolling box: what passes behind it is blurred. */}
+      <div
+        className="h-72 overflow-y-auto rounded-card border border-line"
+        tabIndex={0}
+        aria-label="Contenu sous la barre"
+      >
+        <Navbar opacity={opacity[0]} className="justify-between">
+          <strong>iris-ui</strong>
+          <Button look="glass" size="sm">
+            Connexion
+          </Button>
+        </Navbar>
+        <div className="grid grid-cols-3 gap-3 p-4">
+          {TILES.map((tone, i) => (
+            <div
+              key={i}
+              className="flex h-24 items-end rounded-field p-3 text-sm font-bold text-text-on-holo"
+              style={{ background: `var(--tone-${tone})` }}
+            >
+              Carte {i + 1}
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 export function Showcase() {
   return (
     <>
@@ -929,6 +968,7 @@ export function Showcase() {
       <Navigation />
       <Security />
       <Flags />
+      <NavbarDemo />
       <MapShowcase />
       <Toaster />
     </>
