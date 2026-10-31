@@ -211,6 +211,23 @@
     border: 1px solid transparent;
   }
 
+  /* ---------- Quiet controls: transparent, a neutral tint on hover ---------- */
+  .iris-quiet {
+    background: transparent;
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+  .iris-password-toggle {
+    color: var(--text-muted);
+  }
+  @media (hover: hover) {
+    .iris-quiet:not(:disabled, [data-disabled]):hover {
+      background: var(--hover-bg);
+    }
+    .iris-password-toggle:not(:disabled):hover {
+      color: var(--text);
+    }
+  }
+
   /* ---------- Interactive states (buttons) ---------- */
   .iris-interactive:where(:not([data-disabled], [aria-busy="true"])) {
     cursor: pointer;
@@ -241,7 +258,7 @@
       background: var(--t-tint);
     }
     .iris-interactive[data-look="ghost"]:where(:not([data-disabled], [aria-busy="true"])):hover {
-      background: var(--glass);
+      background: var(--hover-bg);
     }
   }
   .iris-interactive:where(:not([data-disabled], [aria-busy="true"])):active {
@@ -360,7 +377,7 @@
   }
   @media (hover: hover) {
     .iris-tab[data-state="inactive"]:not([data-disabled]):hover {
-      background: var(--glass);
+      background: var(--hover-bg);
     }
   }
   .iris-tab[data-look="pill"][data-state="active"] {
@@ -488,12 +505,6 @@
     border-color: var(--danger);
     box-shadow: 0 0 0 1px var(--danger);
   }
-  @media (hover: hover) {
-    .iris-password-toggle:not(:disabled):hover {
-      background: var(--glass);
-      color: var(--text);
-    }
-  }
   .iris-field[data-invalid]:has(:focus-visible),
   .iris-field[data-invalid]:focus-visible {
     outline-color: var(--danger);
@@ -561,11 +572,6 @@
   .iris-accordion-trigger[data-state="open"] .iris-accordion-chevron {
     transform: rotate(180deg);
   }
-  @media (hover: hover) {
-    .iris-accordion-trigger:not([data-disabled]):hover {
-      background: var(--glass);
-    }
-  }
   .iris-accordion-content[data-state="open"] {
     animation: iris-accordion-open var(--duration-base) var(--ease-out);
   }
@@ -605,7 +611,7 @@
   }
   @media (hover: hover) {
     .iris-toggle:is([data-state="off"]):not([data-disabled]):hover {
-      background: var(--glass);
+      background: var(--hover-bg);
     }
   }
   .iris-toggle[data-state="on"] {

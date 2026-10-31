@@ -46,11 +46,11 @@ export function Toaster({ toastOptions, style, containerAriaLabel, ...props }: T
             "bg-selected-bg font-sans text-sm font-bold text-selected-text",
           ),
           cancelButton: cn(
-            "iris-interactive h-(--control-sm) shrink-0 self-center rounded-pill border-0 bg-transparent px-4",
+            "iris-quiet iris-interactive h-(--control-sm) shrink-0 self-center rounded-pill border-0 px-4",
             "font-sans text-sm font-bold text-text",
           ),
           closeButton:
-            "iris-interactive absolute top-2 right-2 flex size-7 items-center justify-center rounded-pill border-0 bg-transparent text-text-muted",
+            "iris-quiet iris-interactive absolute top-2 right-2 flex size-7 items-center justify-center rounded-pill border-0 text-text-muted",
           ...classNames,
         },
       }}

@@ -381,7 +381,9 @@
   --control-border: rgb(21 19 42 / 0.3);
   --avatar-ring: rgb(255 255 255 / 0.9);
   --track-border: rgb(255 255 255 / 0.7);
-  --menu-hover: linear-gradient(90deg, color-mix(in srgb, var(--holo-1) 50%, transparent), color-mix(in srgb, var(--holo-2) 50%, transparent), color-mix(in srgb, var(--holo-3) 50%, transparent));
+  /* hover of transparent elements and active option: a neutral tint of the text */
+  --hover-bg: color-mix(in srgb, var(--text) 7%, transparent);
+  --menu-hover: var(--hover-bg);
 
   /* tons (tone="1" à "5") : base, liseré, texte sur fond neutre, fond pâle */
   --tone-1: var(--tone-1-base); --tone-1-edge: var(--tone-1-deep); --tone-1-text: var(--tone-1-deep); --tone-1-soft: var(--tone-1-tint-light);
@@ -461,7 +463,7 @@
   --control-border: rgb(255 255 255 / 0.3);
   --avatar-ring: rgb(255 255 255 / 0.3);
   --track-border: rgb(255 255 255 / 0.12);
-  --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
+  --hover-bg: color-mix(in srgb, var(--text) 8%, transparent); --menu-hover: var(--hover-bg);
 
   /* tons : texte et fond pâle éclaircis sur fond sombre */
   --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
@@ -499,7 +501,7 @@
     --look-glass-border: rgb(255 255 255 / 0.25); --look-glass-highlight: rgb(255 255 255 / 0.35); --edge-highlight: rgb(255 255 255 / 0.12); --look-outline-bg: #1A1733;
     --map-land: color-mix(in srgb, var(--white) 6%, var(--night)); --map-water: color-mix(in srgb, var(--tone-2) 22%, var(--night)); --map-park: color-mix(in srgb, var(--tone-3) 14%, var(--night)); --map-building: color-mix(in srgb, var(--white) 11%, var(--night)); --map-road: color-mix(in srgb, var(--white) 18%, var(--night)); --map-road-major: color-mix(in srgb, var(--tone-4) 32%, var(--night)); --map-boundary: rgb(255 255 255 / 0.25); --map-label: var(--text-muted); --map-label-halo: var(--night);
     --text-on-danger: var(--night); --control-border: rgb(255 255 255 / 0.3); --avatar-ring: rgb(255 255 255 / 0.3); --track-border: rgb(255 255 255 / 0.12);
-    --menu-hover: color-mix(in srgb, var(--accent) 16%, transparent);
+    --hover-bg: color-mix(in srgb, var(--text) 8%, transparent); --menu-hover: var(--hover-bg);
     --tone-1-text: color-mix(in srgb, var(--tone-1-base) 45%, var(--white)); --tone-1-soft: color-mix(in srgb, var(--tone-1-base) 22%, var(--look-outline-bg));
     --tone-2-text: color-mix(in srgb, var(--tone-2-base) 45%, var(--white)); --tone-2-soft: color-mix(in srgb, var(--tone-2-base) 22%, var(--look-outline-bg));
     --tone-3-text: color-mix(in srgb, var(--tone-3-base) 45%, var(--white)); --tone-3-soft: color-mix(in srgb, var(--tone-3-base) 22%, var(--look-outline-bg));
